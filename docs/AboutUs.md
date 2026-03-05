@@ -35,11 +35,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[homepage](https://www.youtube.com/watch?v=zL19uMsnpSU)]
 [[github](https://github.com/Reiner-Ong)]
 
-* Role: Sweatshop Worker 2
-* Responsiblity: Assist Sweatshop Worker 1
-
-* Role: Developer
-* Responsibilities: Data
+* Role: Developer 
+* Responsiblity: UI
 
 ### Chen Yoong Shee
 
