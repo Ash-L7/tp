@@ -260,73 +260,235 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**:
+**Target user profile**
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+Bivago is designed for professional tour guides who:
+* Manage a large network of contacts including drivers, restaurants, hotels, and attractions
+* Prefer desktop applications with a Command-Line Interface (CLI) for fast, efficient data entry
+* Need to quickly plan and organize tour packages by associating contacts with specific tours
+* Conduct tours involving multiple service providers and need reliable, up-to-date contact records
+* Are reasonably comfortable using CLI applications and can type quickly
 
 **Value proposition**: manage contacts faster than a typical mouse/GUI driven app
 
-
 ### User stories
 
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+Priorities: High (must have) — `* * *`, Medium (nice to have) — `* *`, Low (unlikely to have) — `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a… | I want to… | So that I can… |
+|----------|--------|------------|----------------|
+| `* * *` | tour guide using the app for the first time | access a help page | learn how to use the app as a beginner |
+| `* * *` | tour guide | add new contacts with their details | build my network of service providers within the app |
+| `* * *` | tour guide | delete contacts I no longer work with | keep my contact list relevant |
+| `* * *` | tour guide who is careless | have my contact data saved automatically | not lose information if the app closes |
+| `* * *` | tour guide | create tour packages | organize my different tour offerings |
+| `* * *` | tour guide | assign contacts to specific tours | know which driver, restaurant, and attractions are involved in each tour |
+| `* * *` | tour guide who prioritizes efficiency | search through tours by criteria (e.g. category, contact, restaurant) | quickly find tours concerning certain contacts, restaurants, or categories |
+| `* * *` | tour guide who is lazy and forgetful | see descriptive error messages when I input commands incorrectly | not have to keep referring to the help page |
+| `* * *` | tour guide who conducts time-sensitive tours | store operating hours for restaurants and attractions | plan tours accordingly |
+| `* *` | tour guide | add email addresses to contacts | communicate digitally when needed |
+| `* *` | tour guide | add pricing information to contacts | quickly estimate tour costs |
+| `* *` | tour guide | store capacity information (e.g. restaurant seating, bus capacity) | match group sizes appropriately |
+| `* *` | tour guide who conducts tours in other languages | add languages spoken by contacts (e.g. English-speaking driver, Mandarin-speaking restaurant staff) | match service providers with my international clients' needs |
+| `* *` | tour guide | categorize contacts by type (driver, restaurant, hotel, attraction) | quickly find the right person for each need |
+| `* *` | tour guide | edit contact information | keep details up-to-date when phone numbers or addresses change or when I make a mistake |
+| `* *` | tour guide | search for contacts by name | quickly find specific people |
+| `* *` | tour guide | filter contacts by category | see all restaurants or all drivers at once |
+| `* *` | tour guide | add notes to contacts | remember important details like dietary restrictions they accommodate or special pricing |
+| `* *` | tour guide | mark favourite contacts | prioritize my most reliable service providers |
+| `* *` | tour guide | view all contacts associated with a tour | see my full service provider lineup at a glance |
+| `* *` | tour guide | tag tours by type (walking, food, sightseeing) | organize my offerings |
+| `* *` | tour guide | add multiple restaurants to one tour | plan multi-stop food tours |
+| `*` | tour guide | store multiple phone numbers for each contact | have backup contact methods |
+| `*` | tour guide who is forgetful | set reminders for follow-ups with contacts | maintain relationships and confirm bookings ahead of tours |
+| `*` | tour guide with affiliated contacts | link affiliated contacts (e.g. restaurant and nearby attraction) | remember partnership deals |
+| `*` | tour guide with affiliated contacts | rate my affiliated contacts | track service quality over time |
+| `*` | tour guide with affiliated contacts | add commission or discount information to contacts | remember special arrangements |
+| `*` | tour guide who conducts tours in various locations | search contacts by location/neighbourhood | find service providers near specific attractions |
+| `*` | tour guide who prioritizes efficiency | filter contacts by availability | quickly find who's available for a specific date |
+| `*` | tour guide who conducts many tour packages | duplicate existing tours | quickly create similar tour packages without re-entering all details |
+| `*` | tour guide who has wrist problems | alias commands I frequently use | not have to type so much |
 
-*{More to be added}*
+---
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+*(For all use cases below, the **System** is `Bivago` and the **Actor** is the `tour guide`, unless specified otherwise)*
 
-**Use case: Delete a person**
+---
+
+### Use Case: UC01 - View Help
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User requests to view the help page.
+2. Bivago displays a list of available commands and their usage.
 
-    Use case ends.
+*Use case ends.*
 
 **Extensions**
 
-* 2a. The list is empty.
+- 1a. User enters an unrecognised command.
+    - 1a1. Bivago shows an error message with a suggestion to use the help command.
+    - 1a2. Use case ends.
 
-  Use case ends.
+---
 
-* 3a. The given index is invalid.
+### Use Case: UC02 - Add a New Contact
 
-    * 3a1. AddressBook shows an error message.
+**MSS**
+1. User requests to add a new contact with the relevant details.
+2. Bivago saves the contact and confirms that the contact has been added.
 
-      Use case resumes at step 2.
+*Use case ends.*
 
-*{More to be added}*
+**Extensions**
 
-### Non-Functional Requirements
+- 1a. One or more required fields are missing or invalid.
+    - 1a1. Bivago shows an error message indicating the missing or incorrect fields.
+    - 1a2. Use case resumes at step 1.
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+- 1b. A contact with the same name already exists.
+    - 1b1. Bivago shows a duplicate contact error message.
+    - 1b2. Use case resumes at step 1.
 
-*{More to be added}*
+---
+
+### Use Case: UC03 - Find Contacts
+
+**MSS**
+1. User requests to find contacts using a search query.
+2. Bivago displays a list of contacts matching the search query.
+
+*Use case ends.*
+
+**Extensions**
+- 1a. The search query is empty.
+    - 1a1. Bivago shows an error message indicating that a search term must be provided.
+    - 1a2. Use case resumes at step 1.
+
+- 2a. No contacts match the search query.
+    - 2a1. Bivago shows an error message indicating no contacts found.
+    - 2a2. Use case ends.
+
+---
+
+### Use Case: UC04 - Edit a Contact's Details
+
+**MSS**
+1. User <u>finds the contact (UC03)</u>.
+2. Bivago displays a list of matching contacts.
+3. User requests to edit a specific contact using its index in the displayed list, providing the new field(s) to update.
+4. Bivago saves and confirms the updated contact information.
+
+*Use case ends.*
+
+**Extensions**
+- 3a. The given index is invalid.
+    - 3a1. Bivago shows an error message.
+    - 3a2. Use case resumes at step 3.
+
+- 3b. The new value provided for a field is invalid.
+    - 3b1. Bivago shows an error message.
+    - 3b2. Use case resumes at step 3.
+
+- 3c. No fields are provided to update.
+    - 3c1. Bivago shows an error message.
+    - 3c2. Use case resumes at step 3.
+
+---
+
+### Use Case: UC05 - Delete a Contact
+
+**MSS**
+1.  User requests to list contacts
+2.  Bivago shows a list of contacts
+3.  User requests to delete a specific contact in the list
+4.  Bivago deletes the contact and confirms the deletion
+
+*Use case ends.*
+
+**Extensions**
+
+- 2a. The list is empty.
+    - 2a1. Use case ends.
+
+- 3a. The given index is invalid.
+    - 3a1. Bivago shows an error message.
+    - 3a2. Use case resumes at step 2.
+
+---
+
+### Use case: UC06 - Create a Tour Package
+
+**MSS**
+1. User requests to create a new tour package with a name and type tag.
+2. Bivago confirms the tour has been created.
+
+*Use case ends.*
+
+**Extensions**
+
+- 1a. A tour with the same name already exists.
+    - 1a1. Bivago shows a duplicate tour name error.
+    - 1a2. Use case resumes at step 1.
+
+- 1b. The name or type tag provided is invalid.
+    - 1b1. Bivago shows an error message.
+    - 1b2. Use case resumes at step 1.
+
+---
+
+### Use Case: UC07 - Add a Contact to a Tour Package
+
+**MSS**
+1. User requests to assign a contact to a tour package.
+2. Bivago confirms the contact has been assigned to the tour.
+
+*Use case ends.*
+
+**Extensions**
+- 1a. The specified tour package does not exist.
+    - 1a1. Bivago shows an error message.
+    - 1a2. Use case ends.
+
+- 1b. The specified contact does not exist.
+    - 1b1. Bivago shows an error message.
+    - 1b2. Use case resumes at step 1.
+
+- 1c. The specified contact is already assigned to the tour.
+    - 1c1. Bivago shows a duplicate assignment error.
+    - 1c2. Use case resumes at step 1.
+
+---
+
+### Use Case: UC08 - Filter Contacts by Category
+
+**MSS**
+
+1. User requests to filter contacts by a specific category (e.g. restaurant).
+2. Bivago displays all contacts belonging to that category.
+
+*Use case ends.*
+
+**Extensions**
+
+- 2a. No contacts exist in the specified category.
+    - 2a1. Bivago shows an empty list indicating no contacts were found in that category
+    - 2a2. Use case ends.
+
+---
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+| Term | Definition |
+|------|------------|
+| **Mainstream OS** | Windows, Linux, Unix, or macOS. |
+| **Contact** | A service provider in the tour guide's network, such as a driver, restaurant, hotel, or tourist attraction. |
+| **Tour Package** | A planned tour offering that groups together a set of contacts (e.g. driver, restaurants, attractions) under a named itinerary. |
+| **Category** | A classification label for contacts. Valid categories include: Driver, Restaurant, Hotel, Attraction. |
+| **Tag** | A label applied to a tour package to describe its type, e.g. `sightseeing`, `food`. |
+| **CLI (Command-Line Interface)** | A text-based interface where the user interacts with the application by typing commands rather than clicking buttons or menus. |
 
 --------------------------------------------------------------------------------------------------------------------
 
