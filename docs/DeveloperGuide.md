@@ -488,7 +488,7 @@ Copy
 
 ### Target User Profile
 
-TourConnect is designed for professional tour guides who:
+Bivago is designed for professional tour guides who:
 - Manage a large network of contacts including drivers, restaurants, hotels, and attractions
 - Prefer desktop applications with a Command-Line Interface (CLI) for fast, efficient data entry
 - Need to quickly plan and organize tour packages by associating contacts with specific tours
