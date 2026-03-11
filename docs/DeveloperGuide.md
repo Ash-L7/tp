@@ -479,6 +479,215 @@ Priorities: High (must have) — `* * *`, Medium (nice to have) — `* *`, Low (
 
 ---
 
+Developerguide appendix · MD
+Copy
+
+# Appendix: Requirements
+
+## Product Scope
+
+### Target User Profile
+
+TourConnect is designed for professional tour guides who:
+- Manage a large network of contacts including drivers, restaurants, hotels, and attractions
+- Prefer desktop applications with a Command-Line Interface (CLI) for fast, efficient data entry
+- Need to quickly plan and organize tour packages by associating contacts with specific tours
+- Conduct tours involving multiple service providers and need reliable, up-to-date contact records
+- Are reasonably comfortable using CLI applications and can type quickly
+
+### Value Proposition
+
+TourConnect helps professional tour guides manage their network of service providers (drivers, restaurants, hotels, attractions) and plan tour packages faster than a typical mouse/GUI-driven application. By providing a unified CLI-based contact and tour management system, guides can quickly look up contacts, assemble tour packages, and keep their service provider information current — all without switching between multiple tools or applications.
+
+---
+
+## User Stories
+
+Priorities: High (must have) — `* * *`, Medium (nice to have) — `* *`, Low (unlikely to have) — `*`
+
+| Priority | As a… | I want to… | So that I can… |
+|----------|--------|------------|----------------|
+| `* * *` | tour guide using the app for the first time | access a help page | learn how to use the app as a beginner |
+| `* * *` | tour guide | add new contacts with their details | build my network of service providers within the app |
+| `* * *` | tour guide | delete contacts I no longer work with | keep my contact list relevant |
+| `* * *` | tour guide who is careless | have my contact data saved automatically | not lose information if the app closes |
+| `* * *` | tour guide | create tour packages | organize my different tour offerings |
+| `* * *` | tour guide | assign contacts to specific tours | know which driver, restaurant, and attractions are involved in each tour |
+| `* * *` | tour guide who prioritizes efficiency | search through tours by criteria (e.g. category, contact, restaurant) | quickly find tours concerning certain contacts, restaurants, or categories |
+| `* * *` | tour guide who is lazy and forgetful | see descriptive error messages when I input commands incorrectly | not have to keep referring to the help page |
+| `* * *` | tour guide who conducts time-sensitive tours | store operating hours for restaurants and attractions | plan tours accordingly |
+| `* *` | tour guide | add email addresses to contacts | communicate digitally when needed |
+| `* *` | tour guide | add pricing information to contacts | quickly estimate tour costs |
+| `* *` | tour guide | store capacity information (e.g. restaurant seating, bus capacity) | match group sizes appropriately |
+| `* *` | tour guide who conducts tours in other languages | add languages spoken by contacts (e.g. English-speaking driver, Mandarin-speaking restaurant staff) | match service providers with my international clients' needs |
+| `* *` | tour guide | categorize contacts by type (driver, restaurant, hotel, attraction) | quickly find the right person for each need |
+| `* *` | tour guide | edit contact information | keep details up-to-date when phone numbers or addresses change or when I make a mistake |
+| `* *` | tour guide | search for contacts by name | quickly find specific people |
+| `* *` | tour guide | filter contacts by category | see all restaurants or all drivers at once |
+| `* *` | tour guide | add notes to contacts | remember important details like dietary restrictions they accommodate or special pricing |
+| `* *` | tour guide | mark favourite contacts | prioritize my most reliable service providers |
+| `* *` | tour guide | view all contacts associated with a tour | see my full service provider lineup at a glance |
+| `* *` | tour guide | tag tours by type (walking, food, sightseeing) | organize my offerings |
+| `* *` | tour guide | add multiple restaurants to one tour | plan multi-stop food tours |
+| `*` | tour guide | store multiple phone numbers for each contact | have backup contact methods |
+| `*` | tour guide who is forgetful | set reminders for follow-ups with contacts | maintain relationships and confirm bookings ahead of tours |
+| `*` | tour guide with affiliated contacts | link affiliated contacts (e.g. restaurant and nearby attraction) | remember partnership deals |
+| `*` | tour guide with affiliated contacts | rate my affiliated contacts | track service quality over time |
+| `*` | tour guide with affiliated contacts | add commission or discount information to contacts | remember special arrangements |
+| `*` | tour guide who conducts tours in various locations | search contacts by location/neighbourhood | find service providers near specific attractions |
+| `*` | tour guide who prioritizes efficiency | filter contacts by availability | quickly find who's available for a specific date |
+| `*` | tour guide who conducts many tour packages | duplicate existing tours | quickly create similar tour packages without re-entering all details |
+| `*` | tour guide who has wrist problems | alias commands I frequently use | not have to type so much |
+
+---
+
+## Use Cases
+
+*(For all use cases below, the System is **TourConnect** and the Actor is the **tour guide**, unless specified otherwise)*
+
+---
+
+### Use Case TC01: View Help
+
+**MSS**
+
+1. User requests to view the help page.
+2. TourConnect displays the help page with a list of available commands and their usage.
+
+*Use case ends.*
+
+**Extensions**
+
+- 1a. User enters an unrecognised command.
+    - 1a1. TourConnect shows an error message with a suggestion to use the help command.
+    - 1a2. Use case ends.
+
+---
+
+### Use Case TC02: Add a New Contact
+
+**MSS**
+
+1. User requests to add a new contact with the relevant details.
+2. TourConnect saves the contact and confirms that the contact has been added.
+
+*Use case ends.*
+
+**Extensions**
+
+- 1a. One or more required fields are missing or invalid.
+    - 1a1. TourConnect shows a descriptive error message specifying the missing or incorrect fields.
+    - 1a2. Use case resumes at step 1.
+
+- 1b. A contact with the same name already exists.
+    - 1b1. TourConnect shows a duplicate contact error message.
+    - 1b2. Use case resumes at step 1.
+
+---
+
+### Use Case TC03: Edit a Contact's Details
+
+**MSS**
+
+1. User searches for a contact by name.
+2. TourConnect displays a list of matching contacts.
+3. User requests to edit a specific contact's field(s) (e.g. phone number, operating hours).
+4. TourConnect saves and confirms the updated contact information.
+
+*Use case ends.*
+
+**Extensions**
+
+- 2a. No contacts match the search query.
+    - 2a1. TourConnect shows a "No contacts found" message.
+    - 2a2. Use case ends.
+
+- 3a. The new value provided for a field is invalid.
+    - 3a1. TourConnect shows a descriptive error message.
+    - 3a2. Use case resumes at step 3.
+
+---
+
+### Use Case TC04: Delete a Contact
+
+**MSS**
+
+1. User requests to list all contacts.
+2. TourConnect shows a list of all contacts.
+3. User requests to delete a specific contact from the list.
+4. TourConnect deletes the contact and confirms the deletion.
+
+*Use case ends.*
+
+**Extensions**
+
+- 2a. The list is empty.
+    - 2a1. Use case ends.
+
+- 3a. The given index is invalid.
+    - 3a1. TourConnect shows an error message.
+    - 3a2. Use case resumes at step 2.
+
+---
+
+### Use Case TC05: Create a Tour Package with Multiple Contacts
+
+**MSS**
+
+1. User requests to create a new tour package with a name and type tag (e.g. food, walking).
+2. TourConnect confirms the tour has been created.
+3. User requests to assign a contact to the tour.
+4. TourConnect confirms the contact has been assigned to the tour.
+5. Steps 3–4 are repeated until all desired contacts have been assigned.
+6. TourConnect displays the completed tour with all assigned contacts.
+
+*Use case ends.*
+
+**Extensions**
+
+- 1a. A tour with the same name already exists.
+    - 1a1. TourConnect shows a duplicate tour name error.
+    - 1a2. Use case resumes at step 1.
+
+- 3a. The specified contact does not exist.
+    - 3a1. TourConnect shows a "Contact not found" error.
+    - 3a2. User may add the contact first (TC02) before resuming.
+    - 3a3. Use case resumes at step 3.
+
+---
+
+### Use Case TC06: Filter Contacts by Category
+
+**MSS**
+
+1. User requests to filter contacts by a specific category (e.g. restaurant).
+2. TourConnect displays all contacts belonging to that category.
+3. User requests to view the full details of a specific contact from the filtered list.
+4. TourConnect displays the selected contact's complete information.
+
+*Use case ends.*
+
+**Extensions**
+
+- 2a. No contacts exist in the specified category.
+    - 2a1. TourConnect shows an empty list with a "No contacts found in this category" message.
+    - 2a2. Use case ends.
+
+---
+
+## Non-Functional Requirements
+
+1. Should work on any mainstream OS (Windows, Linux, macOS) with Java 17 or above installed.
+2. Should be able to hold up to 1000 contacts and 200 tour packages without noticeable performance degradation during typical usage.
+3. A user with above-average typing speed for regular English text (i.e. not code, not system admin commands) should be able to complete most tasks faster using CLI commands than using the mouse.
+4. The application should respond to any single user command within 2 seconds under normal operating conditions.
+5. All contact and tour data must be persisted automatically after every command that modifies data, with no manual save step required.
+6. The application must be packaged as a single portable JAR file requiring no installation beyond Java 17.
+7. The application must function fully offline, with no dependence on external servers or internet connectivity.
+8. The application should be usable by a tour guide with no prior experience of CLI applications after reading the help page.
+
+---
+
 ### Glossary
 
 | Term | Definition |
