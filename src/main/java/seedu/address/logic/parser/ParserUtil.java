@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.VALID_TYPES;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -21,6 +22,7 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_TYPE = "Invalid contact type.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -33,6 +35,19 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses {@code type} and returns it. Leading and trailing white spaces will be trimmed.
+     * @throws ParseException if the type is invalid (not a contact type).
+     */
+    public static String parseType(String type) throws ParseException {
+        requireNonNull(type);
+        String trimmedType = type.trim();
+        if (!VALID_TYPES.contains(trimmedType)) {
+            throw new ParseException(MESSAGE_INVALID_TYPE);
+        }
+        return trimmedType;
     }
 
     /**

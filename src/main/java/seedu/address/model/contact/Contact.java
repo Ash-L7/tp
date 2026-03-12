@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.commands.EditCommand.EditContactDescriptor;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -75,6 +76,16 @@ public abstract class Contact {
     }
 
     /**
+     * Returns a copy of the contact with its values edited.
+     */
+    public abstract Contact edit(EditContactDescriptor editContactDescriptor);
+
+    /**
+     * Returns the type of contact.
+     */
+    public abstract String getType();
+
+    /**
      * Returns true if both contacts have the same identity and data fields.
      * This defines a stronger notion of equality between two contacts.
      */
@@ -113,5 +124,4 @@ public abstract class Contact {
                 .add("tags", tags)
                 .toString();
     }
-
 }

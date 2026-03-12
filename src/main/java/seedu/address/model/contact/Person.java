@@ -1,7 +1,10 @@
 package seedu.address.model.contact;
 
+import static seedu.address.logic.parser.CliSyntax.TYPE_PERSON;
+
 import java.util.Set;
 
+import seedu.address.logic.commands.EditCommand.EditContactDescriptor;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -17,17 +20,19 @@ public class Person extends Contact {
         super(name, phone, email, address, tags);
     }
 
-    /**
-     * Returns true if both persons have the same name.
-     * This defines a weaker notion of equality between two persons.
-     */
-    public boolean isSamePerson(Person otherPerson) {
-        if (otherPerson == this) {
-            return true;
-        }
+    @Override
+    public Contact edit(EditContactDescriptor editContactDescriptor) {
+        Name updatedName = editContactDescriptor.getName().orElse(getName());
+        Phone updatedPhone = editContactDescriptor.getPhone().orElse(getPhone());
+        Email updatedEmail = editContactDescriptor.getEmail().orElse(getEmail());
+        Address updatedAddress = editContactDescriptor.getAddress().orElse(getAddress());
+        Set<Tag> updatedTags = editContactDescriptor.getTags().orElse(getTags());
 
-        return otherPerson != null
-                && otherPerson.getName().equals(getName());
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
     }
 
+    @Override
+    public String getType() {
+        return TYPE_PERSON;
+    }
 }
