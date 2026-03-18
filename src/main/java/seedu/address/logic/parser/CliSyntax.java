@@ -14,9 +14,9 @@ public class CliSyntax {
     public static final Prefix PREFIX_EMAIL = new Prefix("e/");
     public static final Prefix PREFIX_ADDRESS = new Prefix("a/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
-    public static final Prefix PREFIX_ISHALAL = new Prefix("h/");
-    public static final Prefix PREFIX_OPENINGHOUR = new Prefix("o/");
-    public static final Prefix PREFIX_CLOSINGHOUR = new Prefix("c/");
+    public static final Prefix PREFIX_HALAL_STATUS = new Prefix("h/");
+    public static final Prefix PREFIX_OPENING_HOUR = new Prefix("o/");
+    public static final Prefix PREFIX_CLOSING_HOUR = new Prefix("c/");
     public static final Prefix PREFIX_STARS = new Prefix("s/");
 
     /* Valid types */

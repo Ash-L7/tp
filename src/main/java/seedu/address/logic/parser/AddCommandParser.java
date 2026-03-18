@@ -2,11 +2,11 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CLOSINGHOUR;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLOSING_HOUR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ISHALAL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HALAL_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_OPENINGHOUR;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_OPENING_HOUR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STARS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -49,8 +49,8 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_TYPE, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                        PREFIX_ADDRESS, PREFIX_TAG, PREFIX_ISHALAL, PREFIX_OPENINGHOUR,
-                        PREFIX_CLOSINGHOUR, PREFIX_STARS);
+                        PREFIX_ADDRESS, PREFIX_TAG, PREFIX_HALAL_STATUS, PREFIX_OPENING_HOUR,
+                        PREFIX_CLOSING_HOUR, PREFIX_STARS);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_TYPE, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -73,8 +73,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
 
         if (type.equals(TYPE_FNB)) {
-            if (arePrefixesPresent(argMultimap, PREFIX_ISHALAL)) {
-                HalalStatus isHalal = ParserUtil.parseHalalStatus(argMultimap.getValue(PREFIX_ISHALAL).get());
+            if (arePrefixesPresent(argMultimap, PREFIX_HALAL_STATUS)) {
+                HalalStatus isHalal = ParserUtil.parseHalalStatus(argMultimap.getValue(PREFIX_HALAL_STATUS).get());
                 contact = new Fnb(name, phone, email, address, tagList, isHalal);
             } else {
                 contact = new Fnb(name, phone, email, address, tagList);
@@ -84,11 +84,11 @@ public class AddCommandParser implements Parser<AddCommand> {
         if (type.equals(TYPE_ATTRACTION)) {
             OpeningHour openingHour = null;
             ClosingHour closingHour = null;
-            if (arePrefixesPresent(argMultimap, PREFIX_OPENINGHOUR)) {
-                openingHour = ParserUtil.parseOpeningHour(argMultimap.getValue(PREFIX_OPENINGHOUR).get());
+            if (arePrefixesPresent(argMultimap, PREFIX_OPENING_HOUR)) {
+                openingHour = ParserUtil.parseOpeningHour(argMultimap.getValue(PREFIX_OPENING_HOUR).get());
             }
-            if (arePrefixesPresent(argMultimap, PREFIX_CLOSINGHOUR)) {
-                closingHour = ParserUtil.parseClosingHour(argMultimap.getValue(PREFIX_CLOSINGHOUR).get());
+            if (arePrefixesPresent(argMultimap, PREFIX_CLOSING_HOUR)) {
+                closingHour = ParserUtil.parseClosingHour(argMultimap.getValue(PREFIX_CLOSING_HOUR).get());
             }
             if (openingHour == null && closingHour == null) {
                 contact = new Attraction(name, phone, email, address, tagList);

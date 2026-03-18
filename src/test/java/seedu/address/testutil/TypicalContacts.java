@@ -1,22 +1,44 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_ACCOMMODATION;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_ATTRACTION;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_FNB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CLOSING_HOUR_ATTRACTION;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_ACCOMMODATION;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_ATTRACTION;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_FNB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_HALAL_STATUS_FNB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_ACCOMMODATION;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_ATTRACTION;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_FNB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_OPENING_HOUR_ATTRACTION;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_ACCOMMODATION;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_ATTRACTION;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_FNB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STARS_ACCOMMODATION;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FUN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_INDIAN;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_STAY;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
+import seedu.address.model.contact.Accommodation;
+import seedu.address.model.contact.Attraction;
 import seedu.address.model.contact.Contact;
+import seedu.address.model.contact.Fnb;
 
 /**
  * A utility class containing a list of {@code Contact} objects to be used in tests.
@@ -54,6 +76,35 @@ public class TypicalContacts {
     public static final Contact BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
             .build();
+    // Fnb
+    public static final Fnb AL_AZHAR = (Fnb) new FnbBuilder()
+            .withHalalStatus(VALID_HALAL_STATUS_FNB)
+            .withName(VALID_NAME_FNB)
+            .withPhone(VALID_PHONE_FNB)
+            .withEmail(VALID_EMAIL_FNB)
+            .withAddress(VALID_ADDRESS_FNB)
+            .withTags(VALID_TAG_INDIAN)
+            .build();
+
+    // Attraction
+    public static final Attraction USS = (Attraction) new AttractionBuilder()
+            .withOperatingHours(VALID_OPENING_HOUR_ATTRACTION, VALID_CLOSING_HOUR_ATTRACTION)
+            .withName(VALID_NAME_ATTRACTION)
+            .withPhone(VALID_PHONE_ATTRACTION)
+            .withEmail(VALID_EMAIL_ATTRACTION)
+            .withAddress(VALID_ADDRESS_ATTRACTION)
+            .withTags(VALID_TAG_FUN)
+            .build();
+
+    // Accommodation
+    public static final Accommodation HOTEL = (Accommodation) new AccommodationBuilder()
+            .withStars(VALID_STARS_ACCOMMODATION)
+            .withName(VALID_NAME_ACCOMMODATION)
+            .withPhone(VALID_PHONE_ACCOMMODATION)
+            .withEmail(VALID_EMAIL_ACCOMMODATION)
+            .withAddress(VALID_ADDRESS_ACCOMMODATION)
+            .withTags(VALID_TAG_STAY)
+            .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
@@ -71,6 +122,7 @@ public class TypicalContacts {
     }
 
     public static List<Contact> getTypicalContacts() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA,
+                AL_AZHAR, USS, HOTEL, GEORGE));
     }
 }

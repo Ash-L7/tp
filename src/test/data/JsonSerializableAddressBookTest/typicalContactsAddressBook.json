@@ -43,6 +43,31 @@
     "address" : "little tokyo",
     "tags" : [ ]
   }, {
+    "type": "Fnb",
+    "name" : "Al Azhar",
+    "phone" : "63334444",
+    "email" : "alazhar@example.com",
+    "address" : "1 Jalan Besar",
+    "tags" : [ "Indian" ],
+    "halalStatus" : "true"
+  }, {
+    "type" : "Attraction",
+    "name" : "USS",
+    "phone" : "65552222",
+    "email" : "uss@example.com",
+    "address" : "1 Sentosa Drive",
+    "tags" : [ "fun" ],
+    "openingHour" : "09:00",
+    "closingHour" : "22:00"
+  }, {
+    "type" : "Accommodation",
+    "name" : "Hotel 81",
+    "phone" : "61234567",
+    "email" : "hotel81@example.com",
+    "address" : "1 Hotel Drive",
+    "tags" : [ "stay" ],
+    "stars" : "4"
+  }, {
     "type": "Person",
     "name" : "George Best",
     "phone" : "9482442",

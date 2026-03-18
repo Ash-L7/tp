@@ -3,7 +3,6 @@ package seedu.address.storage;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -89,7 +88,7 @@ class JsonAdaptedContact {
         String closingHour = null;
         String stars = null;
         if (source instanceof Fnb fnb) {
-            halalStatus = fnb.getHalalStatus().toString();
+            halalStatus = String.valueOf(fnb.getHalalStatus().isHalal);
         }
         if (source instanceof Attraction attraction) {
             openingHour = attraction.getOpeningHour().toString();

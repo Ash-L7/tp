@@ -5,10 +5,14 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditContactDescriptor;
+import seedu.address.model.contact.AccommodationStars;
 import seedu.address.model.contact.Address;
+import seedu.address.model.contact.ClosingHour;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.Email;
+import seedu.address.model.contact.HalalStatus;
 import seedu.address.model.contact.Name;
+import seedu.address.model.contact.OpeningHour;
 import seedu.address.model.contact.Phone;
 import seedu.address.model.tag.Tag;
 
@@ -78,6 +82,38 @@ public class EditContactDescriptorBuilder {
     public EditContactDescriptorBuilder withTags(String... tags) {
         Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
         descriptor.setTags(tagSet);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Halal Status} of the {@code EditContactDescriptor} that we are building.
+     */
+    public EditContactDescriptorBuilder withHalalStatus(String halalStatus) {
+        descriptor.setHalal(new HalalStatus(halalStatus));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Opening Hour} of the {@code EditContactDescriptor} that we are building.
+     */
+    public EditContactDescriptorBuilder withOpeningHour(String openingHour) {
+        descriptor.setOpeningHour(new OpeningHour(openingHour));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Closing Hour} of the {@code EditContactDescriptor} that we are building.
+     */
+    public EditContactDescriptorBuilder withClosingHour(String closingHour) {
+        descriptor.setClosingHour(new ClosingHour(closingHour));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Accommodation Stars} of the {@code EditContactDescriptor} that we are building.
+     */
+    public EditContactDescriptorBuilder withStars(String stars) {
+        descriptor.setStars(new AccommodationStars(stars));
         return this;
     }
 

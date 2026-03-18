@@ -3,9 +3,13 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLOSING_HOUR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HALAL_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_OPENING_HOUR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STARS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -40,6 +44,35 @@ public class CommandTestUtil {
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
+    public static final String VALID_TYPE_FNB = "fnb";
+    public static final String VALID_TYPE_ATTRACTION = "attraction";
+    public static final String VALID_TYPE_ACCOMMODATION = "accommodation";
+
+    public static final String VALID_NAME_FNB = "Al Azhar";
+    public static final String VALID_NAME_ATTRACTION = "USS";
+    public static final String VALID_NAME_ACCOMMODATION = "Hotel 81";
+
+    public static final String VALID_PHONE_FNB = "63334444";
+    public static final String VALID_PHONE_ATTRACTION = "65552222";
+    public static final String VALID_PHONE_ACCOMMODATION = "61234567";
+
+    public static final String VALID_EMAIL_FNB = "alazhar@example.com";
+    public static final String VALID_EMAIL_ATTRACTION = "uss@example.com";
+    public static final String VALID_EMAIL_ACCOMMODATION = "hotel81@example.com";
+
+    public static final String VALID_ADDRESS_FNB = "1 Jalan Besar";
+    public static final String VALID_ADDRESS_ATTRACTION = "1 Sentosa Drive";
+    public static final String VALID_ADDRESS_ACCOMMODATION = "1 Hotel Drive";
+
+    public static final String VALID_TAG_INDIAN = "Indian";
+    public static final String VALID_TAG_FUN = "fun";
+    public static final String VALID_TAG_STAY = "stay";
+
+    public static final String VALID_HALAL_STATUS_FNB = "true";
+    public static final String VALID_OPENING_HOUR_ATTRACTION = "09:00";
+    public static final String VALID_CLOSING_HOUR_ATTRACTION = "22:00";
+    public static final String VALID_STARS_ACCOMMODATION = "4";
+
     public static final String TYPE_DESC_AMY = " " + PREFIX_TYPE + VALID_TYPE_AMY;
     public static final String TYPE_DESC_BOB = " " + PREFIX_TYPE + VALID_TYPE_BOB;
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
@@ -53,6 +86,35 @@ public class CommandTestUtil {
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
+    public static final String TYPE_DESC_FNB = " " + PREFIX_TYPE + VALID_TYPE_FNB;
+    public static final String TYPE_DESC_ATTRACTION = " " + PREFIX_TYPE + VALID_TYPE_ATTRACTION;
+    public static final String TYPE_DESC_ACCOMMODATION = " " + PREFIX_TYPE + VALID_TYPE_ACCOMMODATION;
+
+    public static final String NAME_DESC_FNB = " " + PREFIX_NAME + VALID_NAME_FNB;
+    public static final String NAME_DESC_ATTRACTION = " " + PREFIX_NAME + VALID_NAME_ATTRACTION;
+    public static final String NAME_DESC_ACCOMMODATION = " " + PREFIX_NAME + VALID_NAME_ACCOMMODATION;
+
+    public static final String PHONE_DESC_FNB = " " + PREFIX_PHONE + VALID_PHONE_FNB;
+    public static final String PHONE_DESC_ATTRACTION = " " + PREFIX_PHONE + VALID_PHONE_ATTRACTION;
+    public static final String PHONE_DESC_ACCOMMODATION = " " + PREFIX_PHONE + VALID_PHONE_ACCOMMODATION;
+
+    public static final String EMAIL_DESC_FNB = " " + PREFIX_EMAIL + VALID_EMAIL_FNB;
+    public static final String EMAIL_DESC_ATTRACTION = " " + PREFIX_EMAIL + VALID_EMAIL_ATTRACTION;
+    public static final String EMAIL_DESC_ACCOMMODATION = " " + PREFIX_EMAIL + VALID_EMAIL_ACCOMMODATION;
+
+    public static final String ADDRESS_DESC_FNB = " " + PREFIX_ADDRESS + VALID_ADDRESS_FNB;
+    public static final String ADDRESS_DESC_ATTRACTION = " " + PREFIX_ADDRESS + VALID_ADDRESS_ATTRACTION;
+    public static final String ADDRESS_DESC_ACCOMMODATION = " " + PREFIX_ADDRESS + VALID_ADDRESS_ACCOMMODATION;
+
+    public static final String TAG_DESC_INDIAN = " " + PREFIX_TAG + VALID_TAG_INDIAN;
+    public static final String TAG_DESC_FUN = " " + PREFIX_TAG + VALID_TAG_FUN;
+    public static final String TAG_DESC_STAY = " " + PREFIX_TAG + VALID_TAG_STAY;
+
+    public static final String HALAL_STATUS_DESC_FNB = " " + PREFIX_HALAL_STATUS + VALID_HALAL_STATUS_FNB;
+    public static final String OPENING_HOUR_DESC_ATTRACTION = " " + PREFIX_OPENING_HOUR + VALID_OPENING_HOUR_ATTRACTION;
+    public static final String CLOSING_HOUR_DESC_ATTRACTION = " " + PREFIX_CLOSING_HOUR + VALID_CLOSING_HOUR_ATTRACTION;
+    public static final String STARS_DESC_ACCOMMODATION = " " + PREFIX_STARS + VALID_STARS_ACCOMMODATION;
+
     public static final String INVALID_TYPE_DESC = " " + PREFIX_TYPE + "people";
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -60,11 +122,19 @@ public class CommandTestUtil {
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
+    public static final String INVALID_HALAL_STATUS_DESC = " " + PREFIX_HALAL_STATUS + "Maybe";
+    public static final String INVALID_OPENING_HOUR_DESC = " " + PREFIX_OPENING_HOUR + "9am";
+    public static final String INVALID_CLOSING_HOUR_DESC = " " + PREFIX_CLOSING_HOUR + "25:00";
+    public static final String INVALID_STARS_DESC = " " + PREFIX_STARS + "6";
+
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
     public static final EditCommand.EditContactDescriptor DESC_AMY;
     public static final EditCommand.EditContactDescriptor DESC_BOB;
+    public static final EditCommand.EditContactDescriptor DESC_FNB;
+    public static final EditCommand.EditContactDescriptor DESC_ATTRACTION;
+    public static final EditCommand.EditContactDescriptor DESC_ACCOMMODATION;
 
     static {
         DESC_AMY = new EditContactDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -73,6 +143,21 @@ public class CommandTestUtil {
         DESC_BOB = new EditContactDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+
+        DESC_FNB = new EditContactDescriptorBuilder().withName(VALID_NAME_FNB)
+                .withPhone(VALID_PHONE_FNB).withEmail(VALID_EMAIL_FNB).withAddress(VALID_ADDRESS_FNB)
+                .withTags(VALID_TAG_INDIAN).withHalalStatus(VALID_HALAL_STATUS_FNB).build();
+
+        DESC_ATTRACTION = new EditContactDescriptorBuilder().withName(VALID_NAME_ATTRACTION)
+                .withPhone(VALID_PHONE_ATTRACTION).withEmail(VALID_EMAIL_ATTRACTION)
+                .withAddress(VALID_ADDRESS_ATTRACTION).withTags(VALID_TAG_FUN)
+                .withOpeningHour(VALID_OPENING_HOUR_ATTRACTION)
+                .withClosingHour(VALID_CLOSING_HOUR_ATTRACTION).build();
+
+        DESC_ACCOMMODATION = new EditContactDescriptorBuilder().withName(VALID_NAME_ACCOMMODATION)
+                .withPhone(VALID_PHONE_ACCOMMODATION).withEmail(VALID_EMAIL_ACCOMMODATION)
+                .withAddress(VALID_ADDRESS_ACCOMMODATION).withTags(VALID_TAG_STAY)
+                .withStars(VALID_STARS_ACCOMMODATION).build();
     }
 
     /**
