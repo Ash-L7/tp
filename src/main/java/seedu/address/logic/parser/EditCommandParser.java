@@ -11,6 +11,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_OPENING_HOUR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STARS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TOUR;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -22,6 +23,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditContactDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tour.Tour;
 
 
 /**
@@ -38,7 +40,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                        PREFIX_ADDRESS, PREFIX_TAG, PREFIX_HALAL_STATUS, PREFIX_OPENING_HOUR,
+                        PREFIX_ADDRESS, PREFIX_TAG, PREFIX_TOUR, PREFIX_HALAL_STATUS, PREFIX_OPENING_HOUR,
                         PREFIX_CLOSING_HOUR, PREFIX_STARS);
 
         Index index;
@@ -66,6 +68,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             editContactDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editContactDescriptor::setTags);
+        parseToursForEdit(argMultimap.getAllValues(PREFIX_TOUR)).ifPresent(editContactDescriptor::setTours);
         if (argMultimap.getValue(PREFIX_HALAL_STATUS).isPresent()) {
             editContactDescriptor.setHalal(ParserUtil.parseHalalStatus(
                     argMultimap.getValue(PREFIX_HALAL_STATUS).get()));
@@ -104,4 +107,18 @@ public class EditCommandParser implements Parser<EditCommand> {
         return Optional.of(ParserUtil.parseTags(tagSet));
     }
 
+    /**
+     * Parses {@code Collection<String> tours} into a {@code Set<Tour>} if {@code tours} is non-empty.
+     * If {@code tours} contain only one element which is an empty string, it will be parsed into a
+     * {@code Set<Tour>} containing zero tours.
+     */
+    private Optional<Set<Tour>> parseToursForEdit(Collection<String> tours) throws ParseException {
+        assert tours != null;
+
+        if (tours.isEmpty()) {
+            return Optional.empty();
+        }
+        Collection<String> tourSet = tours.size() == 1 && tours.contains("") ? Collections.emptySet() : tours;
+        return Optional.of(ParserUtil.parseTours(tourSet));
+    }
 }

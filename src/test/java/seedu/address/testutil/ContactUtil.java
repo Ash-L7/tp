@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TOUR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 
 import java.util.Set;
@@ -13,6 +14,7 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditContactDescriptor;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tour.Tour;
 
 /**
  * A utility class for Contact.
@@ -57,6 +59,14 @@ public class ContactUtil {
                 sb.append(PREFIX_TAG);
             } else {
                 tags.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
+            }
+        }
+        if (descriptor.getTours().isPresent()) {
+            Set<Tour> tours = descriptor.getTours().get();
+            if (tours.isEmpty()) {
+                sb.append(PREFIX_TOUR);
+            } else {
+                tours.forEach(s -> sb.append(PREFIX_TOUR).append(s.tourName).append(" "));
             }
         }
         return sb.toString();

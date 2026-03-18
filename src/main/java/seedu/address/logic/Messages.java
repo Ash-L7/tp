@@ -62,6 +62,8 @@ public class Messages {
             builder.append("; Stars: ")
                     .append(accommodation.getStars());
         }
+        builder.append("; Tours: ");
+        contact.getTours().forEach(builder::append);
         builder.append("; Tags: ");
         contact.getTags().forEach(builder::append);
         return builder.toString();

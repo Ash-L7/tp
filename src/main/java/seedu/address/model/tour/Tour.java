@@ -1,20 +1,36 @@
 package seedu.address.model.tour;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 import java.util.Objects;
+
 
 /**
  * Represents a tour package, which is identified by its String name
  */
 public class Tour {
-    String name = "";
+    public static final String MESSAGE_CONSTRAINTS = "Tour names should not have special characters.";
+    public static final String VALIDATION_REGEX = "^[A-Za-z0-9 ]+$";
+
+    public final String tourName;
 
     /**
-    * Constructs a {@code Tour} with the given name.
-    *
-    * @param name the name of the tour
-    */
-    public Tour(String name) {
-        this.name = name;
+     * Constructs a {@code Tour} with the given name.
+     *
+     * @param tourName the name of the tour
+     */
+    public Tour(String tourName) {
+        requireNonNull(tourName);
+        checkArgument(isValidTourName(tourName), MESSAGE_CONSTRAINTS);
+        this.tourName = tourName;
+    }
+
+    /**
+     * Returns true if a given string is a valid tour name.
+     */
+    public static boolean isValidTourName(String test) {
+        return test.matches(VALIDATION_REGEX);
     }
 
     /**
@@ -22,8 +38,8 @@ public class Tour {
      *
      * @return the tour name as a {@code String}
      */
-    public String getName() {
-        return name;
+    public String getTourName() {
+        return tourName;
     }
 
     /**
@@ -33,7 +49,7 @@ public class Tour {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(name);
+        return Objects.hash(tourName);
     }
 
     /**
@@ -49,13 +65,13 @@ public class Tour {
             return true;
         }
         if (other instanceof Tour tour) {
-            return this.name.equals(tour.getName());
+            return this.tourName.equals(tour.getTourName());
         }
         return false;
     }
 
     @Override
     public String toString() {
-        return String.format("Tour %s", name);
+        return tourName;
     }
 }

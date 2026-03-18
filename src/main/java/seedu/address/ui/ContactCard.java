@@ -59,8 +59,9 @@ public class ContactCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         contact.getTypeSpecificDetails().forEach(detail -> {
-                Label label = new Label(detail);
-                label.getStyleClass().add("cell_small_label");
-                detailsBox.getChildren().add(label);});
+            Label label = new Label(detail);
+            label.getStyleClass().add("cell_small_label");
+            detailsBox.getChildren().add(label);
+        });
     }
 }

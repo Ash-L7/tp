@@ -69,7 +69,8 @@ public class EditContactDescriptorTest {
                 + editContactDescriptor.getHalalStatus().orElse(null) + ", openingHour="
                 + editContactDescriptor.getOpeningHour().orElse(null) + ", closingHour="
                 + editContactDescriptor.getClosingHour().orElse(null) + ", stars="
-                + editContactDescriptor.getStars().orElse(null) + "}";
+                + editContactDescriptor.getStars().orElse(null) + ", tours="
+                + editContactDescriptor.getTours().orElse(null) + "}";
         assertEquals(expected, editContactDescriptor.toString());
     }
 }

@@ -10,6 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_OPENING_HOUR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STARS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TOUR;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CONTACTS;
 
 import java.util.Collections;
@@ -57,6 +58,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_OPENING_HOUR + "OPENING HOUR (for Attraction contacts)] \n"
             + "[" + PREFIX_CLOSING_HOUR + "CLOSING HOUR (for Attraction contacts)] "
             + "[" + PREFIX_STARS + "STARS (for for Accommodations)] "
+            + "[" + PREFIX_TOUR + "TOUR]... "
             + "[" + PREFIX_TAG + "TAG]... \n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -165,6 +167,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
+            setTours(toCopy.tours);
             setHalal(toCopy.isHalal);
             setOpeningHour(toCopy.openingHour);
             setClosingHour(toCopy.closingHour);
@@ -175,7 +178,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags,
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, tours,
                     isHalal, openingHour, closingHour, stars);
         }
 
@@ -280,9 +283,16 @@ public class EditCommand extends Command {
          * @return an {@code Optional} containing the new set of tours, or {@code Optional.empty()} if unspecified
          */
         public Optional<Set<Tour>> getTours() {
+<<<<<<< fix/resolve-save-contact-and-tour-clashes
+            return (tours != null) ? Optional.of(Collections.unmodifiableSet(tours)) : Optional.empty();
+        }
+
+
+=======
             return Optional.ofNullable(tours);
         }
 
+>>>>>>> master
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -300,6 +310,7 @@ public class EditCommand extends Command {
                     && Objects.equals(email, otherEditContactDescriptor.email)
                     && Objects.equals(address, otherEditContactDescriptor.address)
                     && Objects.equals(tags, otherEditContactDescriptor.tags)
+                    && Objects.equals(tours, otherEditContactDescriptor.tours)
                     && Objects.equals(isHalal, otherEditContactDescriptor.isHalal)
                     && Objects.equals(openingHour, otherEditContactDescriptor.openingHour)
                     && Objects.equals(closingHour, otherEditContactDescriptor.closingHour)

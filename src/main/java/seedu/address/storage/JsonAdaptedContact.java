@@ -25,6 +25,7 @@ import seedu.address.model.contact.OpeningHour;
 import seedu.address.model.contact.Person;
 import seedu.address.model.contact.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tour.Tour;
 
 /**
  * Jackson-friendly version of {@link Contact}.
@@ -44,6 +45,7 @@ class JsonAdaptedContact {
     private final String closingHour;
     private final String stars;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final List<JsonAdaptedTour> tours = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedContact} with the given contact details.
@@ -53,6 +55,7 @@ class JsonAdaptedContact {
                               @JsonProperty("name") String name, @JsonProperty("phone") String phone,
                               @JsonProperty("email") String email, @JsonProperty("address") String address,
                               @JsonProperty("tags") List<JsonAdaptedTag> tags,
+                              @JsonProperty("tours") List<JsonAdaptedTour> tours,
                               @JsonProperty("halalStatus") String halalStatus,
                               @JsonProperty("openingHour") String openingHour,
                               @JsonProperty("closingHour") String closingHour,
@@ -64,6 +67,9 @@ class JsonAdaptedContact {
         this.address = address;
         if (tags != null) {
             this.tags.addAll(tags);
+        }
+        if (tours != null) {
+            this.tours.addAll(tours);
         }
         this.halalStatus = halalStatus;
         this.openingHour = openingHour;
@@ -82,6 +88,9 @@ class JsonAdaptedContact {
         address = source.getAddress().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
+                .collect(Collectors.toList()));
+        tours.addAll(source.getTours().stream()
+                .map(JsonAdaptedTour::new)
                 .collect(Collectors.toList()));
 
         String halalStatus = null;
@@ -114,6 +123,10 @@ class JsonAdaptedContact {
         final List<Tag> contactTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
             contactTags.add(tag.toModelType());
+        }
+        final List<Tour> contactTours = new ArrayList<>();
+        for (JsonAdaptedTour tour : tours) {
+            contactTours.add(tour.toModelType());
         }
         if (type == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Contact.class.getSimpleName()));
@@ -152,6 +165,8 @@ class JsonAdaptedContact {
 
         final Set<Tag> modelTags = new HashSet<>(contactTags);
 
+        final Set<Tour> modelTours = new HashSet<>(contactTours);
+
         if (type.equals(Person.class.getSimpleName())) {
             return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, Collections.emptySet());
         }
@@ -165,7 +180,7 @@ class JsonAdaptedContact {
                 throw new IllegalValueException(HalalStatus.MESSAGE_CONSTRAINTS);
             }
             final HalalStatus modelHalalStatus = new HalalStatus(halalStatus);
-            return new Fnb(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelHalalStatus);
+            return new Fnb(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelHalalStatus, modelTours);
         }
 
         if (type.equals(Attraction.class.getSimpleName())) {
@@ -189,7 +204,7 @@ class JsonAdaptedContact {
             final ClosingHour modelClosingHour = new ClosingHour(closingHour);
 
             return new Attraction(modelName, modelPhone, modelEmail, modelAddress, modelTags,
-                    modelOpeningHour, modelClosingHour);
+                    modelOpeningHour, modelClosingHour, modelTours);
         }
 
         if (type.equals(Accommodation.class.getSimpleName())) {
@@ -202,7 +217,8 @@ class JsonAdaptedContact {
             }
 
             final AccommodationStars modelStars = new AccommodationStars(stars);
-            return new Accommodation(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelStars);
+            return new Accommodation(modelName, modelPhone, modelEmail, modelAddress, modelTags,
+                    modelStars, modelTours);
         }
 
         throw new IllegalValueException(String.format(INVALID_FIELD_MESSAGE_FORMAT, type));

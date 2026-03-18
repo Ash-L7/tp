@@ -10,6 +10,7 @@ import seedu.address.model.contact.Name;
 import seedu.address.model.contact.Person;
 import seedu.address.model.contact.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tour.Tour;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
@@ -27,6 +28,7 @@ public abstract class ContactBuilder {
     protected Email email;
     protected Address address;
     protected Set<Tag> tags;
+    protected Set<Tour> tours;
 
     /**
      * Creates a {@code ContactBuilder} with the default details.
@@ -37,6 +39,7 @@ public abstract class ContactBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
+        tours = new HashSet<>();
     }
 
     /**
@@ -50,6 +53,7 @@ public abstract class ContactBuilder {
             personBuilder.email = person.getEmail();
             personBuilder.address = person.getAddress();
             personBuilder.tags = new HashSet<>(person.getTags());
+            personBuilder.tours = new HashSet<>(person.getTours());
             return personBuilder;
         }
         return null;
@@ -68,6 +72,14 @@ public abstract class ContactBuilder {
      */
     public ContactBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
+        return this;
+    }
+
+    /**
+     * Parses the {@code tours} into a {@code Set<Tour>} and set it to the {@code Contact} that we are building.
+     */
+    public ContactBuilder withTours(String ... tours) {
+        this.tours = SampleDataUtil.getTourSet(tours);
         return this;
     }
 

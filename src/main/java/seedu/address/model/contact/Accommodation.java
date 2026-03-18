@@ -27,6 +27,7 @@ public class Accommodation extends Contact {
 
     /**
      * Constructs an {@code Accommodation} contact with specified Halal status.
+     *
      * @param stars The number of stars of the accommodation.
      */
     public Accommodation(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
@@ -63,6 +64,6 @@ public class Accommodation extends Contact {
 
     @Override
     public List<String> getTypeSpecificDetails() {
-        return List.of(stars.toString());
+        return List.of("Number of Stars: " + stars.toString(), getToursString());
     }
 }

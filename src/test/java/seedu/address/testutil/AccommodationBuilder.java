@@ -20,6 +20,6 @@ public class AccommodationBuilder extends ContactBuilder {
 
     @Override
     public Contact build() {
-        return new Accommodation(name, phone, email, address, tags, stars);
+        return new Accommodation(name, phone, email, address, tags, stars, tours);
     }
 }

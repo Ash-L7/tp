@@ -44,3 +44,4 @@ public class Person extends Contact {
         return List.of();
     }
 }
+

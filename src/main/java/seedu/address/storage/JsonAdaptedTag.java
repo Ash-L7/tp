@@ -10,7 +10,6 @@ import seedu.address.model.tag.Tag;
  * Jackson-friendly version of {@link Tag}.
  */
 class JsonAdaptedTag {
-
     private final String tagName;
 
     /**

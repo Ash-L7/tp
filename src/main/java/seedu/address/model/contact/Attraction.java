@@ -54,7 +54,7 @@ public class Attraction extends Contact {
      * @param closingHour The closing hours of the attraction.
      */
     public Attraction(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-                         OpeningHour openingHour, ClosingHour closingHour, Set<Tour> tours) {
+                      OpeningHour openingHour, ClosingHour closingHour, Set<Tour> tours) {
         super(name, phone, email, address, tags, tours);
         this.openingHour = openingHour;
         this.closingHour = closingHour;
@@ -101,8 +101,15 @@ public class Attraction extends Contact {
     @Override
     public List<String> getTypeSpecificDetails() {
         return List.of(
+<<<<<<< fix/resolve-save-contact-and-tour-clashes
+                "Operating Hours: " + openingHour.toString() + " to " + closingHour.toString(),
+                getToursString());
+=======
                 openingHour.toString(),
                 closingHour.toString()
         );
+>>>>>>> master
     }
 }
+
+
