@@ -6,6 +6,7 @@ import java.util.Set;
 
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tour.Tour;
 
 
 /**
@@ -18,8 +19,8 @@ public class Accommodation extends Contact {
     /**
      * Constructs an {@code Accommodation} contact with default number of stars (THREE_STAR).
      */
-    public Accommodation(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        super(name, phone, email, address, tags);
+    public Accommodation(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Set<Tour> tours) {
+        super(name, phone, email, address, tags, tours);
         this.stars = new AccommodationStars(AccommodationStars.Stars.THREE_STAR);
     }
 
@@ -28,8 +29,8 @@ public class Accommodation extends Contact {
      * @param stars The number of stars of the accommodation.
      */
     public Accommodation(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-                         AccommodationStars stars) {
-        super(name, phone, email, address, tags);
+                         AccommodationStars stars, Set<Tour> tours) {
+        super(name, phone, email, address, tags, tours);
         this.stars = stars;
     }
 
@@ -53,7 +54,9 @@ public class Accommodation extends Contact {
         Address updatedAddress = editAccommodationDescriptor.getAddress().orElse(getAddress());
         Set<Tag> updatedTags = editAccommodationDescriptor.getTags().orElse(getTags());
         AccommodationStars updatedStars = editAccommodationDescriptor.getStars().orElse(getStars());
+        Set<Tour> updatedTours = editAccommodationDescriptor.getTours().orElse(getTours());
 
-        return new Accommodation(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedStars);
+        return new Accommodation(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedStars,
+                updatedTours);
     }
 }

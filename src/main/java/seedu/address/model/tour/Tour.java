@@ -1,66 +1,61 @@
 package seedu.address.model.tour;
 
-import seedu.address.model.contact.Contact;
-import seedu.address.model.contact.UniqueContactList;
+import java.util.Objects;
 
 /**
- * Represents a tour package, which is associated with a collection of contacts associated with the tour.
+ * Represents a tour package, which is identified by its String name
  */
 public class Tour {
-    private final UniqueContactList contacts = new UniqueContactList();
+    String name = "";
 
     /**
-     * Adds a contact to the tour.
-     * The contact must not exist in the tour.
-     */
-    public void add(Contact contact) {
-        contacts.add(contact);
+    * Constructs a {@code Tour} with the given name.
+    *
+    * @param name the name of the tour
+    */
+    public Tour(String name) {
+        this.name = name;
     }
 
     /**
-     * Returns true if the tour contains an equivalent contact as the given argument.
+     * Returns the name of the tour.
+     *
+     * @return the tour name as a {@code String}
      */
-    public boolean contains(Contact contact) {
-        return contacts.contains(contact);
+    public String getName() {
+        return name;
     }
 
     /**
-     * Replaces the contact {@code target} in the tour with {@code editedContact}.
-     * {@code target} must exist in the tour.
-     * The contact identity of {@code editedContact} must not be the same as another existing contact in the tour.
+     * Returns the hash code of this tour, based on its name.
+     *
+     * @return hash code derived from the tour name
      */
-    public void setContact(Contact target, Contact editedContact) {
-        contacts.setContact(target, editedContact);
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
     }
 
     /**
-     * Removes the equivalent contact from the tour.
-     * The contact must exist in the tour.
+     * Returns true if both tours have the same name.
+     * This defines equality between two {@code Tour} objects.
+     *
+     * @param other the object to compare to
+     * @return true if {@code other} is a {@code Tour} with the same name
      */
-    public void remove(Contact toRemove) {
-        contacts.remove(toRemove);
-    }
-
-    /**
-     * Replaces the contents of this tour with {@code replacement}.
-     */
-    public void setContacts(Tour replacement) {
-        contacts.setContacts(replacement.contacts);
-    }
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
         }
         if (other instanceof Tour tour) {
-            return this.contacts.equals(tour.contacts);
+            return this.name.equals(tour.getName());
         }
         return false;
     }
 
     @Override
     public String toString() {
-        return String.format("Tour(%s)", contacts);
+        return String.format("Tour %s", name);
     }
 }

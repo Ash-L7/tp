@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.VALID_TYPES;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -19,6 +20,7 @@ import seedu.address.model.contact.Name;
 import seedu.address.model.contact.OpeningHour;
 import seedu.address.model.contact.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tour.Tour;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -181,6 +183,14 @@ public class ParserUtil {
             throw new ParseException(ClosingHour.MESSAGE_CONSTRAINTS);
         }
         return new ClosingHour(trimmedClosingHour);
+    }
+
+    public static Set<Tour> parseTours(List<String> allValues) {
+        Set<Tour> tourSet = new HashSet<>();
+        for (String tourName : allValues) {
+            tourSet.add(new Tour(tourName));
+        }
+        return tourSet;
     }
 
     /**

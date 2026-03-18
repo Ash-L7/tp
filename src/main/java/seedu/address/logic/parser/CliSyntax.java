@@ -18,6 +18,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_OPENINGHOUR = new Prefix("o/");
     public static final Prefix PREFIX_CLOSINGHOUR = new Prefix("c/");
     public static final Prefix PREFIX_STARS = new Prefix("s/");
+    public static final Prefix PREFIX_TOUR = new Prefix("tour/");
 
     /* Valid types */
     public static final String TYPE_PERSON = "person";

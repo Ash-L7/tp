@@ -35,6 +35,7 @@ import seedu.address.model.contact.Name;
 import seedu.address.model.contact.OpeningHour;
 import seedu.address.model.contact.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tour.Tour;
 
 
 /**
@@ -149,6 +150,7 @@ public class EditCommand extends Command {
         private OpeningHour openingHour;
         private ClosingHour closingHour;
         private AccommodationStars stars;
+        private Set<Tour> tours;
 
 
         public EditContactDescriptor() {}
@@ -259,6 +261,28 @@ public class EditCommand extends Command {
             this.stars = stars;
         }
 
+        /**
+         * Sets the tours of the contact being edited.
+         * A defensive copy of {@code tours} is used to prevent external modifications.
+         * {@code null} indicates that the tours field was not specified in the edit command
+         * and the contact's existing tours should remain unchanged.
+         *
+         * @param tours the new set of tours, or {@code null} if unspecified
+         */
+        public void setTours(Set<Tour> tours) {
+            this.tours = (tours != null) ? new HashSet<>(tours) : null;
+        }
+
+        /**
+         * Returns the tours of the contact being edited.
+         * Returns {@code Optional.empty()} if tours were not specified in the edit command.
+         *
+         * @return an {@code Optional} containing the new set of tours, or {@code Optional.empty()} if unspecified
+         */
+        public Optional<Set<Tour>> getTours() {
+            return Optional.ofNullable(tours);
+        }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -294,6 +318,7 @@ public class EditCommand extends Command {
                     .add("openingHour", openingHour)
                     .add("closingHour", closingHour)
                     .add("stars", stars)
+                    .add("tours", tours)
                     .toString();
         }
     }
