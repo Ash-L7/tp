@@ -74,6 +74,9 @@ public class AddressBookParser {
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
 
+        case TourListCommand.COMMAND_WORD:
+            return new TourListCommand();
+
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
@@ -82,6 +85,9 @@ public class AddressBookParser {
 
         case TourAddCommand.COMMAND_WORD:
             return new TourAddCommandParser().parse(arguments);
+
+        case TourDeleteCommand.COMMAND_WORD:
+            return new TourDeleteCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
