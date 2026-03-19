@@ -20,6 +20,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.exceptions.DuplicateContactException;
+import seedu.address.model.tour.Tour;
 import seedu.address.testutil.ContactBuilder;
 
 public class AddressBookTest {
@@ -85,7 +86,8 @@ public class AddressBookTest {
 
     @Test
     public void toStringMethod() {
-        String expected = AddressBook.class.getCanonicalName() + "{contacts=" + addressBook.getContactList() + "}";
+        String expected = String.format("%s{contacts=%s, tours=%s}", AddressBook.class.getCanonicalName(),
+                addressBook.getContactList(), addressBook.getTourList());
         assertEquals(expected, addressBook.toString());
     }
 
@@ -94,6 +96,7 @@ public class AddressBookTest {
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Contact> contacts = FXCollections.observableArrayList();
+        private final ObservableList<Tour> tours = FXCollections.observableArrayList();
 
         AddressBookStub(Collection<Contact> contacts) {
             this.contacts.setAll(contacts);
@@ -102,6 +105,11 @@ public class AddressBookTest {
         @Override
         public ObservableList<Contact> getContactList() {
             return contacts;
+        }
+
+        @Override
+        public ObservableList<Tour> getTourList() {
+            return tours;
         }
     }
 

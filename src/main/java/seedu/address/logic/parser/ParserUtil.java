@@ -143,6 +143,19 @@ public class ParserUtil {
     }
 
     /**
+     * Parses {@code String tour} into a {@code Tour}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static Tour parseTour(String tour) throws ParseException {
+        requireNonNull(tour);
+        String trimmedTour = tour.trim();
+        if (!Tour.isValidTourName(trimmedTour)) {
+            throw new ParseException(Tour.MESSAGE_CONSTRAINTS);
+        }
+        return new Tour(trimmedTour);
+    }
+
+    /**
      * Parses a {@code Collection<String>} of tours into a {@code Set<Tour>}.
      */
     public static Set<Tour> parseTours(Collection<String> allValues) {

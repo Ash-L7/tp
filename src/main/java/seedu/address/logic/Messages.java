@@ -9,6 +9,7 @@ import seedu.address.model.contact.Accommodation;
 import seedu.address.model.contact.Attraction;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.Fnb;
+import seedu.address.model.tour.Tour;
 
 /**
  * Container for user visible messages.
@@ -21,6 +22,7 @@ public class Messages {
     public static final String MESSAGE_CONTACTS_LISTED_OVERVIEW = "%1$d contacts listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_INVALID_TOUR_DISPLAYED_INDEX = "The tour index provided is invalid";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -67,6 +69,13 @@ public class Messages {
         builder.append("; Tags: ");
         contact.getTags().forEach(builder::append);
         return builder.toString();
+    }
+
+    /**
+     * Formats the {@code tour} for display to the user.
+     */
+    public static String format(Tour tour) {
+        return tour.getTourName();
     }
 
 }

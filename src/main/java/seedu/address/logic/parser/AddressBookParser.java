@@ -18,6 +18,8 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ViewTourCommand;
+import seedu.address.logic.commands.TourAddCommand;
+import seedu.address.logic.commands.TourDeleteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -77,6 +79,12 @@ public class AddressBookParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case TourAddCommand.COMMAND_WORD:
+            return new TourAddCommandParser().parse(arguments);
+
+        case TourDeleteCommand.COMMAND_WORD:
+            return new TourDeleteCommandParser().parse(arguments);
 
         case ViewTourCommand.COMMAND_WORD:
             return new ViewTourCommandParser().parse(arguments);

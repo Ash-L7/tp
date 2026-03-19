@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.contact.Contact;
+import seedu.address.model.tour.Tour;
 
 /**
  * The API of the Model component.
@@ -77,6 +78,23 @@ public interface Model {
      */
     void setContact(Contact target, Contact editedContact);
 
+    /**
+     * Returns true if a tour with the same identity as {@code tour} exists in the address book.
+     */
+    boolean hasTour(Tour tour);
+
+    /**
+     * Deletes the given tour.
+     * The tour must exist in the address book.
+     */
+    void deleteTour(Tour target);
+
+    /**
+     * Adds the given tour.
+     * {@code tour} must not already exist in the address book.
+     */
+    void addTour(Tour tour);
+
     /** Returns an unmodifiable view of the filtered contact list */
     ObservableList<Contact> getFilteredContactList();
 
@@ -85,4 +103,13 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredContactList(Predicate<Contact> predicate);
+
+    /** Returns an unmodifiable biew of the filtered tour list */
+    ObservableList<Tour> getFilteredTourList();
+
+    /**
+     * Updates the filter of the filtered tour list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredTourList(Predicate<Tour> predicate);
 }

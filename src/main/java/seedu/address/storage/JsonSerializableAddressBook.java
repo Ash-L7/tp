@@ -2,7 +2,6 @@ package seedu.address.storage;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -12,6 +11,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.contact.Contact;
+import seedu.address.model.tour.Tour;
 
 /**
  * An Immutable AddressBook that is serializable to JSON format.
@@ -20,15 +20,19 @@ import seedu.address.model.contact.Contact;
 class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_CONTACT = "Contacts list contains duplicate contact(s).";
+    public static final String MESSAGE_DUPLICATE_TOUR = "Tours list contains duplicate tour(s).";
 
     private final List<JsonAdaptedContact> contacts = new ArrayList<>();
+    private final List<JsonAdaptedTour> tours = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given contacts.
+     * Constructs a {@code JsonSerializableAddressBook} with the given contacts and tours.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("contacts") List<JsonAdaptedContact> contacts) {
+    public JsonSerializableAddressBook(@JsonProperty("contacts") List<JsonAdaptedContact> contacts,
+                                       @JsonProperty("tours") List<JsonAdaptedTour> tours) {
         this.contacts.addAll(contacts);
+        this.tours.addAll(tours);
     }
 
     /**
@@ -37,7 +41,8 @@ class JsonSerializableAddressBook {
      * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
-        contacts.addAll(source.getContactList().stream().map(JsonAdaptedContact::new).collect(Collectors.toList()));
+        contacts.addAll(source.getContactList().stream().map(JsonAdaptedContact::new).toList());
+        tours.addAll(source.getTourList().stream().map(JsonAdaptedTour::new).toList());
     }
 
     /**
@@ -53,6 +58,13 @@ class JsonSerializableAddressBook {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_CONTACT);
             }
             addressBook.addContact(contact);
+        }
+        for (JsonAdaptedTour jsonAdaptedTour : tours) {
+            Tour tour = jsonAdaptedTour.toModelType();
+            if (addressBook.hasTour(tour)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_TOUR);
+            }
+            addressBook.addTour(tour);
         }
         return addressBook;
     }
