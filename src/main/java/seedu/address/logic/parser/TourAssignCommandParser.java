@@ -6,13 +6,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TOUR;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.tour.AssignTourCommand;
+import seedu.address.logic.commands.tour.TourAssignCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Parses input arguments and creates a new AssignTourCommand object.
  */
-public class AssignTourCommandParser implements Parser<AssignTourCommand> {
+public class TourAssignCommandParser implements Parser<TourAssignCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the AssignTourCommand
@@ -20,11 +20,11 @@ public class AssignTourCommandParser implements Parser<AssignTourCommand> {
      *
      * @throws ParseException if the user input does not conform the expected format
      */
-    public AssignTourCommand parse(String args) throws ParseException {
+    public TourAssignCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TOUR);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_TOUR) || argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AssignTourCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TourAssignCommand.MESSAGE_USAGE));
         }
 
         Index contactIndex;
@@ -32,7 +32,7 @@ public class AssignTourCommandParser implements Parser<AssignTourCommand> {
             contactIndex = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AssignTourCommand.MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, TourAssignCommand.MESSAGE_USAGE), pe);
         }
 
         Index tourIndex;
@@ -40,10 +40,10 @@ public class AssignTourCommandParser implements Parser<AssignTourCommand> {
             tourIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_TOUR).get());
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AssignTourCommand.MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, TourAssignCommand.MESSAGE_USAGE), pe);
         }
 
-        return new AssignTourCommand(contactIndex, tourIndex);
+        return new TourAssignCommand(contactIndex, tourIndex);
     }
 
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {

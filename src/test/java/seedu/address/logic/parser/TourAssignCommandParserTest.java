@@ -9,25 +9,25 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_TOUR;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.tour.AssignTourCommand;
+import seedu.address.logic.commands.tour.TourAssignCommand;
 
-public class AssignTourCommandParserTest {
+public class TourAssignCommandParserTest {
 
     private static final String MESSAGE_INVALID_FORMAT =
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, AssignTourCommand.MESSAGE_USAGE);
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, TourAssignCommand.MESSAGE_USAGE);
 
-    private AssignTourCommandParser parser = new AssignTourCommandParser();
+    private TourAssignCommandParser parser = new TourAssignCommandParser();
 
     @Test
     public void parse_validArgs_returnsAssignTourCommand() {
         assertParseSuccess(parser, "1 tour/1",
-                new AssignTourCommand(INDEX_FIRST_CONTACT, INDEX_FIRST_TOUR));
+                new TourAssignCommand(INDEX_FIRST_CONTACT, INDEX_FIRST_TOUR));
     }
 
     @Test
     public void parse_validArgsWithWhitespace_returnsAssignTourCommand() {
         assertParseSuccess(parser, "  1  tour/2  ",
-                new AssignTourCommand(INDEX_FIRST_CONTACT, INDEX_SECOND_TOUR));
+                new TourAssignCommand(INDEX_FIRST_CONTACT, INDEX_SECOND_TOUR));
     }
 
     @Test

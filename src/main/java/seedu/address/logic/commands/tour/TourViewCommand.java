@@ -18,7 +18,7 @@ import seedu.address.model.tour.Tour;
 /**
  * Finds and lists all contacts in the address book who are assigned to the specified tour.
  */
-public class ViewTourCommand extends Command {
+public class TourViewCommand extends Command {
 
     public static final String COMMAND_WORD = "tour-view";
 
@@ -29,7 +29,7 @@ public class ViewTourCommand extends Command {
 
     private final Index targetIndex;
 
-    public ViewTourCommand(Index targetIndex) {
+    public TourViewCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
@@ -56,12 +56,12 @@ public class ViewTourCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof ViewTourCommand)) {
+        if (!(other instanceof TourViewCommand)) {
             return false;
         }
 
-        ViewTourCommand otherViewTourCommand = (ViewTourCommand) other;
-        return targetIndex.equals(otherViewTourCommand.targetIndex);
+        TourViewCommand otherTourViewCommand = (TourViewCommand) other;
+        return targetIndex.equals(otherTourViewCommand.targetIndex);
     }
 
     @Override

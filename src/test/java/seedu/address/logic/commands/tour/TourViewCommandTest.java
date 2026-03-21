@@ -21,20 +21,20 @@ import seedu.address.model.tour.Tour;
 import seedu.address.testutil.PersonBuilder;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code ViewTourCommand}.
+ * Contains integration tests (interaction with the Model) for {@code TourViewCommand}.
  */
-public class ViewTourCommandTest {
+public class TourViewCommandTest {
 
     @Test
     public void equals() {
-        ViewTourCommand viewFirstCommand = new ViewTourCommand(Index.fromOneBased(1));
-        ViewTourCommand viewSecondCommand = new ViewTourCommand(Index.fromOneBased(2));
+        TourViewCommand viewFirstCommand = new TourViewCommand(Index.fromOneBased(1));
+        TourViewCommand viewSecondCommand = new TourViewCommand(Index.fromOneBased(2));
 
         // same object -> returns true
         assertTrue(viewFirstCommand.equals(viewFirstCommand));
 
         // same values -> returns true
-        ViewTourCommand viewFirstCommandCopy = new ViewTourCommand(Index.fromOneBased(1));
+        TourViewCommand viewFirstCommandCopy = new TourViewCommand(Index.fromOneBased(1));
         assertTrue(viewFirstCommand.equals(viewFirstCommandCopy));
 
         // different types -> returns false
@@ -58,7 +58,7 @@ public class ViewTourCommandTest {
         Model testExpectedModel = new ModelManager(ab, new UserPrefs());
 
         String expectedMessage = String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, 0);
-        ViewTourCommand command = new ViewTourCommand(Index.fromOneBased(1));
+        TourViewCommand command = new TourViewCommand(Index.fromOneBased(1));
         testExpectedModel.updateFilteredContactList(new ContactIsInTourPredicate(emptyTour));
         assertCommandSuccess(command, testModel, expectedMessage, testExpectedModel);
         assertEquals(java.util.Collections.emptyList(), testModel.getFilteredContactList());
@@ -83,7 +83,7 @@ public class ViewTourCommandTest {
         Model testExpectedModel = new ModelManager(ab, new UserPrefs());
 
         String expectedMessage = String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, 2);
-        ViewTourCommand command = new ViewTourCommand(Index.fromOneBased(1));
+        TourViewCommand command = new TourViewCommand(Index.fromOneBased(1));
         testExpectedModel.updateFilteredContactList(new ContactIsInTourPredicate(targetTour));
         assertCommandSuccess(command, testModel, expectedMessage, testExpectedModel);
         assertEquals(Arrays.asList(alice, bob), testModel.getFilteredContactList());
@@ -92,8 +92,8 @@ public class ViewTourCommandTest {
     @Test
     public void toStringMethod() {
         Index index = Index.fromOneBased(1);
-        ViewTourCommand viewTourCommand = new ViewTourCommand(index);
-        String expected = ViewTourCommand.class.getCanonicalName() + "{targetIndex=" + index + "}";
+        TourViewCommand viewTourCommand = new TourViewCommand(index);
+        String expected = TourViewCommand.class.getCanonicalName() + "{targetIndex=" + index + "}";
         assertEquals(expected, viewTourCommand.toString());
     }
 }

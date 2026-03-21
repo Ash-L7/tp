@@ -21,7 +21,7 @@ import seedu.address.model.tour.Tour;
 /**
  * Assigns a tour to an existing contact in the address book.
  */
-public class AssignTourCommand extends Command {
+public class TourAssignCommand extends Command {
 
     public static final String COMMAND_WORD = "tour-assign";
 
@@ -37,9 +37,9 @@ public class AssignTourCommand extends Command {
     private final Index tourIndex;
 
     /**
-     * Creates an AssignTourCommand to assign the tour at {@code tourIndex} to the contact at {@code contactIndex}.
+     * Creates an TourAssignCommand to assign the tour at {@code tourIndex} to the contact at {@code contactIndex}.
      */
-    public AssignTourCommand(Index contactIndex, Index tourIndex) {
+    public TourAssignCommand(Index contactIndex, Index tourIndex) {
         requireNonNull(contactIndex);
         requireNonNull(tourIndex);
         this.contactIndex = contactIndex;
@@ -86,11 +86,11 @@ public class AssignTourCommand extends Command {
             return true;
         }
 
-        if (!(other instanceof AssignTourCommand)) {
+        if (!(other instanceof TourAssignCommand)) {
             return false;
         }
 
-        AssignTourCommand otherCommand = (AssignTourCommand) other;
+        TourAssignCommand otherCommand = (TourAssignCommand) other;
         return contactIndex.equals(otherCommand.contactIndex) && tourIndex.equals(otherCommand.tourIndex);
     }
 
