@@ -3,8 +3,6 @@ layout: page
 title: User Guide
 ---
 
-# Introduction
-
 Bivago is a **desktop contact management app** meant for tour guides. Along with basic contact management, it also helps
 you **efficiently look up contacts** associated with the different tour packages that you offer. The app supports
 different types of contacts including **people, F&B establishments, accommodations and attractions**. Through
@@ -12,7 +10,7 @@ consolidating your contacts and tours in a simple **Command Line Interface (CLI)
 and execute better and smoother tours for your clients.
 
 * Table of Contents
-  {:toc}
+{:toc}
 
 ---
 
