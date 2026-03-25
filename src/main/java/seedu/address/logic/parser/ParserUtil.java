@@ -49,7 +49,6 @@ public class ParserUtil {
     public static String parseType(String type) throws ParseException {
         requireNonNull(type);
         String trimmedType = type.trim();
-        System.out.println(trimmedType);
         if (!VALID_TYPES.contains(trimmedType)) {
             throw new ParseException(MESSAGE_INVALID_TYPE);
         }
