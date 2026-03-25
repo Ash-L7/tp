@@ -10,6 +10,8 @@ import seedu.address.commons.util.ToStringBuilder;
  * Tests that a {@code Contact}'s {@code Name} matches any of the keywords given.
  */
 public class NameContainsKeywordsPredicate implements Predicate<Contact> {
+    public static final NameContainsKeywordsPredicate ANY_NAME_ALLOWED_PREDICATE =
+            new AnyNameAllowedPredicate(List.of());
     private final List<String> keywords;
 
     public NameContainsKeywordsPredicate(List<String> keywords) {
@@ -40,5 +42,21 @@ public class NameContainsKeywordsPredicate implements Predicate<Contact> {
     @Override
     public String toString() {
         return new ToStringBuilder(this).add("keywords", keywords).toString();
+    }
+
+    private static class AnyNameAllowedPredicate extends NameContainsKeywordsPredicate {
+        private AnyNameAllowedPredicate(List<String> keywords) {
+            super(keywords);
+        }
+
+        @Override
+        public boolean test(Contact contact) {
+            return true;
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            return other instanceof AnyNameAllowedPredicate;
+        }
     }
 }
