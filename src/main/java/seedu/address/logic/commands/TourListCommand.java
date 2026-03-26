@@ -19,13 +19,7 @@ public class TourListCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredTourList(PREDICATE_SHOW_ALL_TOURS);
-
-        StringBuilder sb = new StringBuilder(MESSAGE_SUCCESS + ":\n");
-        int index = 1;
-        for (Tour tour : model.getFilteredTourList()) {
-            sb.append(index).append(". ").append(tour.getTourName()).append("\n");
-            index++;
-        }
-        return new CommandResult(sb.toString());
+        
+        return new CommandResult(MESSAGE_SUCCESS);
     }
 }
