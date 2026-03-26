@@ -120,7 +120,7 @@ public interface Model {
      */
     void updateFilteredContactList(Predicate<Contact> predicate);
 
-    /** Returns an unmodifiable biew of the filtered tour list */
+    /** Returns an unmodifiable view of the filtered tour list */
     ObservableList<Tour> getFilteredTourList();
 
     /**
