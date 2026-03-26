@@ -1,13 +1,10 @@
 package seedu.address.logic.commands;
 
-import java.util.List;
-
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.tour.Tour;
 import seedu.address.model.tour.TourNameContainsKeywordsPredicate;
 
 /**
@@ -35,21 +32,8 @@ public class TourFindCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredTourList(predicate);
-
-        List<Tour> allTours = model.getAddressBook().getTourList();
-        List<Tour> filteredTours = model.getFilteredTourList();
-
-        if (filteredTours.isEmpty()) {
-            return new CommandResult("No matching tours found.");
-        }
-
-        StringBuilder sb = new StringBuilder("Matching Tours:\n");
-        for (Tour tour : filteredTours) {
-            int realIndex = allTours.indexOf(tour) + 1; // +1 for 1-based index
-            sb.append(realIndex).append(". ").append(tour.getTourName()).append("\n");
-        }
-
-        return new CommandResult(sb.toString());
+        return new CommandResult(
+                String.format(Messages.MESSAGE_TOURS_LISTED_OVERVIEW, model.getFilteredTourList().size()));
     }
 
     @Override
