@@ -17,6 +17,7 @@ import seedu.address.model.contact.Attraction;
 import seedu.address.model.contact.ClosingHour;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.Email;
+import seedu.address.model.contact.FavoriteStatus;
 import seedu.address.model.contact.Fnb;
 import seedu.address.model.contact.HalalStatus;
 import seedu.address.model.contact.Name;
@@ -43,6 +44,7 @@ class JsonAdaptedContact {
     private final String openingHour;
     private final String closingHour;
     private final String stars;
+    private final String favoriteStatus;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final List<JsonAdaptedTour> tours = new ArrayList<>();
 
@@ -58,7 +60,8 @@ class JsonAdaptedContact {
                               @JsonProperty("halalStatus") String halalStatus,
                               @JsonProperty("openingHour") String openingHour,
                               @JsonProperty("closingHour") String closingHour,
-                              @JsonProperty("stars") String stars) {
+                              @JsonProperty("stars") String stars,
+                              @JsonProperty("favoriteStatus") String favoriteStatus) {
         this.type = type;
         this.name = name;
         this.phone = phone;
@@ -74,6 +77,7 @@ class JsonAdaptedContact {
         this.openingHour = openingHour;
         this.closingHour = closingHour;
         this.stars = stars;
+        this.favoriteStatus = favoriteStatus;
     }
 
     /**
@@ -91,6 +95,7 @@ class JsonAdaptedContact {
         tours.addAll(source.getTours().stream()
                 .map(JsonAdaptedTour::new)
                 .collect(Collectors.toList()));
+        favoriteStatus = String.valueOf(source.getFavoriteStatus().isFavorite);
 
         String halalStatus = null;
         String openingHour = null;
@@ -166,8 +171,19 @@ class JsonAdaptedContact {
 
         final Set<Tour> modelTours = new HashSet<>(contactTours);
 
+        final FavoriteStatus modelFavoriteStatus;
+        if (favoriteStatus == null) {
+            modelFavoriteStatus = new FavoriteStatus("false");
+        } else {
+            if (!FavoriteStatus.isValidFavoriteStatus(favoriteStatus)) {
+                throw new IllegalValueException(FavoriteStatus.MESSAGE_CONSTRAINTS);
+            }
+            modelFavoriteStatus = new FavoriteStatus(favoriteStatus);
+        }
+
         if (type.equals(Person.class.getSimpleName())) {
-            return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelTours);
+            return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelTours,
+                    modelFavoriteStatus);
         }
 
         if (type.equals(Fnb.class.getSimpleName())) {
@@ -179,7 +195,8 @@ class JsonAdaptedContact {
                 throw new IllegalValueException(HalalStatus.MESSAGE_CONSTRAINTS);
             }
             final HalalStatus modelHalalStatus = new HalalStatus(halalStatus);
-            return new Fnb(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelHalalStatus, modelTours);
+            return new Fnb(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelHalalStatus, modelTours,
+                    modelFavoriteStatus);
         }
 
         if (type.equals(Attraction.class.getSimpleName())) {
@@ -203,7 +220,7 @@ class JsonAdaptedContact {
             final ClosingHour modelClosingHour = new ClosingHour(closingHour);
 
             return new Attraction(modelName, modelPhone, modelEmail, modelAddress, modelTags,
-                    modelOpeningHour, modelClosingHour, modelTours);
+                    modelOpeningHour, modelClosingHour, modelTours, modelFavoriteStatus);
         }
 
         if (type.equals(Accommodation.class.getSimpleName())) {
@@ -217,7 +234,7 @@ class JsonAdaptedContact {
 
             final AccommodationStars modelStars = new AccommodationStars(stars);
             return new Accommodation(modelName, modelPhone, modelEmail, modelAddress, modelTags,
-                    modelStars, modelTours);
+                    modelStars, modelTours, modelFavoriteStatus);
         }
 
         throw new IllegalValueException(String.format(INVALID_FIELD_MESSAGE_FORMAT, type));

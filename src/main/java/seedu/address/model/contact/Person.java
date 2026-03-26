@@ -22,6 +22,14 @@ public class Person extends Contact {
         super(name, phone, email, address, tags, tours);
     }
 
+    /**
+     * Constructs a {@code Person} with specified favorite status.
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Set<Tour> tours,
+                  FavoriteStatus isFavorite) {
+        super(name, phone, email, address, tags, tours, isFavorite);
+    }
+
     @Override
     public Contact edit(EditContactDescriptor editContactDescriptor) {
         Name updatedName = editContactDescriptor.getName().orElse(getName());
@@ -30,8 +38,10 @@ public class Person extends Contact {
         Address updatedAddress = editContactDescriptor.getAddress().orElse(getAddress());
         Set<Tag> updatedTags = editContactDescriptor.getTags().orElse(getTags());
         Set<Tour> updatedTours = editContactDescriptor.getTours().orElse(getTours());
+        FavoriteStatus updatedFavoriteStatus = editContactDescriptor.getFavoriteStatus().orElse(getFavoriteStatus());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedTours);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedTours,
+                updatedFavoriteStatus);
     }
 
     @Override

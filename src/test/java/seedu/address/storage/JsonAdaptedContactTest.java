@@ -70,7 +70,7 @@ public class JsonAdaptedContactTest {
         JsonAdaptedContact contact =
                 new JsonAdaptedContact(INVALID_TYPE, VALID_NAME_PERSON, VALID_PHONE_PERSON, VALID_EMAIL_PERSON,
                         VALID_ADDRESS_PERSON, VALID_TAGS_PERSON, EMPTY_TOUR,
-                        NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER);
+                        NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER);
         String expectedMessage = String.format(INVALID_FIELD_MESSAGE_FORMAT, INVALID_TYPE);
         assertThrows(IllegalValueException.class, expectedMessage, contact::toModelType);
     }
@@ -80,7 +80,7 @@ public class JsonAdaptedContactTest {
         JsonAdaptedContact contact =
                 new JsonAdaptedContact(VALID_TYPE_PERSON, INVALID_NAME, VALID_PHONE_PERSON, VALID_EMAIL_PERSON,
                         VALID_ADDRESS_PERSON, VALID_TAGS_PERSON, EMPTY_TOUR,
-                        NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER);
+                        NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER);
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, contact::toModelType);
     }
@@ -89,7 +89,7 @@ public class JsonAdaptedContactTest {
     public void toModelType_nullName_throwsIllegalValueException() {
         JsonAdaptedContact contact = new JsonAdaptedContact(VALID_TYPE_PERSON, null, VALID_PHONE_PERSON,
                 VALID_EMAIL_PERSON, VALID_ADDRESS_PERSON, VALID_TAGS_PERSON, EMPTY_TOUR,
-                NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER);
+                NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, contact::toModelType);
     }
@@ -99,7 +99,7 @@ public class JsonAdaptedContactTest {
         JsonAdaptedContact contact =
                 new JsonAdaptedContact(VALID_TYPE_PERSON, VALID_NAME_PERSON, INVALID_PHONE, VALID_EMAIL_PERSON,
                         VALID_ADDRESS_PERSON, VALID_TAGS_PERSON, EMPTY_TOUR,
-                        NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER);
+                        NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER);
         String expectedMessage = Phone.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, contact::toModelType);
     }
@@ -108,7 +108,7 @@ public class JsonAdaptedContactTest {
     public void toModelType_nullPhone_throwsIllegalValueException() {
         JsonAdaptedContact contact = new JsonAdaptedContact(VALID_TYPE_PERSON, VALID_NAME_PERSON, null,
                 VALID_EMAIL_PERSON, VALID_ADDRESS_PERSON, VALID_TAGS_PERSON, EMPTY_TOUR,
-                NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER);
+                NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, contact::toModelType);
     }
@@ -118,7 +118,7 @@ public class JsonAdaptedContactTest {
         JsonAdaptedContact contact =
                 new JsonAdaptedContact(VALID_TYPE_PERSON, VALID_NAME_PERSON, VALID_PHONE_PERSON, INVALID_EMAIL,
                         VALID_ADDRESS_PERSON, VALID_TAGS_PERSON, EMPTY_TOUR,
-                        NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER);
+                        NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER);
         String expectedMessage = Email.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, contact::toModelType);
     }
@@ -127,7 +127,7 @@ public class JsonAdaptedContactTest {
     public void toModelType_nullEmail_throwsIllegalValueException() {
         JsonAdaptedContact contact = new JsonAdaptedContact(VALID_TYPE_PERSON, VALID_NAME_PERSON, VALID_PHONE_PERSON,
                 null, VALID_ADDRESS_PERSON, VALID_TAGS_PERSON, EMPTY_TOUR,
-                NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER);
+                NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, contact::toModelType);
     }
@@ -137,7 +137,7 @@ public class JsonAdaptedContactTest {
         JsonAdaptedContact contact =
                 new JsonAdaptedContact(VALID_TYPE_PERSON, VALID_NAME_PERSON, VALID_PHONE_PERSON, VALID_EMAIL_PERSON,
                         INVALID_ADDRESS, VALID_TAGS_PERSON, EMPTY_TOUR,
-                        NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER);
+                        NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER);
         String expectedMessage = Address.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, contact::toModelType);
     }
@@ -147,7 +147,7 @@ public class JsonAdaptedContactTest {
         JsonAdaptedContact contact = new JsonAdaptedContact(VALID_TYPE_PERSON, VALID_NAME_PERSON, VALID_PHONE_PERSON,
                 VALID_EMAIL_PERSON,
                 null, VALID_TAGS_PERSON, EMPTY_TOUR,
-                NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER);
+                NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, contact::toModelType);
     }
@@ -159,7 +159,7 @@ public class JsonAdaptedContactTest {
         JsonAdaptedContact contact =
                 new JsonAdaptedContact(VALID_TYPE_PERSON, VALID_NAME_PERSON, VALID_PHONE_PERSON, VALID_EMAIL_PERSON,
                         VALID_ADDRESS_PERSON, invalidTags, EMPTY_TOUR,
-                        NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER);
+                        NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER);
         assertThrows(IllegalValueException.class, contact::toModelType);
     }
 
@@ -176,6 +176,7 @@ public class JsonAdaptedContactTest {
                         VALID_HALAL_STATUS,
                         NULL_PARAMETER,
                         NULL_PARAMETER,
+                        NULL_PARAMETER,
                         NULL_PARAMETER);
         assertEquals(AL_AZHAR, contact.toModelType());
     }
@@ -190,6 +191,7 @@ public class JsonAdaptedContactTest {
                         AL_AZHAR.getAddress().toString(),
                         AL_AZHAR.getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()),
                         EMPTY_TOUR,
+                        NULL_PARAMETER,
                         NULL_PARAMETER,
                         NULL_PARAMETER,
                         NULL_PARAMETER,
@@ -212,6 +214,7 @@ public class JsonAdaptedContactTest {
                         INVALID_HALAL_STATUS,
                         NULL_PARAMETER,
                         NULL_PARAMETER,
+                        NULL_PARAMETER,
                         NULL_PARAMETER);
 
         assertThrows(IllegalValueException.class, HalalStatus.MESSAGE_CONSTRAINTS, contact::toModelType);
@@ -230,6 +233,7 @@ public class JsonAdaptedContactTest {
                         NULL_PARAMETER,
                         VALID_OPENING_HOUR,
                         VALID_CLOSING_HOUR,
+                        NULL_PARAMETER,
                         NULL_PARAMETER);
         assertEquals(USS, contact.toModelType());
     }
@@ -247,6 +251,7 @@ public class JsonAdaptedContactTest {
                         NULL_PARAMETER,
                         NULL_PARAMETER,
                         VALID_CLOSING_HOUR,
+                        NULL_PARAMETER,
                         NULL_PARAMETER);
 
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, OpeningHour.class.getSimpleName());
@@ -266,6 +271,7 @@ public class JsonAdaptedContactTest {
                         NULL_PARAMETER,
                         INVALID_OPENING_HOUR,
                         VALID_CLOSING_HOUR,
+                        NULL_PARAMETER,
                         NULL_PARAMETER);
 
         assertThrows(IllegalValueException.class, OpeningHour.MESSAGE_CONSTRAINTS, contact::toModelType);
@@ -283,6 +289,7 @@ public class JsonAdaptedContactTest {
                         EMPTY_TOUR,
                         NULL_PARAMETER,
                         VALID_OPENING_HOUR,
+                        NULL_PARAMETER,
                         NULL_PARAMETER,
                         NULL_PARAMETER);
 
@@ -303,6 +310,7 @@ public class JsonAdaptedContactTest {
                         NULL_PARAMETER,
                         VALID_OPENING_HOUR,
                         INVALID_CLOSING_HOUR,
+                        NULL_PARAMETER,
                         NULL_PARAMETER);
 
         assertThrows(IllegalValueException.class, ClosingHour.MESSAGE_CONSTRAINTS, contact::toModelType);
@@ -321,7 +329,8 @@ public class JsonAdaptedContactTest {
                         NULL_PARAMETER,
                         NULL_PARAMETER,
                         NULL_PARAMETER,
-                        VALID_STARS);
+                        VALID_STARS,
+                        NULL_PARAMETER);
         assertEquals(HOTEL, contact.toModelType());
     }
 
@@ -335,6 +344,7 @@ public class JsonAdaptedContactTest {
                         HOTEL.getAddress().toString(),
                         HOTEL.getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()),
                         EMPTY_TOUR,
+                        NULL_PARAMETER,
                         NULL_PARAMETER,
                         NULL_PARAMETER,
                         NULL_PARAMETER,
@@ -358,7 +368,8 @@ public class JsonAdaptedContactTest {
                         NULL_PARAMETER,
                         NULL_PARAMETER,
                         NULL_PARAMETER,
-                        INVALID_STARS);
+                        INVALID_STARS,
+                        NULL_PARAMETER);
 
         assertThrows(IllegalValueException.class, AccommodationStars.MESSAGE_CONSTRAINTS, contact::toModelType);
     }
@@ -370,7 +381,7 @@ public class JsonAdaptedContactTest {
         JsonAdaptedContact contact =
                 new JsonAdaptedContact(VALID_TYPE_PERSON, VALID_NAME_PERSON, VALID_PHONE_PERSON, VALID_EMAIL_PERSON,
                         VALID_ADDRESS_PERSON, VALID_TAGS_PERSON, invalidTours,
-                        NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER);
+                        NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER);
         assertThrows(IllegalValueException.class, contact::toModelType);
     }
 
@@ -381,7 +392,7 @@ public class JsonAdaptedContactTest {
         JsonAdaptedContact contact =
                 new JsonAdaptedContact(VALID_TYPE_PERSON, VALID_NAME_PERSON, VALID_PHONE_PERSON, VALID_EMAIL_PERSON,
                         VALID_ADDRESS_PERSON, VALID_TAGS_PERSON, validTours,
-                        NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER);
+                        NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER);
         Contact result = contact.toModelType();
         assertEquals(1, result.getTours().size());
         assertEquals(new Tour(VALID_TOUR), result.getTours().iterator().next());
@@ -396,7 +407,7 @@ public class JsonAdaptedContactTest {
         JsonAdaptedContact contact =
                 new JsonAdaptedContact(VALID_TYPE_PERSON, VALID_NAME_PERSON, VALID_PHONE_PERSON, VALID_EMAIL_PERSON,
                         VALID_ADDRESS_PERSON, VALID_TAGS_PERSON, multipleTours,
-                        NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER);
+                        NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER);
         Contact result = contact.toModelType();
         assertEquals(2, result.getTours().size());
     }

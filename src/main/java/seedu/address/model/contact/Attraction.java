@@ -60,6 +60,19 @@ public class Attraction extends Contact {
         this.closingHour = closingHour;
     }
 
+    /**
+     * Constructs an {@code Attraction} contact with specified operating hours and Favorite Status.
+     * @param openingHour The opening hours of the attraction.
+     * @param closingHour The closing hours of the attraction.
+     * @param isFavorite The Favorite Status.
+     */
+    public Attraction(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
+                      OpeningHour openingHour, ClosingHour closingHour, Set<Tour> tours, FavoriteStatus isFavorite) {
+        super(name, phone, email, address, tags, tours, isFavorite);
+        this.openingHour = openingHour;
+        this.closingHour = closingHour;
+    }
+
     public OpeningHour getOpeningHour() {
         return openingHour;
     }
@@ -93,9 +106,10 @@ public class Attraction extends Contact {
         OpeningHour updatedOpeningHour = editAttractionDescriptor.getOpeningHour().orElse(getOpeningHour());
         ClosingHour updatedClosingHour = editAttractionDescriptor.getClosingHour().orElse(getClosingHour());
         Set<Tour> updatedTours = editAttractionDescriptor.getTours().orElse(getTours());
+        FavoriteStatus updatedFavoriteStatus = editAttractionDescriptor.getFavoriteStatus().orElse(getFavoriteStatus());
 
         return new Attraction(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
-                updatedOpeningHour, updatedClosingHour, updatedTours);
+                updatedOpeningHour, updatedClosingHour, updatedTours, updatedFavoriteStatus);
     }
 
     @Override

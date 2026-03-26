@@ -29,6 +29,7 @@ public abstract class Contact {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private final Set<Tour> tours = new HashSet<>();
+    private final FavoriteStatus isFavorite;
 
     /**
      * Constructs a {@code Contact}.
@@ -43,6 +44,22 @@ public abstract class Contact {
         this.address = address;
         this.tags.addAll(tags);
         this.tours.addAll(tours);
+        this.isFavorite = new FavoriteStatus("false");
+    }
+
+    /**
+     * Constructs a {@code Contact} with specified Favorite status.
+     */
+    public Contact(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Set<Tour> tours,
+                   FavoriteStatus isFavorite) {
+        requireAllNonNull(name, phone, email, address, tags, tours, isFavorite);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.tours.addAll(tours);
+        this.isFavorite = isFavorite;
     }
 
     public Name getName() {
@@ -96,6 +113,14 @@ public abstract class Contact {
                 .collect(Collectors.joining(" | "));
     }
 
+    public FavoriteStatus getFavoriteStatus() {
+        return this.isFavorite;
+    }
+
+    public boolean isFavorite() {
+        return this.isFavorite.isFavorite;
+    }
+
     /**
      * Returns true if both contacts have the same name.
      * This defines a weaker notion of equality between two contacts.
@@ -146,7 +171,8 @@ public abstract class Contact {
                 && email.equals(otherContact.email)
                 && address.equals(otherContact.address)
                 && tags.equals(otherContact.tags)
-                && tours.equals(otherContact.tours);
+                && tours.equals(otherContact.tours)
+                && isFavorite.equals(otherContact.isFavorite);
     }
 
     @Override
@@ -163,6 +189,7 @@ public abstract class Contact {
                 .add("email", email)
                 .add("address", address)
                 .add("tags", tags)
+                .add("favoriteStatus", isFavorite)
                 .toString();
     }
 }
