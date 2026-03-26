@@ -36,6 +36,7 @@ public class TourFindCommand extends Command {
         requireNonNull(model);
         model.updateFilteredTourList(predicate);
 
+        List<Tour> allTours = model.getAddressBook().getTourList();
         List<Tour> filteredTours = model.getFilteredTourList();
 
         if (filteredTours.isEmpty()) {
@@ -43,8 +44,9 @@ public class TourFindCommand extends Command {
         }
 
         StringBuilder sb = new StringBuilder("Matching Tours:\n");
-        for (int i = 0; i < filteredTours.size(); i++) {
-            sb.append(i + 1).append(". ").append(filteredTours.get(i).getTourName()).append("\n");
+        for (Tour tour : filteredTours) {
+            int realIndex = allTours.indexOf(tour) + 1; // +1 for 1-based index
+            sb.append(realIndex).append(". ").append(tour.getTourName()).append("\n");
         }
 
         return new CommandResult(sb.toString());
