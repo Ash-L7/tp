@@ -29,7 +29,7 @@ public abstract class Contact {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private final Set<Tour> tours = new HashSet<>();
-    private final boolean isFavorite;
+    private final FavoriteStatus isFavorite;
 
     /**
      * Constructs a {@code Contact}.
@@ -44,7 +44,7 @@ public abstract class Contact {
         this.address = address;
         this.tags.addAll(tags);
         this.tours.addAll(tours);
-        this.isFavorite = false;
+        this.isFavorite = new FavoriteStatus("false");
     }
 
     public Name getName() {
@@ -98,9 +98,12 @@ public abstract class Contact {
                 .collect(Collectors.joining(" | "));
     }
 
-    public boolean isFavorite() {
+    public FavoriteStatus getFavoriteStatus() {
         return this.isFavorite;
+    }
 
+    public boolean isFavorite() {
+        return this.isFavorite.isFavorite;
     }
 
     /**
@@ -153,7 +156,8 @@ public abstract class Contact {
                 && email.equals(otherContact.email)
                 && address.equals(otherContact.address)
                 && tags.equals(otherContact.tags)
-                && tours.equals(otherContact.tours);
+                && tours.equals(otherContact.tours)
+                && isFavorite.equals(otherContact.isFavorite);
     }
 
     @Override
@@ -170,6 +174,7 @@ public abstract class Contact {
                 .add("email", email)
                 .add("address", address)
                 .add("tags", tags)
+                .add("favorite-status", isFavorite)
                 .toString();
     }
 }
