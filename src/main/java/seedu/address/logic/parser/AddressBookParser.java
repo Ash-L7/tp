@@ -26,12 +26,11 @@ import seedu.address.logic.commands.tour.TourViewCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.TourAddCommand;
 import seedu.address.logic.commands.TourDeleteCommand;
-import seedu.address.logic.commands.TourFindCommand;
+import seedu.address.logic.commands.tour.TourFindCommand;
 import seedu.address.logic.commands.TourListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
