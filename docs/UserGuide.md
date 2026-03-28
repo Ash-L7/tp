@@ -35,19 +35,13 @@ management while conducting the tour as you can quickly view contact details on 
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.]
-
-<details>
-<summary>How to install?</summary>
-
-<b>Windows users:</b> Follow the installation instructions
-<a href="https://se-education.org/guides/tutorials/javaInstallationWindows.html">here</a>.<br>
-<b>Mac users:</b> Follow the installation instructions
-<a href="https://se-education.org/guides/tutorials/javaInstallationMac.html">here</a>.<br>
-<b>Mac users:</b> Follow the installation instructions
-<a href="https://se-education.org/guides/tutorials/javaInstallationMac.html">here</a>.<br>
-
-</details>
+1. Ensure you have Java `17` or above installed in your Computer.<br>
+**Windows users:** Follow the installation instructions
+[here](https://se-education.org/guides/tutorials/javaInstallationWindows.html).<br>
+**Mac users:** Follow the installation instructions
+[here](https://se-education.org/guides/tutorials/javaInstallationMac.html).<br>
+**Mac users:** Follow the installation instructions
+[here](https://se-education.org/guides/tutorials/javaInstallationMac.html).<br>
 
 2. Download the latest `.jar` file from [here](https://github.com/AY2526S2-CS2103T-W08-1/tp/releases).
 
