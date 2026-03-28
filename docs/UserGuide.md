@@ -28,7 +28,7 @@ museums, amusement parks) and accommodation (e.g. hotels, hostels). For each typ
  to store any additional information.
 
 ### Tour Management
-Through **Tour Management**, you can **store different tour packages** you offer and assign contacts with those tours.
+Through Tour Management, you can **store different tour packages** you offer and assign contacts with those tours.
 When planning to conduct a specific tour, you can see the assigned contacts at a glance and with the relevant
 information from the contacts, you can make informed decisions during tour planning. You can also benefit from tour
 management while conducting the tour as you can quickly view contact details on the day itself and contact them.
