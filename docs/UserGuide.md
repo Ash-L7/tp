@@ -62,16 +62,11 @@ management while conducting the tour as you can quickly view contact details on 
    Some example commands you can try:
 
 * `help` : Displays the help message.
-
 * `list` : Lists all contacts.
-
 * `add type/person n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact
   named `John Doe` to the contact list.
-
 * `tour-add n/City Walking Tour` : Adds a tour named `City Walking Tour` to the tour list.
-
 * `delete 3` : Deletes the third contact shown in the current contact list.
-
 * `exit` : Exits the app.
 
 8. Refer to the [Features](#features) below for details of each command.
