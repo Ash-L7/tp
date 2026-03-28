@@ -177,13 +177,19 @@ For example, `h/true` will not apply to `person` contacts.
 <details>
 <summary><b>Example:</b></summary>
 
-* `add type/person n/John Doe p/98765432 e/johnd@example.com a/311 Clementi Ave 2` : Adds a person contact named `John Doe` to the contact list.
+<ul>
+  <li><code>add type/person n/John Doe p/98765432 e/johnd@example.com a/311 Clementi Ave 2</code> :
+  Adds a person contact named <code>John Doe</code> to the contact list.</li>
 
-* `add type/fnb n/Nasi Lemak Stall p/91234567 e/fnb@example.com a/Market Street h/true` : Adds an F&B contact named `Nasi Lemak Stall` with halal status set to `true`.
+  <li><code>add type/fnb n/Nasi Lemak Stall p/91234567 e/fnb@example.com a/Market Street h/true</code> :
+  Adds an F&amp;B contact named <code>Nasi Lemak Stall</code> with halal status set to <code>true</code>.</li>
 
-* `add type/attraction n/USS p/67891234 e/uss@example.com a/Sentosa o/09:00 c/21:00` : Adds an attraction named `USS` with operating hours from `09:00` to `21:00`.
+  <li><code>add type/attraction n/USS p/67891234 e/uss@example.com a/Sentosa o/09:00 c/21:00</code> :
+  Adds an attraction named <code>USS</code> with operating hours from <code>09:00</code> to <code>21:00</code>.</li>
 
-* `add type/accommodation n/Hotel 81 p/61234567 e/hotel@example.com a/Geylang s/4` : Adds an accommodation named `Hotel 81` with a `4`-star rating.
+  <li><code>add type/accomm n/Hotel 81 p/61234567 e/hotel@example.com a/Geylang s/4</code> :
+  Adds an accommodation named <code>Hotel 81</code> with a <code>4</code>-star rating.</li>
+</ul>
 
 </details>
 
@@ -212,9 +218,13 @@ Edits an existing contact in the contact list.
 <details>
 <summary><b>Example:</b></summary>
 
-* `edit 1 p/91234567 e/johndoe@example.com` : Edits the first contact by updating the phone number to `91234567` and email to `johndoe@example.com`.
+<ul>
+  <li><code>edit 1 p/91234567 e/johndoe@example.com</code> :
+  Edits the first contact by updating the phone number and email.</li>
 
-* `edit 2 n/New Name t/` : Edits the second contact by updating the name to `New Name` and clearing all existing tags.
+  <li><code>edit 2 n/New Name t/</code> :
+  Edits the second contact by updating the name and clearing all tags.</li>
+</ul>
 
 </details>
 
@@ -233,9 +243,13 @@ Finds contacts whose names contain any of the given keywords.
 <details>
 <summary><b>Example:</b></summary>
 
-* `find John` : Finds and lists all contacts whose names contain `John`.
+<ul>
+  <li><code>find John</code> :
+  Finds contacts whose names contain <code>John</code>.</li>
 
-* `find alex david` : Finds and lists all contacts whose names contain either `alex` or `david`.
+  <li><code>find alex david</code> :
+  Finds contacts whose names contain <code>alex</code> or <code>david</code>.</li>
+</ul>
 
 </details>
 
@@ -251,9 +265,13 @@ Deletes the specified contact from the contact list.
 <details>
 <summary><b>Example:</b></summary>
 
-* `delete 2` : Deletes the second contact shown in the current contact list.
+<ul>
+  <li><code>delete 2</code> :
+  Deletes the second contact shown in the current contact list.</li>
 
-* `find John` followed by `delete 1` : Finds contacts with names containing `John`, then deletes the first contact from the search results.
+  <li><code>find John</code> followed by <code>delete 1</code> :
+  Deletes the first contact from the filtered results.</li>
+</ul>
 
 </details>
 
@@ -270,7 +288,10 @@ Adds a tour package to the tour list.
 <details>
 <summary><b>Example:</b></summary>
 
-* `tour-add n/Le Royal Tour` : Adds a tour named `Le Royal Tour` to the tour list.
+<ul>
+  <li><code>tour-add n/Le Royal Tour</code> :
+  Adds a tour named <code>Le Royal Tour</code>.</li>
+</ul>
 
 </details>
 
@@ -291,8 +312,10 @@ Assigns a contact to a tour.
 <details>
 <summary><b>Example:</b></summary>
 
-* `tour-assign 1 tour/2` : Assigns the first contact in the current contact list to the second tour in the current
-tour list.
+<ul>
+  <li><code>tour-assign 1 tour/2</code> :
+  Assigns the first contact to the second tour.</li>
+</ul>
 
 </details>
 
@@ -307,8 +330,10 @@ Unassigns a contact from a tour.
 <details>
 <summary><b>Example:</b></summary>
 
-* `tour-unassign 3 tour/5` : Unassigns the third contact in the current contact list from the fifth tour in the current
-  tour list.
+<ul>
+  <li><code>tour-unassign 3 tour/5</code> :
+  Unassigns the third contact from the fifth tour.</li>
+</ul>
 
 </details>
 
@@ -321,7 +346,10 @@ Displays all contacts assigned to a specified tour.
 <details>
 <summary><b>Example:</b></summary>
 
-* `tour-view 1` : Displays all contacts assigned to the first tour in the current tour list.
+<ul>
+  <li><code>tour-view 1</code> :
+  Displays all contacts assigned to the first tour.</li>
+</ul>
 
 </details>
 
@@ -340,9 +368,13 @@ Finds tours whose names contain any of the given keywords.
 <details>
 <summary><b>Example:</b></summary>
 
-* `tour-find Foodie` : Finds and lists all tours whose names contain `Foodie`.
+<ul>
+  <li><code>tour-find Foodie</code> :
+  Finds tours whose names contain <code>Foodie</code>.</li>
 
-* `tour-find City Walking` : Finds and lists all tours whose names contain `City` or `Walking`.
+  <li><code>tour-find City Walking</code> :
+  Finds tours whose names contain <code>City</code> or <code>Walking</code>.</li>
+</ul>
 
 </details>
 
@@ -355,7 +387,10 @@ Deletes a tour package from the tour list.
 <details>
 <summary><b>Example:</b></summary>
 
-* `tour-delete 1` : Deletes the first tour shown in the current tour list.
+<ul>
+  <li><code>tour-delete 1</code> :
+  Deletes the first tour in the current tour list.</li>
+</ul>
 
 </details>
 
