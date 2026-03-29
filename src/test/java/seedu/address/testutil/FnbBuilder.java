@@ -20,6 +20,6 @@ public class FnbBuilder extends ContactBuilder {
 
     @Override
     public Contact build() {
-        return new Fnb(name, phone, email, address, tags, halalStatus, tours);
+        return new Fnb(name, phone, email, address, tags, halalStatus, tours, favoriteStatus);
     }
 }

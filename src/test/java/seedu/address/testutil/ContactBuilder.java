@@ -6,6 +6,7 @@ import java.util.Set;
 import seedu.address.model.contact.Address;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.Email;
+import seedu.address.model.contact.FavoriteStatus;
 import seedu.address.model.contact.Name;
 import seedu.address.model.contact.Person;
 import seedu.address.model.contact.Phone;
@@ -22,6 +23,7 @@ public abstract class ContactBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_FAVORITE_STATUS = "false";
 
     protected Name name;
     protected Phone phone;
@@ -29,6 +31,7 @@ public abstract class ContactBuilder {
     protected Address address;
     protected Set<Tag> tags;
     protected Set<Tour> tours;
+    protected FavoriteStatus favoriteStatus;
 
     /**
      * Creates a {@code ContactBuilder} with the default details.
@@ -38,6 +41,7 @@ public abstract class ContactBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
+        favoriteStatus = new FavoriteStatus(DEFAULT_FAVORITE_STATUS);
         tags = new HashSet<>();
         tours = new HashSet<>();
     }
@@ -54,6 +58,7 @@ public abstract class ContactBuilder {
             personBuilder.address = person.getAddress();
             personBuilder.tags = new HashSet<>(person.getTags());
             personBuilder.tours = new HashSet<>(person.getTours());
+            personBuilder.favoriteStatus = person.getFavoriteStatus();
             return personBuilder;
         }
         return null;
@@ -72,6 +77,14 @@ public abstract class ContactBuilder {
      */
     public ContactBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
+        return this;
+    }
+
+    /**
+     * Sets the {@code FavoriteStatus} of the {@code Contact} that we are building.
+     */
+    public ContactBuilder withFavoriteStatus(String favoriteStatus) {
+        this.favoriteStatus = new FavoriteStatus(favoriteStatus);
         return this;
     }
 

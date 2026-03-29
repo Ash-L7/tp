@@ -10,6 +10,7 @@ import seedu.address.model.contact.Address;
 import seedu.address.model.contact.ClosingHour;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.Email;
+import seedu.address.model.contact.FavoriteStatus;
 import seedu.address.model.contact.HalalStatus;
 import seedu.address.model.contact.Name;
 import seedu.address.model.contact.OpeningHour;
@@ -84,6 +85,15 @@ public class EditContactDescriptorBuilder {
         descriptor.setTags(tagSet);
         return this;
     }
+
+    /**
+     * Sets the {@code Favorite Status} of the {@code EditContactDescriptor} that we are building.
+     */
+    public EditContactDescriptorBuilder withFavoriteStatus(String favoriteStatus) {
+        descriptor.setFavorite(new FavoriteStatus(favoriteStatus));
+        return this;
+    }
+
 
     /**
      * Sets the {@code Halal Status} of the {@code EditContactDescriptor} that we are building.

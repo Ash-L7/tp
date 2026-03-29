@@ -6,20 +6,23 @@
     "phone" : "94351253",
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
-    "tags" : [ "friends" ]
+    "tags" : [ "friends" ],
+    "favoriteStatus" : "false"
   }, {
     "type": "Person",
     "name" : "Benson Meier",
     "phone" : "98765432",
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
-    "tags" : [ "owesMoney", "friends" ]
+    "tags" : [ "owesMoney", "friends" ],
+    "favoriteStatus" : "false"
   }, {
     "type": "Person",
     "name" : "Carl Kurz",
     "phone" : "95352563",
     "email" : "heinz@example.com",
     "address" : "wall street",
+    "favoriteStatus" : "false",
     "tags" : [ ]
   }, {
     "type": "Person",
@@ -27,21 +30,24 @@
     "phone" : "87652533",
     "email" : "cornelia@example.com",
     "address" : "10th street",
-    "tags" : [ "friends" ]
+    "tags" : [ "friends" ],
+    "favoriteStatus" : "false"
   }, {
     "type": "Person",
     "name" : "Elle Meyer",
     "phone" : "9482224",
     "email" : "werner@example.com",
     "address" : "michegan ave",
-    "tags" : [ ]
+    "tags" : [ ],
+    "favoriteStatus" : "false"
   }, {
     "type": "Person",
     "name" : "Fiona Kunz",
     "phone" : "9482427",
     "email" : "lydia@example.com",
     "address" : "little tokyo",
-    "tags" : [ ]
+    "tags" : [ ],
+    "favoriteStatus" : "false"
   }, {
     "type": "Fnb",
     "name" : "Al Azhar",
@@ -49,7 +55,8 @@
     "email" : "alazhar@example.com",
     "address" : "1 Jalan Besar",
     "tags" : [ "Indian" ],
-    "halalStatus" : "true"
+    "halalStatus" : "true",
+    "favoriteStatus" : "true"
   }, {
     "type" : "Attraction",
     "name" : "USS",
@@ -58,7 +65,8 @@
     "address" : "1 Sentosa Drive",
     "tags" : [ "fun" ],
     "openingHour" : "09:00",
-    "closingHour" : "22:00"
+    "closingHour" : "22:00",
+    "favoriteStatus" : "false"
   }, {
     "type" : "Accommodation",
     "name" : "Hotel 81",
@@ -66,14 +74,16 @@
     "email" : "hotel81@example.com",
     "address" : "1 Hotel Drive",
     "tags" : [ "stay" ],
-    "stars" : "4"
+    "stars" : "4",
+    "favoriteStatus" : "true"
   }, {
     "type": "Person",
     "name" : "George Best",
     "phone" : "9482442",
     "email" : "anna@example.com",
     "address" : "4th street",
-    "tags" : [ ]
+    "tags" : [ ],
+    "favoriteStatus" : "false"
   } ],
   "tours" : [ ]
 }

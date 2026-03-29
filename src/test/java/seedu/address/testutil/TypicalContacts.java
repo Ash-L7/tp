@@ -11,6 +11,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_ATTRACTION;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_FNB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_FAVORITE_STATUS_FALSE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_FAVORITE_STATUS_TRUE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_HALAL_STATUS_FNB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_ACCOMMODATION;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
@@ -88,6 +90,7 @@ public class TypicalContacts {
             .withAddress(VALID_ADDRESS_FNB)
             .withTags(VALID_TAG_INDIAN)
             .withTours()
+            .withFavoriteStatus(VALID_FAVORITE_STATUS_TRUE)
             .build();
 
     // Attraction
@@ -99,6 +102,7 @@ public class TypicalContacts {
             .withAddress(VALID_ADDRESS_ATTRACTION)
             .withTags(VALID_TAG_FUN)
             .withTours()
+            .withFavoriteStatus(VALID_FAVORITE_STATUS_FALSE)
             .build();
 
     // Accommodation
@@ -110,6 +114,7 @@ public class TypicalContacts {
             .withAddress(VALID_ADDRESS_ACCOMMODATION)
             .withTags(VALID_TAG_STAY)
             .withTours()
+            .withFavoriteStatus(VALID_FAVORITE_STATUS_TRUE)
             .build();
 
     // Tour

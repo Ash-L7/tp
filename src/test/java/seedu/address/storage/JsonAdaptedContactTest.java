@@ -1,6 +1,8 @@
 package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_FAVORITE_STATUS_FALSE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_FAVORITE_STATUS_TRUE;
 import static seedu.address.storage.JsonAdaptedContact.INVALID_FIELD_MESSAGE_FORMAT;
 import static seedu.address.storage.JsonAdaptedContact.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -177,7 +179,7 @@ public class JsonAdaptedContactTest {
                         NULL_PARAMETER,
                         NULL_PARAMETER,
                         NULL_PARAMETER,
-                        NULL_PARAMETER);
+                        VALID_FAVORITE_STATUS_TRUE);
         assertEquals(AL_AZHAR, contact.toModelType());
     }
 
@@ -234,7 +236,7 @@ public class JsonAdaptedContactTest {
                         VALID_OPENING_HOUR,
                         VALID_CLOSING_HOUR,
                         NULL_PARAMETER,
-                        NULL_PARAMETER);
+                        VALID_FAVORITE_STATUS_FALSE);
         assertEquals(USS, contact.toModelType());
     }
 
@@ -330,7 +332,7 @@ public class JsonAdaptedContactTest {
                         NULL_PARAMETER,
                         NULL_PARAMETER,
                         VALID_STARS,
-                        NULL_PARAMETER);
+                        VALID_FAVORITE_STATUS_TRUE);
         assertEquals(HOTEL, contact.toModelType());
     }
 
