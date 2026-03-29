@@ -25,7 +25,7 @@ public class FavoriteStatus {
      */
     public FavoriteStatus(String isFavorite) {
         checkArgument(isValidFavoriteStatus(isFavorite), MESSAGE_CONSTRAINTS);
-        this.isFavorite = isFavorite.equals("true");
+        this.isFavorite = isFavorite.equals("true") || isFavorite.equals("TRUE");
     }
 
     /**

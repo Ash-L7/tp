@@ -23,7 +23,7 @@ public class HalalStatus {
      */
     public HalalStatus(String isHalal) {
         checkArgument(isValidHalalStatus(isHalal), MESSAGE_CONSTRAINTS);
-        this.isHalal = isHalal.equals("true");
+        this.isHalal = isHalal.equals("true") || isHalal.equals("TRUE");
     }
 
     /**
