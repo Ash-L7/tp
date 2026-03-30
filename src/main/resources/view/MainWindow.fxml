@@ -58,7 +58,7 @@
             <StackPane fx:id="tourListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
           </VBox>
         </SplitPane>
-        <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
+        <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" managed="false" visible="false" />
       </VBox>
     </Scene>
   </scene>
