@@ -371,7 +371,7 @@
 }
 
 #commandTextField {
-    -fx-background-color: #FFFFFF;
+    -fx-background-color: #F0F6FF;
     -fx-background-insets: 0;
     -fx-background-radius: 8;
     -fx-border-color: #93C5FD;
@@ -386,14 +386,14 @@
 }
 
 #commandTextField:focused {
-    -fx-border-color: #4A7CF6;
+    -fx-border-color: #2563EB;
     -fx-background-color: #FFFFFF;
-    -fx-effect: dropshadow(gaussian, rgba(74,124,246,0.20), 8, 0, 0, 0);
+    -fx-effect: dropshadow(gaussian, rgba(37,99,235,0.20), 8, 0, 0, 0);
 }
 
 /* ---- Result Display Background ---- */
 #resultDisplay .content {
-    -fx-background-color: #EFF6FF;
+    -fx-background-color: #F8FAFF;
     -fx-background-radius: 0;
 }
 
@@ -428,9 +428,16 @@
     -fx-padding: 0 16 10 16;
 }
 
-/* ---- Command Area Styling ---- */
-.command-area {
+/* ---- Command Header ---- */
+.command-header {
     -fx-background-color: #FFFFFF;
-    -fx-border-color: #E4E7EC;
+    -fx-border-color: #2563EB #E4E7EC #E4E7EC #E4E7EC;
+    -fx-border-width: 4 0 1 0;
+}
+
+/* ---- Result Area ---- */
+.result-area {
+    -fx-background-color: #F8FAFF;
+    -fx-border-color: #BFDBFE;
     -fx-border-width: 0 0 1 0;
 }

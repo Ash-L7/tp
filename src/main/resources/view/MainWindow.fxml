@@ -24,20 +24,15 @@
       </stylesheets>
 
       <VBox>
-        <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
-          <Menu mnemonicParsing="false" text="File">
-            <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
-          </Menu>
-        </MenuBar>
 
-        <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="pane-with-border">
+        <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="command-header">
           <padding>
-            <Insets top="10" right="16" bottom="10" left="16" />
+            <Insets top="12" right="16" bottom="12" left="16" />
           </padding>
         </StackPane>
 
-        <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane-with-border"
-                   minHeight="80" prefHeight="80" maxHeight="80">
+        <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="result-area"
+                   minHeight="72" prefHeight="72" maxHeight="72">
           <padding>
             <Insets top="8" right="16" bottom="8" left="16" />
           </padding>
