@@ -19,7 +19,7 @@ import seedu.address.model.contact.Contact;
 import seedu.address.model.tour.Tour;
 
 /**
- * Unassigns a tour to an existing contact in the address book.
+ * Unassigns a tour from an existing contact in the address book.
  */
 public class TourUnassignCommand extends Command {
 
@@ -37,7 +37,7 @@ public class TourUnassignCommand extends Command {
     private final Index tourIndex;
 
     /**
-     * Creates an TourUnassignCommand to unassign the tour at {@code tourIndex} to the
+     * Creates an TourUnassignCommand to unassign the tour at {@code tourIndex} from the
      * contact at {@code contactIndex}.
      */
     public TourUnassignCommand(Index contactIndex, Index tourIndex) {
@@ -50,35 +50,41 @@ public class TourUnassignCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Contact> lastShownContactList = model.getFilteredContactList();
-        List<Tour> lastShownTourList = model.getFilteredTourList();
+        Contact contact = getContact(model.getFilteredContactList(), contactIndex);
+        Tour tour = getTour(model.getFilteredTourList(), tourIndex);
+        validateIsAssigned(contact, tour);
+        Contact updatedContact = buildContactWithTourRemoved(contact, tour);
+        model.setContact(contact, updatedContact);
+        model.updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS);
+        return new CommandResult(String.format(MESSAGE_UNASSIGN_TOUR_SUCCESS, Messages.format(updatedContact)));
+    }
 
-        if (contactIndex.getZeroBased() >= lastShownContactList.size()) {
+    private static Contact getContact(List<Contact> contactList, Index index) throws CommandException {
+        if (index.getZeroBased() >= contactList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX);
         }
+        return contactList.get(index.getZeroBased());
+    }
 
-        if (tourIndex.getZeroBased() >= lastShownTourList.size()) {
+    private static Tour getTour(List<Tour> tourList, Index index) throws CommandException {
+        if (index.getZeroBased() >= tourList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TOUR_DISPLAYED_INDEX);
         }
+        return tourList.get(index.getZeroBased());
+    }
 
-        Contact contactToEdit = lastShownContactList.get(contactIndex.getZeroBased());
-        Tour tour = lastShownTourList.get(tourIndex.getZeroBased());
-
-        if (!contactToEdit.isInTour(tour)) {
+    private static void validateIsAssigned(Contact contact, Tour tour) throws CommandException {
+        if (!contact.isInTour(tour)) {
             throw new CommandException(MESSAGE_NOT_IN_TOUR);
         }
+    }
 
-        Set<Tour> updatedTours = new HashSet<>(contactToEdit.getTours());
+    private static Contact buildContactWithTourRemoved(Contact contact, Tour tour) {
+        Set<Tour> updatedTours = new HashSet<>(contact.getTours());
         updatedTours.remove(tour);
-
         EditCommand.EditContactDescriptor descriptor = new EditCommand.EditContactDescriptor();
         descriptor.setTours(updatedTours);
-
-        Contact editedContact = contactToEdit.edit(descriptor);
-
-        model.setContact(contactToEdit, editedContact);
-        model.updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS);
-        return new CommandResult(String.format(MESSAGE_UNASSIGN_TOUR_SUCCESS, Messages.format(editedContact)));
+        return contact.edit(descriptor);
     }
 
     @Override
