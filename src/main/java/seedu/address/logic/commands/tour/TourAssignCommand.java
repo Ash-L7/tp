@@ -60,14 +60,18 @@ public class TourAssignCommand extends Command {
         if (index.getZeroBased() >= contactList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX);
         }
-        return contactList.get(index.getZeroBased());
+        Contact contact = contactList.get(index.getZeroBased());
+        assert contact != null : "Contact list must not contain null elements";
+        return contact;
     }
 
     private static Tour getTour(List<Tour> tourList, Index index) throws CommandException {
         if (index.getZeroBased() >= tourList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TOUR_DISPLAYED_INDEX);
         }
-        return tourList.get(index.getZeroBased());
+        Tour tour = tourList.get(index.getZeroBased());
+        assert tour != null : "Tour list must not contain null elements";
+        return tour;
     }
 
     private static void validateNotAssigned(Contact contact, Tour tour) throws CommandException {
@@ -79,9 +83,12 @@ public class TourAssignCommand extends Command {
     private static Contact buildContactWithTourAdded(Contact contact, Tour tour) {
         Set<Tour> updatedTours = new HashSet<>(contact.getTours());
         updatedTours.add(tour);
+        assert updatedTours.contains(tour) : "Tour must be present in the set after adding";
         EditCommand.EditContactDescriptor descriptor = new EditCommand.EditContactDescriptor();
         descriptor.setTours(updatedTours);
-        return contact.edit(descriptor);
+        Contact updatedContact = contact.edit(descriptor);
+        assert updatedContact != null : "Edited contact must not be null";
+        return updatedContact;
     }
 
     @Override
