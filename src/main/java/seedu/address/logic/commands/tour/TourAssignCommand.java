@@ -1,7 +1,6 @@
 package seedu.address.logic.commands.tour;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CONTACTS;
 
 import java.util.HashSet;
 import java.util.List;
@@ -54,7 +53,6 @@ public class TourAssignCommand extends Command {
         validateNotAssigned(contact, tour);
         Contact updatedContact = buildContactWithTourAdded(contact, tour);
         model.setContact(contact, updatedContact);
-        model.updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS);
         return new CommandResult(String.format(MESSAGE_ASSIGN_TOUR_SUCCESS, Messages.format(updatedContact)));
     }
 
