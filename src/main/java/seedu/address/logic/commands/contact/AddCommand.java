@@ -70,6 +70,7 @@ public class AddCommand extends Command {
         }
 
         model.addContact(toAdd);
+        model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 

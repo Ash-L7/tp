@@ -44,6 +44,7 @@ public class TourDeleteCommand extends Command {
 
         Tour tourToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteTour(tourToDelete);
+        model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_DELETE_TOUR_SUCCESS, Messages.format(tourToDelete)));
     }
 
