@@ -30,6 +30,7 @@ public class TourViewCommand extends Command {
     private final Index targetIndex;
 
     public TourViewCommand(Index targetIndex) {
+        requireNonNull(targetIndex);
         this.targetIndex = targetIndex;
     }
 

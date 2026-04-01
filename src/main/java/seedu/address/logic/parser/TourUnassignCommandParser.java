@@ -26,6 +26,8 @@ public class TourUnassignCommandParser implements Parser<TourUnassignCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TourUnassignCommand.MESSAGE_USAGE));
         }
 
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TOUR);
+
         try {
             Index contactIndex = ParserUtil.parseIndex(argMultimap.getPreamble());
             Index tourIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_TOUR).get());
