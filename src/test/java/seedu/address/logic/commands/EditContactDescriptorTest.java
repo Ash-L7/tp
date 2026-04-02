@@ -10,7 +10,7 @@ import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_FNB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_FAVORITE_STATUS_TRUE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_FAVOURITE_STATUS_TRUE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_HALAL_STATUS_FALSE_FNB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
@@ -68,7 +68,7 @@ public class EditContactDescriptorTest {
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different favourite status -> returns false
-        editedAmy = new EditContactDescriptorBuilder(DESC_AMY).withFavouriteStatus(VALID_FAVORITE_STATUS_TRUE).build();
+        editedAmy = new EditContactDescriptorBuilder(DESC_AMY).withFavouriteStatus(VALID_FAVOURITE_STATUS_TRUE).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different halal status -> returns false

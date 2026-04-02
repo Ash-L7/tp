@@ -3,8 +3,8 @@ package seedu.address.logic.commands.favourite;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_FAVORITE_STATUS_FALSE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_FAVORITE_STATUS_TRUE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_FAVOURITE_STATUS_FALSE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_FAVOURITE_STATUS_TRUE;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalContacts.getTypicalAddressBook;
@@ -30,20 +30,20 @@ public class FavouriteRemoveCommandTest {
     public void execute_validIndex_success() {
         Contact originalContact = model.getFilteredContactList().get(INDEX_FIRST_CONTACT.getZeroBased());
         Contact contactToUnfavourite = ContactBuilder.fromContact(
-                originalContact).withFavouriteStatus(VALID_FAVORITE_STATUS_TRUE).build();
+                originalContact).withFavouriteStatus(VALID_FAVOURITE_STATUS_TRUE).build();
         model.setContact(originalContact, contactToUnfavourite);
 
         FavouriteRemoveCommand command = new FavouriteRemoveCommand(INDEX_FIRST_CONTACT);
 
         Contact expectedEditedContact = ContactBuilder.fromContact(
-                contactToUnfavourite).withFavouriteStatus(VALID_FAVORITE_STATUS_FALSE).build();
+                contactToUnfavourite).withFavouriteStatus(VALID_FAVOURITE_STATUS_FALSE).build();
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setContact(contactToUnfavourite, expectedEditedContact);
         expectedModel.updateFilteredContactList(Model.PREDICATE_SHOW_ALL_CONTACTS);
 
         assertCommandSuccess(command, model,
-                String.format(FavouriteRemoveCommand.MESSAGE_REMOVE_FAVORITE_SUCCESS,
+                String.format(FavouriteRemoveCommand.MESSAGE_REMOVE_FAVOURITE_SUCCESS,
                         Messages.format(expectedEditedContact)),
                 expectedModel);
     }
@@ -60,7 +60,7 @@ public class FavouriteRemoveCommandTest {
     public void execute_alreadyNonFavourite_failure() {
         FavouriteRemoveCommand command = new FavouriteRemoveCommand(INDEX_FIRST_CONTACT);
 
-        assertCommandFailure(command, model, FavouriteRemoveCommand.MESSAGE_DUPLICATE_NON_FAVORITE);
+        assertCommandFailure(command, model, FavouriteRemoveCommand.MESSAGE_DUPLICATE_NON_FAVOURITE);
     }
 
     @Test

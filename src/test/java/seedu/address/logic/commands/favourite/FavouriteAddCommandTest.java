@@ -3,7 +3,7 @@ package seedu.address.logic.commands.favourite;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_FAVORITE_STATUS_TRUE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_FAVOURITE_STATUS_TRUE;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalContacts.getTypicalAddressBook;
@@ -31,14 +31,14 @@ public class FavouriteAddCommandTest {
         FavouriteAddCommand command = new FavouriteAddCommand(INDEX_FIRST_CONTACT);
 
         Contact expectedEditedContact = ContactBuilder.fromContact(
-                contactToFavourite).withFavouriteStatus(VALID_FAVORITE_STATUS_TRUE).build();
+                contactToFavourite).withFavouriteStatus(VALID_FAVOURITE_STATUS_TRUE).build();
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setContact(contactToFavourite, expectedEditedContact);
         expectedModel.updateFilteredContactList(Model.PREDICATE_SHOW_ALL_CONTACTS);
 
         assertCommandSuccess(command, model,
-                String.format(FavouriteAddCommand.MESSAGE_ADD_FAVORITE_SUCCESS, Messages.format(expectedEditedContact)),
+                String.format(FavouriteAddCommand.MESSAGE_ADD_FAVOURITE_SUCCESS, Messages.format(expectedEditedContact)),
                 expectedModel);
     }
 
@@ -54,12 +54,12 @@ public class FavouriteAddCommandTest {
     public void execute_alreadyFavourite_failure() {
         Contact contactToFavourite = model.getFilteredContactList().get(INDEX_FIRST_CONTACT.getZeroBased());
         Contact expectedAlreadyFavouriteContact = ContactBuilder.fromContact(
-                contactToFavourite).withFavouriteStatus(VALID_FAVORITE_STATUS_TRUE).build();
+                contactToFavourite).withFavouriteStatus(VALID_FAVOURITE_STATUS_TRUE).build();
         model.setContact(contactToFavourite, expectedAlreadyFavouriteContact);
 
         FavouriteAddCommand command = new FavouriteAddCommand(INDEX_FIRST_CONTACT);
 
-        assertCommandFailure(command, model, FavouriteAddCommand.MESSAGE_DUPLICATE_FAVORITE);
+        assertCommandFailure(command, model, FavouriteAddCommand.MESSAGE_DUPLICATE_FAVOURITE);
     }
 
     @Test

@@ -29,8 +29,8 @@ public class FavouriteRemoveCommand extends Command {
             + "Parameters: CONTACT_INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_REMOVE_FAVORITE_SUCCESS = "Removed contact from favourites: %1$s";
-    public static final String MESSAGE_DUPLICATE_NON_FAVORITE = "Contact is already not in favourites.";
+    public static final String MESSAGE_REMOVE_FAVOURITE_SUCCESS = "Removed contact from favourites: %1$s";
+    public static final String MESSAGE_DUPLICATE_NON_FAVOURITE = "Contact is already not in favourites.";
 
     private final Index contactIndex;
 
@@ -54,7 +54,7 @@ public class FavouriteRemoveCommand extends Command {
         Contact contactToEdit = lastShownContactList.get(contactIndex.getZeroBased());
 
         if (!contactToEdit.isFavourite()) {
-            throw new CommandException(MESSAGE_DUPLICATE_NON_FAVORITE);
+            throw new CommandException(MESSAGE_DUPLICATE_NON_FAVOURITE);
         }
 
         FavouriteStatus updatedFavouriteStatus = new FavouriteStatus("false");
@@ -66,7 +66,7 @@ public class FavouriteRemoveCommand extends Command {
 
         model.setContact(contactToEdit, editedContact);
         model.updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS);
-        return new CommandResult(String.format(MESSAGE_REMOVE_FAVORITE_SUCCESS, Messages.format(editedContact)));
+        return new CommandResult(String.format(MESSAGE_REMOVE_FAVOURITE_SUCCESS, Messages.format(editedContact)));
     }
 
     @Override

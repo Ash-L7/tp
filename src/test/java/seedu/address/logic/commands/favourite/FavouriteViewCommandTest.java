@@ -2,7 +2,7 @@ package seedu.address.logic.commands.favourite;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.Messages.MESSAGE_CONTACTS_LISTED_OVERVIEW;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_FAVORITE_STATUS_TRUE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_FAVOURITE_STATUS_TRUE;
 import static seedu.address.testutil.TypicalContacts.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
@@ -24,10 +24,10 @@ public class FavouriteViewCommandTest {
         Contact secondContact = model.getFilteredContactList().get(1);
 
         Contact favouriteFirstContact = ContactBuilder.fromContact(firstContact)
-                .withFavouriteStatus(VALID_FAVORITE_STATUS_TRUE)
+                .withFavouriteStatus(VALID_FAVOURITE_STATUS_TRUE)
                 .build();
         Contact favouriteSecondContact = ContactBuilder.fromContact(secondContact)
-                .withFavouriteStatus(VALID_FAVORITE_STATUS_TRUE)
+                .withFavouriteStatus(VALID_FAVOURITE_STATUS_TRUE)
                 .build();
 
         model.setContact(firstContact, favouriteFirstContact);

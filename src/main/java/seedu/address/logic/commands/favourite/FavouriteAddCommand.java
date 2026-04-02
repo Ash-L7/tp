@@ -29,8 +29,8 @@ public class FavouriteAddCommand extends Command {
             + "Parameters: CONTACT_INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_ADD_FAVORITE_SUCCESS = "Added contact to favourites: %1$s";
-    public static final String MESSAGE_DUPLICATE_FAVORITE = "Contact is already in favourites.";
+    public static final String MESSAGE_ADD_FAVOURITE_SUCCESS = "Added contact to favourites: %1$s";
+    public static final String MESSAGE_DUPLICATE_FAVOURITE = "Contact is already in favourites.";
 
     private final Index contactIndex;
 
@@ -54,7 +54,7 @@ public class FavouriteAddCommand extends Command {
         Contact contactToEdit = lastShownContactList.get(contactIndex.getZeroBased());
 
         if (contactToEdit.isFavourite()) {
-            throw new CommandException(MESSAGE_DUPLICATE_FAVORITE);
+            throw new CommandException(MESSAGE_DUPLICATE_FAVOURITE);
         }
 
         FavouriteStatus updatedFavouriteStatus = new FavouriteStatus("true");
@@ -66,7 +66,7 @@ public class FavouriteAddCommand extends Command {
 
         model.setContact(contactToEdit, editedContact);
         model.updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS);
-        return new CommandResult(String.format(MESSAGE_ADD_FAVORITE_SUCCESS, Messages.format(editedContact)));
+        return new CommandResult(String.format(MESSAGE_ADD_FAVOURITE_SUCCESS, Messages.format(editedContact)));
     }
 
     @Override
