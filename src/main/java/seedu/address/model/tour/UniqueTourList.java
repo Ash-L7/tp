@@ -114,6 +114,7 @@ public class UniqueTourList implements Iterable<Tour> {
      * Returns true if {@code tours} contains only unique tours.
      */
     private boolean toursAreUnique(List<Tour> tours) {
+        requireNonNull(tours);
         for (int i = 0; i < tours.size() - 1; i++) {
             for (int j = i + 1; j < tours.size(); j++) {
                 if (tours.get(i).equals(tours.get(j))) {
