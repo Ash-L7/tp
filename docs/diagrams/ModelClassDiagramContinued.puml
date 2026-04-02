@@ -1,0 +1,61 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Package Model as ModelPackage <<Rectangle>>{
+
+Class Contact
+Class Person
+Class Fnb
+Class Attraction
+Class Accommodation
+Class Address
+Class Email
+Class Name
+Class Phone
+Class Tag
+Class FavouriteStatus
+Class HalalStatus
+Class OpeningHour
+Class ClosingHour
+Class AccommodationStars
+
+
+Class I #FFFFFF
+Class J #FFFFFF
+Class Spacer #FFFFFF
+}
+
+I --> "~* all" Contact
+J --> "~* filtered" Contact
+I -[hidden]right-> Spacer
+J -[hidden]left-> Spacer
+Contact --> "*" Spacer
+
+Contact *--> Name
+Contact *--> Phone
+Contact *--> Email
+Contact *--> Address
+Contact *--> "*" Tag
+Contact *--> FavouriteStatus
+Person .up.|> Contact
+Fnb .up.|> Contact
+Attraction .up.|> Contact
+Accommodation .up.|> Contact
+Fnb *--> HalalStatus
+Attraction *--> OpeningHour
+Attraction *--> ClosingHour
+Accommodation *--> AccommodationStars
+
+Name -[hidden]right-> Phone
+Phone -[hidden]right-> Email
+Email -[hidden]right-> Address
+Address -[hidden]right-> Tag
+Tag -[hidden]right-> FavouriteStatus
+Person -[hidden]up-> Phone
+Fnb -[hidden]left-> Person
+Attraction -[hidden]left-> Fnb
+Accommodation -[hidden]left-> Attraction
+@enduml
