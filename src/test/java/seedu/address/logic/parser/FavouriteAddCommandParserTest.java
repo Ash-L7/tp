@@ -7,25 +7,25 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CONTACT;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.favorite.FavoriteAddCommand;
+import seedu.address.logic.commands.favourite.FavouriteAddCommand;
 
-public class FavoriteAddCommandParserTest {
+public class FavouriteAddCommandParserTest {
 
     private static final String MESSAGE_INVALID_FORMAT =
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, FavoriteAddCommand.MESSAGE_USAGE);
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, FavouriteAddCommand.MESSAGE_USAGE);
 
-    private final FavoriteAddCommandParser parser = new FavoriteAddCommandParser();
+    private final FavouriteAddCommandParser parser = new FavouriteAddCommandParser();
 
     @Test
-    public void parse_validArgs_returnsFavoriteAddCommand() {
+    public void parse_validArgs_returnsFavouriteAddCommand() {
         assertParseSuccess(parser, "1",
-                new FavoriteAddCommand(INDEX_FIRST_CONTACT));
+                new FavouriteAddCommand(INDEX_FIRST_CONTACT));
     }
 
     @Test
-    public void parse_validArgsWithWhitespace_returnsFavoriteAddCommand() {
+    public void parse_validArgsWithWhitespace_returnsFavouriteAddCommand() {
         assertParseSuccess(parser, "   1   ",
-                new FavoriteAddCommand(INDEX_FIRST_CONTACT));
+                new FavouriteAddCommand(INDEX_FIRST_CONTACT));
     }
 
     @Test

@@ -44,7 +44,7 @@ public class ContactCard extends UiPart<Region> {
     @FXML
     private VBox detailsBox;
     @FXML
-    private Label favoriteStatus;
+    private Label favouriteStatus;
 
     /**
      * Creates a {@code ContactCode} with the given {@code Contact} and index to display.
@@ -54,8 +54,8 @@ public class ContactCard extends UiPart<Region> {
         this.contact = contact;
         id.setText(displayedIndex + ". ");
         name.setText(contact.getName().fullName);
-        favoriteStatus.setVisible(contact.isFavorite());
-        favoriteStatus.setManaged(contact.isFavorite());
+        favouriteStatus.setVisible(contact.isFavourite());
+        favouriteStatus.setManaged(contact.isFavourite());
         phone.setText(contact.getPhone().value);
         address.setText(contact.getAddress().value);
         email.setText(contact.getEmail().value);

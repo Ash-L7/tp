@@ -1,4 +1,4 @@
-package seedu.address.logic.commands.favorite;
+package seedu.address.logic.commands.favourite;
 
 import static java.util.Objects.requireNonNull;
 
@@ -7,18 +7,18 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
-import seedu.address.model.contact.ContactIsFavoritePredicate;
+import seedu.address.model.contact.ContactIsFavouritePredicate;
 
 /**
- * Lists all contacts in the address book in favorites to the user.
+ * Lists all contacts in the address book in favourites to the user.
  */
-public class FavoriteViewCommand extends Command {
+public class FavouriteViewCommand extends Command {
 
-    public static final String COMMAND_WORD = "favorite-view";
+    public static final String COMMAND_WORD = "favourite-view";
 
-    private final ContactIsFavoritePredicate predicate = new ContactIsFavoritePredicate();
+    private final ContactIsFavouritePredicate predicate = new ContactIsFavouritePredicate();
 
-    public FavoriteViewCommand() {
+    public FavouriteViewCommand() {
     }
 
     @Override

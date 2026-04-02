@@ -29,7 +29,7 @@ public abstract class Contact {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private final Set<Tour> tours = new HashSet<>();
-    private final FavoriteStatus isFavorite;
+    private final FavouriteStatus isFavourite;
 
     /**
      * Constructs a {@code Contact}.
@@ -44,22 +44,22 @@ public abstract class Contact {
         this.address = address;
         this.tags.addAll(tags);
         this.tours.addAll(tours);
-        this.isFavorite = new FavoriteStatus("false");
+        this.isFavourite = new FavouriteStatus("false");
     }
 
     /**
-     * Constructs a {@code Contact} with specified Favorite status.
+     * Constructs a {@code Contact} with specified Favourite status.
      */
     public Contact(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Set<Tour> tours,
-                   FavoriteStatus isFavorite) {
-        requireAllNonNull(name, phone, email, address, tags, tours, isFavorite);
+                   FavouriteStatus isFavourite) {
+        requireAllNonNull(name, phone, email, address, tags, tours, isFavourite);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
         this.tours.addAll(tours);
-        this.isFavorite = isFavorite;
+        this.isFavourite = isFavourite;
     }
 
     public Name getName() {
@@ -113,12 +113,12 @@ public abstract class Contact {
                 .collect(Collectors.joining(" | "));
     }
 
-    public FavoriteStatus getFavoriteStatus() {
-        return this.isFavorite;
+    public FavouriteStatus getFavouriteStatus() {
+        return this.isFavourite;
     }
 
-    public boolean isFavorite() {
-        return this.isFavorite.isFavorite;
+    public boolean isFavourite() {
+        return this.isFavourite.isFavourite;
     }
 
     /**
@@ -172,7 +172,7 @@ public abstract class Contact {
                 && address.equals(otherContact.address)
                 && tags.equals(otherContact.tags)
                 && tours.equals(otherContact.tours)
-                && isFavorite.equals(otherContact.isFavorite);
+                && isFavourite.equals(otherContact.isFavourite);
     }
 
     @Override
@@ -189,7 +189,7 @@ public abstract class Contact {
                 .add("email", email)
                 .add("address", address)
                 .add("tags", tags)
-                .add("favoriteStatus", isFavorite)
+                .add("favouriteStatus", isFavourite)
                 .toString();
     }
 }

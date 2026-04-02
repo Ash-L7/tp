@@ -1,4 +1,4 @@
-package seedu.address.logic.commands.favorite;
+package seedu.address.logic.commands.favourite;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CONTACTS;
@@ -14,30 +14,30 @@ import seedu.address.logic.commands.contact.EditCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.contact.Contact;
-import seedu.address.model.contact.FavoriteStatus;
+import seedu.address.model.contact.FavouriteStatus;
 
 /**
- * Removes an existing contact in the address book from favorites.
+ * Removes an existing contact in the address book from favourites.
  */
-public class FavoriteRemoveCommand extends Command {
+public class FavouriteRemoveCommand extends Command {
 
-    public static final String COMMAND_WORD = "favorite-remove";
+    public static final String COMMAND_WORD = "favourite-remove";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Removes from favorites an existing contact identified by the index number used "
+            + ": Removes from favourites an existing contact identified by the index number used "
             + "in the displayed contact list.\n"
             + "Parameters: CONTACT_INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_REMOVE_FAVORITE_SUCCESS = "Removed contact from favorites: %1$s";
-    public static final String MESSAGE_DUPLICATE_NON_FAVORITE = "Contact is already not in favorites.";
+    public static final String MESSAGE_REMOVE_FAVOURITE_SUCCESS = "Removed contact from favourites: %1$s";
+    public static final String MESSAGE_DUPLICATE_NON_FAVOURITE = "Contact is already not in favourites.";
 
     private final Index contactIndex;
 
     /**
-     * Creates an FavoriteRemoveCommand to remove the contact at {@code contactIndex} from favorites.
+     * Creates an FavouriteRemoveCommand to remove the contact at {@code contactIndex} from favourites.
      */
-    public FavoriteRemoveCommand(Index contactIndex) {
+    public FavouriteRemoveCommand(Index contactIndex) {
         requireNonNull(contactIndex);
         this.contactIndex = contactIndex;
     }
@@ -53,20 +53,20 @@ public class FavoriteRemoveCommand extends Command {
 
         Contact contactToEdit = lastShownContactList.get(contactIndex.getZeroBased());
 
-        if (!contactToEdit.isFavorite()) {
-            throw new CommandException(MESSAGE_DUPLICATE_NON_FAVORITE);
+        if (!contactToEdit.isFavourite()) {
+            throw new CommandException(MESSAGE_DUPLICATE_NON_FAVOURITE);
         }
 
-        FavoriteStatus updatedFavoriteStatus = new FavoriteStatus("false");
+        FavouriteStatus updatedFavouriteStatus = new FavouriteStatus("false");
 
         EditCommand.EditContactDescriptor descriptor = new EditCommand.EditContactDescriptor();
-        descriptor.setFavorite(updatedFavoriteStatus);
+        descriptor.setFavourite(updatedFavouriteStatus);
 
         Contact editedContact = contactToEdit.edit(descriptor);
 
         model.setContact(contactToEdit, editedContact);
         model.updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS);
-        return new CommandResult(String.format(MESSAGE_REMOVE_FAVORITE_SUCCESS, Messages.format(editedContact)));
+        return new CommandResult(String.format(MESSAGE_REMOVE_FAVOURITE_SUCCESS, Messages.format(editedContact)));
     }
 
     @Override
@@ -75,11 +75,11 @@ public class FavoriteRemoveCommand extends Command {
             return true;
         }
 
-        if (!(other instanceof FavoriteRemoveCommand)) {
+        if (!(other instanceof FavouriteRemoveCommand)) {
             return false;
         }
 
-        FavoriteRemoveCommand otherCommand = (FavoriteRemoveCommand) other;
+        FavouriteRemoveCommand otherCommand = (FavouriteRemoveCommand) other;
         return contactIndex.equals(otherCommand.contactIndex);
     }
 

@@ -38,13 +38,13 @@ public class Accommodation extends Contact {
     }
 
     /**
-     * Constructs an {@code Accommodation} contact with specified Favorite status.
+     * Constructs an {@code Accommodation} contact with specified Favourite status.
      *
-     * @param isFavorite The Favorite status.
+     * @param isFavourite The Favourite status.
      */
     public Accommodation(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-                         AccommodationStars stars, Set<Tour> tours, FavoriteStatus isFavorite) {
-        super(name, phone, email, address, tags, tours, isFavorite);
+                         AccommodationStars stars, Set<Tour> tours, FavouriteStatus isFavourite) {
+        super(name, phone, email, address, tags, tours, isFavourite);
         this.stars = stars;
     }
 
@@ -90,11 +90,11 @@ public class Accommodation extends Contact {
         Set<Tag> updatedTags = editAccommodationDescriptor.getTags().orElse(getTags());
         AccommodationStars updatedStars = editAccommodationDescriptor.getStars().orElse(getStars());
         Set<Tour> updatedTours = editAccommodationDescriptor.getTours().orElse(getTours());
-        FavoriteStatus updatedFavoriteStatus = editAccommodationDescriptor.getFavoriteStatus().orElse(
-                getFavoriteStatus());
+        FavouriteStatus updatedFavouriteStatus = editAccommodationDescriptor.getFavouriteStatus().orElse(
+                getFavouriteStatus());
 
         return new Accommodation(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedStars,
-                updatedTours, updatedFavoriteStatus);
+                updatedTours, updatedFavouriteStatus);
     }
 
     @Override
