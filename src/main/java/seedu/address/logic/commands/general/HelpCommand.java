@@ -107,6 +107,7 @@ public class HelpCommand extends Command {
                     + "\n"
                     + "=============================================================\n"
                     + "Auto-save: Data is saved automatically after every command.\n"
+                    + "Undo/Redo: Use undo and redo to revert or restore changes.\n"
                     + "=============================================================\n";
 
     @Override
