@@ -22,12 +22,27 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_emptyArg_throwsParseException() {
+        // equivalence partition: empty arg
+        assertParseFailure(parser, "", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_blankArg_throwsParseException() {
+        // equivalence partition: blank arg
         assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
 
     @Test
-    public void parse_emptyKeyword_throwsParseException() {
+    public void parse_blankKeyword_throwsParseException() {
+        // boundary value: blank keyword
         assertParseFailure(parser, " " + PREFIX_NAME,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_nonEmptyPreamble_throwsParseException() {
+        // equivalence partition: non-empty preamble
+        assertParseFailure(parser, "lebron james " + PREFIX_NAME + "Alice",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
 

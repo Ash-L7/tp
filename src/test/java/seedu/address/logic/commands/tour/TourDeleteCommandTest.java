@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showTourAtIndex;
+import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalContacts.TOUR_JAMES;
 import static seedu.address.testutil.TypicalContacts.TOUR_JAMES_JR;
 import static seedu.address.testutil.TypicalContacts.getTypicalAddressBook;
@@ -40,7 +41,14 @@ public class TourDeleteCommandTest {
     }
 
     @Test
+    public void execute_nullIndex_throwsNullPointerException() {
+        // equivalence partition: null
+        assertThrows(NullPointerException.class, () -> new TourDeleteCommand(null));
+    }
+
+    @Test
     public void execute_validIndexUnfilteredList_success() {
+        // equivalence partition: in full list
         Tour tourToDelete = model.getFilteredTourList().get(INDEX_FIRST_TOUR.getZeroBased());
         TourDeleteCommand tourDeleteCommand = new TourDeleteCommand(INDEX_FIRST_CONTACT);
 
@@ -55,6 +63,7 @@ public class TourDeleteCommandTest {
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
+        // equivalence partition: not in full list
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredTourList().size() + 1);
         TourDeleteCommand tourDeleteCommand = new TourDeleteCommand(outOfBoundIndex);
 
@@ -63,6 +72,7 @@ public class TourDeleteCommandTest {
 
     @Test
     public void execute_validIndexFilteredList_success() {
+        // equivalence partition: in filtered list
         showTourAtIndex(model, INDEX_FIRST_TOUR);
 
         Tour tourToDelete = model.getFilteredTourList().get(INDEX_FIRST_TOUR.getZeroBased());
@@ -80,6 +90,7 @@ public class TourDeleteCommandTest {
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
+        // equivalence partition: not in filtered list
         showTourAtIndex(model, INDEX_FIRST_TOUR);
 
         Index outOfBoundIndex = INDEX_SECOND_TOUR;

@@ -31,6 +31,7 @@ public class Tour {
      * Returns true if a given string is a valid tour name.
      */
     public static boolean isValidTourName(String test) {
+        requireNonNull(test);
         return test.matches(VALIDATION_REGEX);
     }
 
