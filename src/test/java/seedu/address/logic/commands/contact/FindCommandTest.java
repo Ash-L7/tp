@@ -97,6 +97,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_multipleKeywords_multipleContactsFound() {
+        // equivalence partition: both type and keywords specified
         String expectedMessage = String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, 3);
         ContactTypePredicate typePredicate = new ContactTypePredicate(TYPE_PERSON);
         NameContainsKeywordsPredicate namePredicate = prepareNamePredicate("Kurz Elle Kunz");
@@ -108,6 +109,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_anyTypeMultipleKeywords_multipleContactsFound() {
+        // equivalence partition: only keywords specified
         String expectedMessage = String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, 4);
         ContactTypePredicate typePredicate = ContactTypePredicate.ANY_TYPE_ALLOWED_PREDICATE;
         NameContainsKeywordsPredicate namePredicate = prepareNamePredicate("Azhar USS Hotel Alice");
@@ -115,6 +117,30 @@ public class FindCommandTest {
         expectedModel.updateFilteredContactList(testTypeNamePredicate(typePredicate, namePredicate));
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(ALICE, AL_AZHAR, USS, HOTEL), model.getFilteredContactList());
+    }
+
+    @Test
+    public void execute_anyTypeOneKeyword_multipleContactsFound() {
+        // boundary value: 1 keyword specified
+        String expectedMessage = String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, 1);
+        ContactTypePredicate typePredicate = ContactTypePredicate.ANY_TYPE_ALLOWED_PREDICATE;
+        NameContainsKeywordsPredicate namePredicate = prepareNamePredicate("Hotel");
+        FindCommand command = new FindCommand(typePredicate, namePredicate);
+        expectedModel.updateFilteredContactList(testTypeNamePredicate(typePredicate, namePredicate));
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.singletonList(HOTEL), model.getFilteredContactList());
+    }
+
+    @Test
+    public void execute_fnbType_multipleContactsFound() {
+        // equivalence partition: only type specified
+        String expectedMessage = String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, 1);
+        ContactTypePredicate typePredicate = new ContactTypePredicate(TYPE_FNB);
+        NameContainsKeywordsPredicate namePredicate = NameContainsKeywordsPredicate.ANY_NAME_ALLOWED_PREDICATE;
+        FindCommand command = new FindCommand(typePredicate, namePredicate);
+        expectedModel.updateFilteredContactList(testTypeNamePredicate(typePredicate, namePredicate));
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.singletonList(AL_AZHAR), model.getFilteredContactList());
     }
 
     @Test

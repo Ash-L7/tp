@@ -120,6 +120,55 @@ Exits the program.
 
 **Format:** `exit`
 
+### Undoing the last command: `undo`
+
+Undoes the previous command.
+
+* Commands which do not modify contacts/tours will not be considered
+* There must be at least one command in the command history to be undone
+* Multiple `undo` commands can be done in a row, as long as there are commands to undo
+
+<details>
+<summary><b>Example:</b></summary>
+
+<ul>
+  <li><code>delete 1</code> followed by <code>undo</code>:
+  Restores the first contact that was deleted by the <code>delete</code> command.</li>
+
+  <li><code>tour-add n/LeGoated Tour</code> followed by <code>list</code> followed by <code>undo</code> :
+  Deletes the tour named <code>LeGoated Tour</code> from the tour list. Note that the <code>list</code> command was ignored by the <code>undo</code> command.</li>
+
+  <li><code>delete 1</code> followed by <code>tour-delete 1</code> followed by <code>undo</code> followed by  <code>undo</code>:
+  Restores the first contact and the first tour that was deleted by the <code>delete</code> command and the <code>tour-delete</code> command.</li>
+</ul>
+
+</details>
+
+### Redoing an undone command: `redo`
+
+Redoes what was undone by an `undo` command.
+
+* Commands which do not modify contacts/tours will not be considered
+* There must be at least one `undo` command in the command history to redo
+* Multiple `redo` commands can be done in a row, as long as there are `undo` commands to redo
+* If another command which modifies contacts/tours is done after an `undo` command, that `undo` command is considered erased from the command history
+
+<details>
+<summary><b>Example:</b></summary>
+
+<ul>
+  <li><code>delete 1</code> followed by <code>undo</code> followed by <code>redo</code> :
+  Deletes the first contact that was restored by the <code>undo</code> command.</li>
+
+  <li><code>tour-add n/LeGoated Tour</code> followed by <code>list</code> followed by <code>undo</code> followed by <code>redo</code> :
+  Restores the tour named <code>LeGoated Tour</code> that was deleted by the <code>undo</code> command. Note that the <code>list</code> command was ignored by the <code>redo</code> command.</li>
+
+  <li><code>delete 1</code> followed by <code>undo</code> followed by <code>delete 2</code> followed by <code>redo</code> :
+  Restores the first contact that was deleted by the <code>delete</code> command, then deletes the second contact. Note that the final <code>redo</code> command will result in an error, since the second <code>delete</code> command has erased the <code>undo</code> command from history.</li>
+</ul>
+
+</details>
+
 ### Saving the data
 
 Bivago data are saved in the hard disk automatically after any command that changes the data. There is no need to save
@@ -153,7 +202,39 @@ Adds a contact to the contact list.
 A contact can have any number of tags (including 0)
 </div>
 
-Available types: `person`, `fnb`, `accomm`, `attraction`
+**General Fields & Constraints**
+* `type/TYPE` — must be `person`, `fnb`, `accomm`, or `attraction`
+* `n/NAME` — only alphanumeric characters and spaces allowed, and cannot be blank
+* `p/PHONE` — only numbers allowed, and must contain at least 3 digits
+* `e/EMAIL` — a valid email in the form `LOCAL-PART@DOMAIN`
+* `a/ADDRESS` — cannot be blank
+* `t/TAG` — only alphanumeric characters allowed
+
+<details>
+<summary><b>Valid Email Rules:</b></summary>
+
+<ul>
+  <li>Emails should be in the form <code>LOCAL-PART@DOMAIN</code>.</li>
+
+  <li><code>LOCAL-PART</code> must contain only alphanumeric characters, and the following special characters: <code>+_.-</code>.</li>
+  <ul>
+    <li><code>LOCAL-PART</code> must not start or end with any special characters.</li>
+  </ul>
+
+  <li><code>DOMAIN</code> is made up of domain labels, which are separated by periods.</li>
+
+  <ul>
+    <li><code>DOMAIN</code> must end with a domain label containing at least 2 characters.</li>
+    <li>Each domain label must contain only alphanumeric characters, or hyphens.</li>
+    <li>Each domain label must start and end with alphanumeric characters.</li>
+  </ul>
+
+</ul>
+
+</details>
+<br>
+
+
 
 **Type-specific Fields & Constraints**
 
@@ -222,11 +303,14 @@ Edits an existing contact in the contact list.
 
 ### Searching contacts by name: `find`
 
-Finds contacts whose names contain any of the given keywords.
+Finds contacts matching a specified type, whose names contain any of the given keywords.
 
-**Format:** `find KEYWORD [MORE_KEYWORDS]`
+**Format:** `find [type/TYPE] [n/KEYWORD [MORE KEYWORDS]]`
 
-* Case-insensitive (e.g. `john` matches `John`)
+* Either `type/TYPE` or `n/KEYWORD` must be specified
+* `type/TYPE` being omitted means any type of contacts is included
+* `n/KEYWORD` being omitted means all contacts of the specified type are included
+* Keywords are case-insensitive (e.g. `john` matches `John`)
 * Order does not matter
 * Only names are searched
 * Matches **full words only**
@@ -236,11 +320,17 @@ Finds contacts whose names contain any of the given keywords.
 <summary><b>Example:</b></summary>
 
 <ul>
-  <li><code>find John</code> :
-  Finds contacts whose names contain <code>John</code>.</li>
+  <li><code>find n/John</code> :
+  Finds contacts of any type whose names contain <code>John</code>.</li>
 
-  <li><code>find alex david</code> :
-  Finds contacts whose names contain <code>alex</code> or <code>david</code>.</li>
+  <li><code>find n/alex david</code> :
+  Finds contacts of any type whose names contain <code>alex</code> or <code>david</code>.</li>
+
+  <li><code>find type/fnb</code> :
+  Finds contacts of type <code>fnb</code>.</li>
+
+  <li><code>find type/attraction n/NUS NTU</code> :
+  Finds contacts of type `attraction` whose name contain <code>NUS</code> or <code>NTU</code>.</li>
 </ul>
 
 </details>
@@ -263,6 +353,50 @@ Deletes the specified contact from the contact list.
 
   <li><code>find John</code> followed by <code>delete 1</code> :
   Deletes the first contact from the filtered results.</li>
+</ul>
+
+</details>
+
+### Adding contacts to favourites: `favourite-add`
+
+Adds a specified contact from the contact list as a favourite contact.
+
+**Format:** `favourite-add INDEX`
+
+* Adds the contact at the specified `INDEX` as a favourite contact.
+* Index must be a positive integer
+
+<details>
+<summary><b>Example:</b></summary>
+
+<ul>
+  <li><code>favourite-add 2</code> :
+  Adds the second contact shown in the current contact list as a favourite contact.</li>
+</ul>
+
+</details>
+
+### Viewing favourite contacts `favourite-view`
+
+Shows a list of all favourite contacts in the contact list.
+
+**Format:** `favourite-view`
+
+### Removing contacts from favourites: `favourite-remove`
+
+Removes a specified contact as a favourite contact.
+
+**Format:** `favourite-remove INDEX`
+
+* Removes the contact at the specified `INDEX` as a favourite contact.
+* Index must be a positive integer
+
+<details>
+<summary><b>Example:</b></summary>
+
+<ul>
+  <li><code>favourite-remove 1</code> :
+  Removes the first contact shown in the current contact list as a favourite contact.</li>
 </ul>
 
 </details>
@@ -411,30 +545,35 @@ the data of your previous Bivago home folder.
 
 ### General
 
-| Action | Command |
-|--------|----------------|
-| **Help** | `help` |
-| **Exit** | `exit` |
+| Action   | Command | Summary                    |
+|----------|---------|----------------------------|
+| **Help** | `help`  | Displays a help message    |
+| **Exit** | `exit`  | Closes the program         |
+| **Undo** | `undo`  | Undo the previous command  |
+| **Redo** | `redo`  | Restores an undone command |
 
 ### Contact Management
 
-| Action       | Command                                                                                                                                                                                                             |
-|--------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add** | `add type/TYPE n/NAME p/PHONE e/EMAIL a/ADDRESS [h/HALAL_STATUS] [o/OPENING_HOUR] [c/CLOSING_HOUR] [s/STARS] [t/TAG]…​` <br> e.g., `add type/person n/John Doe p/98765432 e/john@example.com a/311 Clementi Ave 2 t/friend` |
-| **Delete** | `delete INDEX` <br> e.g., `delete 3`                                                                                                                                                                                        |
-| **Edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [h/HALAL_STATUS] [o/OPENING_HOUR] [c/CLOSING_HOUR] [s/STARS] [t/TAG]…​` <br> e.g., `edit 2 p/91234567 e/john_new@example.com`                                         |
-| **Find** | `find KEYWORD [MORE_KEYWORDS]` <br> e.g., `find John Jane`                                                                                                                                                                  |
-| **List** | `list`                                                                                                                                                                                                                      |
+| Action               | Command                                                                                                                                                                                            | Summary                                 |
+|----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------|
+| **Add**              | `add type/TYPE n/NAME p/PHONE e/EMAIL a/ADDRESS [h/HALAL_STATUS] [o/OPENING_HOUR] [c/CLOSING_HOUR] [s/STARS] [t/TAG]…​` <br> e.g., `add type/person n/John Doe p/98765432 e/john@example.com a/311 Clementi Ave 2 t/friend` | Adds a contact to the contact list      |
+| **Delete**           | `delete INDEX` <br> e.g., `delete 3`    | Deletes a contact from the contact list |
+| **Edit**             | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [h/HALAL_STATUS] [o/OPENING_HOUR] [c/CLOSING_HOUR] [s/STARS] [t/TAG]…​` <br> e.g., `edit 2 p/91234567 e/john_new@example.com`                 | Edits a contact in contact list         |
+| **Find**             | `find [type/TYPE] [n/KEYWORD [MORE_KEYWORDS]…​]` <br> e.g., `find type/person n/John Jane` | Filters the contact list                |
+| **List**             | `list`       | Lists all contacts                      |
+| **Favourite Add**    | `favourite-add` <br> e.g., `favourite-add 1` | Adds a contact to favourites            |
+| **Favourite View**   | `favourite-view` | Displays favourite contacts             |
+| **Favourite Remove** | `favourite-remove` <br> e.g., `favourite-remove 2` | Removes a contact from favourites       |
 
 
 ### Tour Management
 
-| Action       | Command                                                                |
-|--------------|----------------------------------------------------------------------------------|
-| **Add**      | `tour-add n/NAME` <br> e.g., `tour-add n/Le Royal Tour`                          |
-| **Delete**   | `tour-delete INDEX` <br> e.g., `tour-delete 2`                                   |
-| **Assign**   | `tour-assign CONTACT_INDEX tour/TOUR_INDEX` <br> e.g., `tour-assign 1 tour/2`    |
-| **Unassign** | `tour-unassign CONTACT_INDEX tour/TOUR_INDEX` <br> e.g., `tour-unassign 3 tour/5` |
-| **View**     | `tour-view INDEX` <br> e.g., `tour-view 1`                                       |
-| **Find** | `tour-find KEYWORD [MORE_KEYWORDS]` <br> e.g., `tour-find City Walking`          |
-| **List**     | `tour-list`                                                                      |
+| Action       | Command                                                                | Summary     |
+|--------------|----------------------------------------------------------------------------------|-------------|
+| **Add**      | `tour-add n/NAME` <br> e.g., `tour-add n/Le Royal Tour`                          | Adds a tour to the tour list |
+| **Delete**   | `tour-delete INDEX` <br> e.g., `tour-delete 2`                                   | Deletes a tour from the tour list |
+| **Assign**   | `tour-assign CONTACT_INDEX tour/TOUR_INDEX` <br> e.g., `tour-assign 1 tour/2`    | Assigns a contact to a tour |
+| **Unassign** | `tour-unassign CONTACT_INDEX tour/TOUR_INDEX` <br> e.g., `tour-unassign 3 tour/5` | Unassigns a contact from a tour|
+| **View**     | `tour-view INDEX` <br> e.g., `tour-view 1`                                       | Display contacts assigned to a tour |
+| **Find** | `tour-find KEYWORD [MORE_KEYWORDS]` <br> e.g., `tour-find City Walking`          | Filters the tour list |
+| **List**     | `tour-list`                                                                      | Lists all tours |

@@ -101,8 +101,18 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean canUndoAddressBook() {
+        return addressBook.canUndoAddressBook();
+    }
+
+    @Override
     public void redoAddressBook() {
         addressBook.redo();
+    }
+
+    @Override
+    public boolean canRedoAddressBook() {
+        return addressBook.canRedoAddressBook();
     }
 
     @Override

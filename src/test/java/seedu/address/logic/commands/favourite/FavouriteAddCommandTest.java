@@ -38,7 +38,8 @@ public class FavouriteAddCommandTest {
         expectedModel.updateFilteredContactList(Model.PREDICATE_SHOW_ALL_CONTACTS);
 
         assertCommandSuccess(command, model,
-                String.format(FavouriteAddCommand.MESSAGE_ADD_FAVOURITE_SUCCESS, Messages.format(expectedEditedContact)),
+                String.format(FavouriteAddCommand.MESSAGE_ADD_FAVOURITE_SUCCESS,
+                        Messages.format(expectedEditedContact)),
                 expectedModel);
     }
 

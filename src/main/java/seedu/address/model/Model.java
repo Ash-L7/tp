@@ -65,9 +65,19 @@ public interface Model {
     void undoAddressBook();
 
     /**
+     * Returns true if there is an address book to undo.
+     */
+    boolean canUndoAddressBook();
+
+    /**
      * Restores a previously undone address book from history.
      */
     void redoAddressBook();
+
+    /**
+    * Returns true if there is an address book to redo.
+    */
+    boolean canRedoAddressBook();
 
     /**
      * Returns true if a contact with the same identity as {@code contact} exists in the address book.

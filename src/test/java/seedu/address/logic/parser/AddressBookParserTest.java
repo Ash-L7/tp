@@ -26,6 +26,8 @@ import seedu.address.logic.commands.contact.ListCommand;
 import seedu.address.logic.commands.general.ClearCommand;
 import seedu.address.logic.commands.general.ExitCommand;
 import seedu.address.logic.commands.general.HelpCommand;
+import seedu.address.logic.commands.general.RedoCommand;
+import seedu.address.logic.commands.general.UndoCommand;
 import seedu.address.logic.commands.tour.TourAddCommand;
 import seedu.address.logic.commands.tour.TourDeleteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -111,6 +113,18 @@ public class AddressBookParserTest {
         TourDeleteCommand command = (TourDeleteCommand) parser.parseCommand(TourDeleteCommand.COMMAND_WORD
                 + " " + INDEX_FIRST_TOUR.getOneBased());
         assertEquals(new TourDeleteCommand(INDEX_FIRST_TOUR), command);
+    }
+
+    @Test
+    public void parseCommand_undo() throws Exception {
+        assertTrue(parser.parseCommand(UndoCommand.COMMAND_WORD) instanceof UndoCommand);
+        assertTrue(parser.parseCommand(UndoCommand.COMMAND_WORD + " extra") instanceof UndoCommand);
+    }
+
+    @Test
+    public void parseCommand_redo() throws Exception {
+        assertTrue(parser.parseCommand(RedoCommand.COMMAND_WORD) instanceof RedoCommand);
+        assertTrue(parser.parseCommand(RedoCommand.COMMAND_WORD + " extra") instanceof RedoCommand);
     }
 
     @Test

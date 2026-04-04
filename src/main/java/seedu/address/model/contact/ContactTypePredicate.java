@@ -32,6 +32,7 @@ public class ContactTypePredicate implements Predicate<Contact> {
         case TYPE_ATTRACTION:
             return contact instanceof Attraction;
         default:
+            assert false : "Unknown contact type string should have been validated by parser.";
             return false;
         }
     }

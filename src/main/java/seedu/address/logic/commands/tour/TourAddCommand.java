@@ -3,6 +3,9 @@ package seedu.address.logic.commands.tour;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
@@ -27,6 +30,8 @@ public class TourAddCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New tour package added: %1$s";
     public static final String MESSAGE_DUPLICATE_TOUR = "This tour package already exists in the address book";
 
+    private static final Logger logger = LogsCenter.getLogger(TourAddCommand.class);
+
     private final Tour toAdd;
 
     /**
@@ -42,10 +47,13 @@ public class TourAddCommand extends Command {
         requireNonNull(model);
 
         if (model.hasTour(toAdd)) {
+            logger.info(String.format("%s already in tour list.", toAdd));
+            logger.fine(String.format("Filtered tour list: %s", model.getFilteredTourList()));
             throw new CommandException(MESSAGE_DUPLICATE_TOUR);
         }
 
         model.addTour(toAdd);
+        model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 

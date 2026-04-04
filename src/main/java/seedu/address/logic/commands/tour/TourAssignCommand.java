@@ -77,6 +77,7 @@ public class TourAssignCommand extends Command {
 
         model.setContact(contactToEdit, editedContact);
         model.updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS);
+        model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_ASSIGN_TOUR_SUCCESS, Messages.format(editedContact)));
     }
 

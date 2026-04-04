@@ -30,6 +30,7 @@ public class TourFindCommand extends Command {
      * and {@code namePredicate} that filters tours by their name.
      */
     public TourFindCommand(TourNameContainsKeywordsPredicate predicate) {
+        requireNonNull(predicate);
         this.predicate = predicate;
         this.matchingList = new StringBuilder();
     }
