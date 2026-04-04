@@ -7,13 +7,13 @@ import seedu.address.commons.util.ToStringBuilder;
 /**
  * Tests that a {@code Contact} is assigned to a given {@code Tour}.
  */
-public class ContactIsFavoritePredicate implements Predicate<Contact> {
-    public ContactIsFavoritePredicate() {
+public class ContactIsFavouritePredicate implements Predicate<Contact> {
+    public ContactIsFavouritePredicate() {
     }
 
     @Override
     public boolean test(Contact contact) {
-        return contact.isFavorite();
+        return contact.isFavourite();
     }
 
     @Override

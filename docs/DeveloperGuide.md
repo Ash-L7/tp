@@ -10,15 +10,15 @@ title: Developer Guide
 ## **Acknowledgements**
 
 * {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
-* Usage of AI Tools (Open AI) to help in extending tests to support different contact types and favorite contacts,
+* Usage of AI Tools (Open AI) to help in extending tests to support different contact types and favourite contacts,
 subsequently verified. Namely in:
-`FavoriteStatusTest.java`, `HalalStatusTest.java`,
+`FavouriteStatusTest.java`, `HalalStatusTest.java`,
 `OpeningHourTest.java`, `ClosingHourTest.java`,
 `AccommodationStarsTest.java`, `EditContactDescriptorTest.java`, 
 `FnbTest.java`, `AttractionTest.java`, `AccommodationTest.java`,
-`ContactIsFavoritePredicateTest.java`, `FavoriteAddCommandTest.java`,
-`FavoriteRemoveCommandTest.java`, `FavoriteViewCommandTest.java`,
-`FavoriteAddCommandParserTest.java`, `FavoriteRemoveCommandParserTest.java`,
+`ContactIsFavouritePredicateTest.java`, `FavouriteAddCommandTest.java`,
+`FavouriteRemoveCommandTest.java`, `FavouriteViewCommandTest.java`,
+`FavouriteAddCommandParserTest.java`, `FavouriteRemoveCommandParserTest.java`,
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**

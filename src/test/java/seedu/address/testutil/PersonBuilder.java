@@ -10,6 +10,6 @@ import seedu.address.model.contact.Person;
 public class PersonBuilder extends ContactBuilder {
     @Override
     public Contact build() {
-        return new Person(name, phone, email, address, tags, tours, favoriteStatus);
+        return new Person(name, phone, email, address, tags, tours, favouriteStatus);
     }
 }

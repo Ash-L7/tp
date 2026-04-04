@@ -41,6 +41,6 @@ public class AttractionBuilder extends ContactBuilder {
     }
     @Override
     public Contact build() {
-        return new Attraction(name, phone, email, address, tags, openingHour, closingHour, tours, favoriteStatus);
+        return new Attraction(name, phone, email, address, tags, openingHour, closingHour, tours, favouriteStatus);
     }
 }

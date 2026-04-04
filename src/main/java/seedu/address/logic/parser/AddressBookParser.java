@@ -14,9 +14,9 @@ import seedu.address.logic.commands.contact.DeleteCommand;
 import seedu.address.logic.commands.contact.EditCommand;
 import seedu.address.logic.commands.contact.FindCommand;
 import seedu.address.logic.commands.contact.ListCommand;
-import seedu.address.logic.commands.favorite.FavoriteAddCommand;
-import seedu.address.logic.commands.favorite.FavoriteRemoveCommand;
-import seedu.address.logic.commands.favorite.FavoriteViewCommand;
+import seedu.address.logic.commands.favourite.FavouriteAddCommand;
+import seedu.address.logic.commands.favourite.FavouriteRemoveCommand;
+import seedu.address.logic.commands.favourite.FavouriteViewCommand;
 import seedu.address.logic.commands.general.ClearCommand;
 import seedu.address.logic.commands.general.ExitCommand;
 import seedu.address.logic.commands.general.HelpCommand;
@@ -83,14 +83,14 @@ public class AddressBookParser {
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
 
-        case FavoriteViewCommand.COMMAND_WORD:
-            return new FavoriteViewCommand();
+        case FavouriteViewCommand.COMMAND_WORD:
+            return new FavouriteViewCommand();
 
-        case FavoriteAddCommand.COMMAND_WORD:
-            return new FavoriteAddCommandParser().parse(arguments);
+        case FavouriteAddCommand.COMMAND_WORD:
+            return new FavouriteAddCommandParser().parse(arguments);
 
-        case FavoriteRemoveCommand.COMMAND_WORD:
-            return new FavoriteRemoveCommandParser().parse(arguments);
+        case FavouriteRemoveCommand.COMMAND_WORD:
+            return new FavouriteRemoveCommandParser().parse(arguments);
 
         case TourListCommand.COMMAND_WORD:
             return new TourListCommand();

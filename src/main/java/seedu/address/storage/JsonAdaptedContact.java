@@ -17,7 +17,7 @@ import seedu.address.model.contact.Attraction;
 import seedu.address.model.contact.ClosingHour;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.Email;
-import seedu.address.model.contact.FavoriteStatus;
+import seedu.address.model.contact.FavouriteStatus;
 import seedu.address.model.contact.Fnb;
 import seedu.address.model.contact.HalalStatus;
 import seedu.address.model.contact.Name;
@@ -44,7 +44,7 @@ class JsonAdaptedContact {
     private final String openingHour;
     private final String closingHour;
     private final String stars;
-    private final String favoriteStatus;
+    private final String favouriteStatus;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final List<JsonAdaptedTour> tours = new ArrayList<>();
 
@@ -61,7 +61,7 @@ class JsonAdaptedContact {
                               @JsonProperty("openingHour") String openingHour,
                               @JsonProperty("closingHour") String closingHour,
                               @JsonProperty("stars") String stars,
-                              @JsonProperty("favoriteStatus") String favoriteStatus) {
+                              @JsonProperty("favouriteStatus") String favouriteStatus) {
         this.type = type;
         this.name = name;
         this.phone = phone;
@@ -77,7 +77,7 @@ class JsonAdaptedContact {
         this.openingHour = openingHour;
         this.closingHour = closingHour;
         this.stars = stars;
-        this.favoriteStatus = favoriteStatus;
+        this.favouriteStatus = favouriteStatus;
     }
 
     /**
@@ -95,7 +95,7 @@ class JsonAdaptedContact {
         tours.addAll(source.getTours().stream()
                 .map(JsonAdaptedTour::new)
                 .collect(Collectors.toList()));
-        favoriteStatus = String.valueOf(source.getFavoriteStatus().isFavorite);
+        favouriteStatus = String.valueOf(source.getFavouriteStatus().isFavourite);
 
         String halalStatus = null;
         String openingHour = null;
@@ -171,19 +171,19 @@ class JsonAdaptedContact {
 
         final Set<Tour> modelTours = new HashSet<>(contactTours);
 
-        final FavoriteStatus modelFavoriteStatus;
-        if (favoriteStatus == null) {
-            modelFavoriteStatus = new FavoriteStatus("false");
+        final FavouriteStatus modelFavouriteStatus;
+        if (favouriteStatus == null) {
+            modelFavouriteStatus = new FavouriteStatus("false");
         } else {
-            if (!FavoriteStatus.isValidFavoriteStatus(favoriteStatus)) {
-                throw new IllegalValueException(FavoriteStatus.MESSAGE_CONSTRAINTS);
+            if (!FavouriteStatus.isValidFavouriteStatus(favouriteStatus)) {
+                throw new IllegalValueException(FavouriteStatus.MESSAGE_CONSTRAINTS);
             }
-            modelFavoriteStatus = new FavoriteStatus(favoriteStatus);
+            modelFavouriteStatus = new FavouriteStatus(favouriteStatus);
         }
 
         if (type.equals(Person.class.getSimpleName())) {
             return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelTours,
-                    modelFavoriteStatus);
+                    modelFavouriteStatus);
         }
 
         if (type.equals(Fnb.class.getSimpleName())) {
@@ -196,7 +196,7 @@ class JsonAdaptedContact {
             }
             final HalalStatus modelHalalStatus = new HalalStatus(halalStatus);
             return new Fnb(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelHalalStatus, modelTours,
-                    modelFavoriteStatus);
+                    modelFavouriteStatus);
         }
 
         if (type.equals(Attraction.class.getSimpleName())) {
@@ -220,7 +220,7 @@ class JsonAdaptedContact {
             final ClosingHour modelClosingHour = new ClosingHour(closingHour);
 
             return new Attraction(modelName, modelPhone, modelEmail, modelAddress, modelTags,
-                    modelOpeningHour, modelClosingHour, modelTours, modelFavoriteStatus);
+                    modelOpeningHour, modelClosingHour, modelTours, modelFavouriteStatus);
         }
 
         if (type.equals(Accommodation.class.getSimpleName())) {
@@ -234,7 +234,7 @@ class JsonAdaptedContact {
 
             final AccommodationStars modelStars = new AccommodationStars(stars);
             return new Accommodation(modelName, modelPhone, modelEmail, modelAddress, modelTags,
-                    modelStars, modelTours, modelFavoriteStatus);
+                    modelStars, modelTours, modelFavouriteStatus);
         }
 
         throw new IllegalValueException(String.format(INVALID_FIELD_MESSAGE_FORMAT, type));

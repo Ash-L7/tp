@@ -1,4 +1,4 @@
-package seedu.address.logic.commands.favorite;
+package seedu.address.logic.commands.favourite;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CONTACTS;
@@ -14,30 +14,30 @@ import seedu.address.logic.commands.contact.EditCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.contact.Contact;
-import seedu.address.model.contact.FavoriteStatus;
+import seedu.address.model.contact.FavouriteStatus;
 
 /**
- * Adds an existing contact in the address book to favorites.
+ * Adds an existing contact in the address book to favourites.
  */
-public class FavoriteAddCommand extends Command {
+public class FavouriteAddCommand extends Command {
 
-    public static final String COMMAND_WORD = "favorite-add";
+    public static final String COMMAND_WORD = "favourite-add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Adds to favorites an existing contact identified by the index number used "
+            + ": Adds to favourites an existing contact identified by the index number used "
             + "in the displayed contact list.\n"
             + "Parameters: CONTACT_INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_ADD_FAVORITE_SUCCESS = "Added contact to favorites: %1$s";
-    public static final String MESSAGE_DUPLICATE_FAVORITE = "Contact is already in favorites.";
+    public static final String MESSAGE_ADD_FAVOURITE_SUCCESS = "Added contact to favourites: %1$s";
+    public static final String MESSAGE_DUPLICATE_FAVOURITE = "Contact is already in favourites.";
 
     private final Index contactIndex;
 
     /**
-     * Creates an FavoriteAddCommand to add the contact at {@code contactIndex} to favorites.
+     * Creates an FavouriteAddCommand to add the contact at {@code contactIndex} to favourites.
      */
-    public FavoriteAddCommand(Index contactIndex) {
+    public FavouriteAddCommand(Index contactIndex) {
         requireNonNull(contactIndex);
         this.contactIndex = contactIndex;
     }
@@ -53,21 +53,21 @@ public class FavoriteAddCommand extends Command {
 
         Contact contactToEdit = lastShownContactList.get(contactIndex.getZeroBased());
 
-        if (contactToEdit.isFavorite()) {
-            throw new CommandException(MESSAGE_DUPLICATE_FAVORITE);
+        if (contactToEdit.isFavourite()) {
+            throw new CommandException(MESSAGE_DUPLICATE_FAVOURITE);
         }
 
-        FavoriteStatus updatedFavoriteStatus = new FavoriteStatus("true");
+        FavouriteStatus updatedFavouriteStatus = new FavouriteStatus("true");
 
         EditCommand.EditContactDescriptor descriptor = new EditCommand.EditContactDescriptor();
-        descriptor.setFavorite(updatedFavoriteStatus);
+        descriptor.setFavourite(updatedFavouriteStatus);
 
         Contact editedContact = contactToEdit.edit(descriptor);
 
         model.setContact(contactToEdit, editedContact);
         model.updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS);
         model.commitAddressBook();
-        return new CommandResult(String.format(MESSAGE_ADD_FAVORITE_SUCCESS, Messages.format(editedContact)));
+        return new CommandResult(String.format(MESSAGE_ADD_FAVOURITE_SUCCESS, Messages.format(editedContact)));
     }
 
     @Override
@@ -76,11 +76,11 @@ public class FavoriteAddCommand extends Command {
             return true;
         }
 
-        if (!(other instanceof FavoriteAddCommand)) {
+        if (!(other instanceof FavouriteAddCommand)) {
             return false;
         }
 
-        FavoriteAddCommand otherCommand = (FavoriteAddCommand) other;
+        FavouriteAddCommand otherCommand = (FavouriteAddCommand) other;
         return contactIndex.equals(otherCommand.contactIndex);
     }
 

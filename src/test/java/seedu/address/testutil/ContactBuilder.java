@@ -8,7 +8,7 @@ import seedu.address.model.contact.Address;
 import seedu.address.model.contact.Attraction;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.Email;
-import seedu.address.model.contact.FavoriteStatus;
+import seedu.address.model.contact.FavouriteStatus;
 import seedu.address.model.contact.Fnb;
 import seedu.address.model.contact.Name;
 import seedu.address.model.contact.Person;
@@ -26,7 +26,7 @@ public abstract class ContactBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-    public static final String DEFAULT_FAVORITE_STATUS = "false";
+    public static final String DEFAULT_FAVOURITE_STATUS = "false";
 
     protected Name name;
     protected Phone phone;
@@ -34,7 +34,7 @@ public abstract class ContactBuilder {
     protected Address address;
     protected Set<Tag> tags;
     protected Set<Tour> tours;
-    protected FavoriteStatus favoriteStatus;
+    protected FavouriteStatus favouriteStatus;
 
     /**
      * Creates a {@code ContactBuilder} with the default details.
@@ -44,7 +44,7 @@ public abstract class ContactBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
-        favoriteStatus = new FavoriteStatus(DEFAULT_FAVORITE_STATUS);
+        favouriteStatus = new FavouriteStatus(DEFAULT_FAVOURITE_STATUS);
         tags = new HashSet<>();
         tours = new HashSet<>();
     }
@@ -61,7 +61,7 @@ public abstract class ContactBuilder {
             personBuilder.address = person.getAddress();
             personBuilder.tags = new HashSet<>(person.getTags());
             personBuilder.tours = new HashSet<>(person.getTours());
-            personBuilder.favoriteStatus = person.getFavoriteStatus();
+            personBuilder.favouriteStatus = person.getFavouriteStatus();
             return personBuilder;
         }
 
@@ -73,7 +73,7 @@ public abstract class ContactBuilder {
             builder.address = fnb.getAddress();
             builder.tags = new HashSet<>(fnb.getTags());
             builder.tours = new HashSet<>(fnb.getTours());
-            builder.favoriteStatus = fnb.getFavoriteStatus();
+            builder.favouriteStatus = fnb.getFavouriteStatus();
             builder.halalStatus = fnb.getHalalStatus();
             return builder;
         }
@@ -86,7 +86,7 @@ public abstract class ContactBuilder {
             builder.address = attraction.getAddress();
             builder.tags = new HashSet<>(attraction.getTags());
             builder.tours = new HashSet<>(attraction.getTours());
-            builder.favoriteStatus = attraction.getFavoriteStatus();
+            builder.favouriteStatus = attraction.getFavouriteStatus();
             builder.openingHour = attraction.getOpeningHour();
             builder.closingHour = attraction.getClosingHour();
             return builder;
@@ -100,7 +100,7 @@ public abstract class ContactBuilder {
             builder.address = accommodation.getAddress();
             builder.tags = new HashSet<>(accommodation.getTags());
             builder.tours = new HashSet<>(accommodation.getTours());
-            builder.favoriteStatus = accommodation.getFavoriteStatus();
+            builder.favouriteStatus = accommodation.getFavouriteStatus();
             builder.stars = accommodation.getStars();
             return builder;
         }
@@ -124,10 +124,10 @@ public abstract class ContactBuilder {
     }
 
     /**
-     * Sets the {@code FavoriteStatus} of the {@code Contact} that we are building.
+     * Sets the {@code FavouriteStatus} of the {@code Contact} that we are building.
      */
-    public ContactBuilder withFavoriteStatus(String favoriteStatus) {
-        this.favoriteStatus = new FavoriteStatus(favoriteStatus);
+    public ContactBuilder withFavouriteStatus(String favouriteStatus) {
+        this.favouriteStatus = new FavouriteStatus(favouriteStatus);
         return this;
     }
 

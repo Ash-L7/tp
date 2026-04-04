@@ -37,12 +37,12 @@ public class Fnb extends Contact {
     }
 
     /**
-     * Constructs an {@code Fnb} contact with specified Halal and Favorite status.
-     * @param favoriteStatus A Favorite status.
+     * Constructs an {@code Fnb} contact with specified Halal and Favourite status.
+     * @param favouriteStatus A Favourite status.
      */
     public Fnb(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-               HalalStatus isHalal, Set<Tour> tours, FavoriteStatus favoriteStatus) {
-        super(name, phone, email, address, tags, tours, favoriteStatus);
+               HalalStatus isHalal, Set<Tour> tours, FavouriteStatus favouriteStatus) {
+        super(name, phone, email, address, tags, tours, favouriteStatus);
         this.isHalal = isHalal;
     }
 
@@ -96,10 +96,10 @@ public class Fnb extends Contact {
         Set<Tag> updatedTags = editFnbDescriptor.getTags().orElse(getTags());
         HalalStatus updatedHalalStatus = editFnbDescriptor.getHalalStatus().orElse(getHalalStatus());
         Set<Tour> updatedTours = editFnbDescriptor.getTours().orElse(getTours());
-        FavoriteStatus updatedFavoriteStatus = editFnbDescriptor.getFavoriteStatus().orElse(getFavoriteStatus());
+        FavouriteStatus updatedFavouriteStatus = editFnbDescriptor.getFavouriteStatus().orElse(getFavouriteStatus());
 
         return new Fnb(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
-                updatedHalalStatus, updatedTours, updatedFavoriteStatus);
+                updatedHalalStatus, updatedTours, updatedFavouriteStatus);
     }
 
     @Override
