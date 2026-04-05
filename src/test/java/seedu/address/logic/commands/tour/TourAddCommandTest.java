@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TOUR_NAME_JAMES;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalContacts.TOUR_JAMES;
 import static seedu.address.testutil.TypicalContacts.TOUR_JAMES_JR;
 import static seedu.address.testutil.TypicalContacts.getTypicalAddressBook;
@@ -32,7 +33,14 @@ public class TourAddCommandTest {
     }
 
     @Test
+    public void execute_nullTour_throwsNullPointerException() {
+        // equivalence partition: null
+        assertThrows(NullPointerException.class, () -> new TourAddCommand(null));
+    }
+
+    @Test
     public void execute_newTour_success() {
+        // equivalence partition: not in list
         Tour validTour = TOUR_JAMES;
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
@@ -45,6 +53,7 @@ public class TourAddCommandTest {
 
     @Test
     public void execute_duplicateTour_throwsCommandException() {
+        // equivalence partition: in list
         Tour tour = TOUR_JAMES;
         model.addTour(tour);
         assertCommandFailure(new TourAddCommand(tour), model,

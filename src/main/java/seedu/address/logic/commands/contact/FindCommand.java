@@ -1,11 +1,15 @@
 package seedu.address.logic.commands.contact;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 import static seedu.address.logic.parser.CliSyntax.TYPE_ATTRACTION;
 import static seedu.address.logic.parser.CliSyntax.TYPE_FNB;
 
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
@@ -35,6 +39,8 @@ public class FindCommand extends Command {
             + String.format("%s %s%s\n", COMMAND_WORD, PREFIX_TYPE, TYPE_FNB)
             + String.format("%s %s%s %sSentosa USS MBS\n", COMMAND_WORD, PREFIX_TYPE, TYPE_ATTRACTION, PREFIX_NAME);
 
+    private static final Logger logger = LogsCenter.getLogger(FindCommand.class);
+
     private final ContactTypePredicate typePredicate;
     private final NameContainsKeywordsPredicate namePredicate;
 
@@ -44,6 +50,7 @@ public class FindCommand extends Command {
      */
     public FindCommand(ContactTypePredicate typePredicate,
                        NameContainsKeywordsPredicate namePredicate) {
+        requireAllNonNull(typePredicate, namePredicate);
         this.typePredicate = typePredicate;
         this.namePredicate = namePredicate;
     }
@@ -52,6 +59,7 @@ public class FindCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredContactList(contact -> typePredicate.test(contact) && namePredicate.test(contact));
+        logger.fine(String.format("Filtered contact list: %s", model.getFilteredContactList()));
         return new CommandResult(
                 String.format(Messages.MESSAGE_CONTACTS_LISTED_OVERVIEW, model.getFilteredContactList().size()));
     }

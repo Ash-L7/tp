@@ -40,6 +40,7 @@ public class Accommodation extends Contact {
     /**
      * Constructs an {@code Accommodation} contact with specified Favourite status.
      *
+     * @param stars The number of stars of the accommodation.
      * @param isFavourite The Favourite status.
      */
     public Accommodation(Name name, Phone phone, Email email, Address address, Set<Tag> tags,

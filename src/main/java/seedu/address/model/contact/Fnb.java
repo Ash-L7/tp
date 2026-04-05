@@ -39,6 +39,7 @@ public class Fnb extends Contact {
     /**
      * Constructs an {@code Fnb} contact with specified Halal and Favourite status.
      * @param favouriteStatus A Favourite status.
+     * @param isHalal A Halal status.
      */
     public Fnb(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
                HalalStatus isHalal, Set<Tour> tours, FavouriteStatus favouriteStatus) {

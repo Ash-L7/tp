@@ -10,7 +10,7 @@ title: Developer Guide
 ## **Acknowledgements**
 
 * {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
-* Usage of AI Tools (Open AI) to help in extending tests to support different contact types and favourite contacts,
+* William: Usage of AI Tools (Open AI) to help in extending tests to support different contact types and favorite contacts,
 subsequently verified. Namely in:
 `FavouriteStatusTest.java`, `HalalStatusTest.java`,
 `OpeningHourTest.java`, `ClosingHourTest.java`,
@@ -18,7 +18,8 @@ subsequently verified. Namely in:
 `FnbTest.java`, `AttractionTest.java`, `AccommodationTest.java`,
 `ContactIsFavouritePredicateTest.java`, `FavouriteAddCommandTest.java`,
 `FavouriteRemoveCommandTest.java`, `FavouriteViewCommandTest.java`,
-`FavouriteAddCommandParserTest.java`, `FavouriteRemoveCommandParserTest.java`,
+`FavouriteAddCommandParserTest.java`, `FavouriteRemoveCommandParserTest.java`
+* William: Usage of AI Tools as an extra layer of checks for bugs and typos.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
@@ -363,7 +364,23 @@ Priorities: High (must have) — `* * *`, Medium (nice to have) — `* *`, Low (
 
 ---
 
-### Use Case: UC03 - Find Contacts
+### Use Case: UC03 - List All Contacts
+
+**MSS**
+1. User requests to list all contacts.
+2. Bivago displays the full list of contacts.
+
+*Use case ends.*
+
+**Extensions**
+
+- 2a. There are no contacts in Bivago.
+    - 2a1. Bivago displays an empty list.
+    - 2a2. Use case ends.
+
+---
+
+### Use Case: UC04 - Find Contacts
 
 **MSS**
 1. User requests to find contacts using a search query.
@@ -382,7 +399,7 @@ Priorities: High (must have) — `* * *`, Medium (nice to have) — `* *`, Low (
 
 ---
 
-### Use Case: UC04 - Edit a Contact's Details
+### Use Case: UC05 - Edit a Contact's Details
 
 **MSS**
 1. User <u>finds the contact (UC03)</u>.
@@ -407,7 +424,7 @@ Priorities: High (must have) — `* * *`, Medium (nice to have) — `* *`, Low (
 
 ---
 
-### Use Case: UC05 - Delete a Contact
+### Use Case: UC06 - Delete a Contact
 
 **MSS**
 1.  User requests to list contacts
@@ -428,7 +445,7 @@ Priorities: High (must have) — `* * *`, Medium (nice to have) — `* *`, Low (
 
 ---
 
-### Use case: UC06 - Create a Tour Package
+### Use case: UC07 - Create a Tour Package
 
 **MSS**
 1. User requests to create a new tour package with a name and type tag.
@@ -448,7 +465,7 @@ Priorities: High (must have) — `* * *`, Medium (nice to have) — `* *`, Low (
 
 ---
 
-### Use Case: UC07 - Add a Contact to a Tour Package
+### Use Case: UC08 - Add a Contact to a Tour Package
 
 **MSS**
 1. User requests to assign a contact to a tour package.
@@ -471,7 +488,7 @@ Priorities: High (must have) — `* * *`, Medium (nice to have) — `* *`, Low (
 
 ---
 
-### Use Case: UC08 - Filter Contacts by Category
+### Use Case: UC09 - Filter Contacts by Category
 
 **MSS**
 
@@ -484,6 +501,64 @@ Priorities: High (must have) — `* * *`, Medium (nice to have) — `* *`, Low (
 
 - 2a. No contacts exist in the specified category.
     - 2a1. Bivago shows an empty list indicating no contacts were found in that category
+    - 2a2. Use case ends.
+
+---
+
+### Use Case: UC10 - Add a Contact to Favorites
+
+**MSS**
+1. User requests to add a contact to favorites using its index in the displayed list.
+2. Bivago marks the contact as a favorite.
+3. Bivago confirms that the contact has been added to favorites.
+
+*Use case ends.*
+
+**Extensions**
+
+- 1a. The given index is invalid.
+    - 1a1. Bivago shows an error message.
+    - 1a2. Use case resumes at step 1.
+
+- 1b. The contact is already marked as a favorite.
+    - 1b1. Bivago shows an error message indicating the contact is already in favorites.
+    - 1b2. Use case resumes at step 1.
+
+---
+
+### Use Case: UC11 - Remove a Contact from Favorites
+
+**MSS**
+1. User requests to remove a contact from favorites using its index in the displayed list.
+2. Bivago unmarks the contact as a favorite.
+3. Bivago confirms that the contact has been removed from favorites.
+
+*Use case ends.*
+
+**Extensions**
+
+- 1a. The given index is invalid.
+    - 1a1. Bivago shows an error message.
+    - 1a2. Use case resumes at step 1.
+
+- 1b. The contact is not marked as a favorite.
+    - 1b1. Bivago shows an error message indicating the contact is not in favorites.
+    - 1b2. Use case resumes at step 1.
+
+---
+
+### Use Case: UC12 - View Favorite Contacts
+
+**MSS**
+1. User requests to view favorite contacts.
+2. Bivago displays the list of contacts marked as favorites.
+
+*Use case ends.*
+
+**Extensions**
+
+- 2a. There are no contacts marked as favorites.
+    - 2a1. Bivago displays an empty list indicating no favorite contacts were found.
     - 2a2. Use case ends.
 
 ---
@@ -507,6 +582,7 @@ Priorities: High (must have) — `* * *`, Medium (nice to have) — `* *`, Low (
 |------|------------|
 | **Mainstream OS** | Windows, Linux, Unix, or macOS. |
 | **Contact** | A service provider in the tour guide's network, such as a driver, restaurant, hotel, or tourist attraction. |
+| **Favorites** | A list of contacts chosen by the tour guide accessible by dedicated commands, each denoted by a star beside the name in the contact list. |
 | **Tour Package** | A planned tour offering that groups together a set of contacts (e.g. driver, restaurants, attractions) under a named itinerary. |
 | **Category** | A classification label for contacts. Valid categories include: Driver, Restaurant, Hotel, Attraction. |
 | **Tag** | A label applied to a tour package to describe its type, e.g. `sightseeing`, `food`. |
@@ -540,6 +616,51 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+### Adding a contact
+
+1. Adding a new contact
+
+    1. Prerequisites: None.
+
+    1. Test case: `add type/person n/John Doe p/98765432 e/john@example.com a/123 Stree t/driver`<br>
+       Expected: Contact is added. Details of the added contact shown in the status message.
+
+    1. Test case: Missing fields (e.g. `add n/John`)<br>
+       Expected: Error message indicating missing required fields.
+
+    1. Test case: Invalid fields (e.g. `add y/something type/person n/John Doe p/98765432 e/john@example.com a/123 Stree t/driver`)<br>
+       Expected: Error message indicating invalid command format.
+
+    1. Test case: Duplicate contact<br>
+       Expected: Error message indicating duplicate contact.
+
+### Listing all contacts
+
+1. Listing all contacts
+
+    1. Prerequisites: None.
+
+    1. Test case: `list`<br>
+       Expected: All contacts are displayed in the contact list.
+
+    1. Test case: `list` when there are no contacts<br>
+       Expected: An empty list is shown.
+
+### Editing a contact
+
+1. Editing an existing contact
+
+    1. Prerequisites: At least one contact exists.
+
+    1. Test case: `edit 1 n/Jane Doe`<br>
+       Expected: First contact’s name is updated.
+
+    1. Test cases: Invalid fields (e.g. `edit`, `edit 0`, `edit a`)<br>
+       Expected: Error message for invalid command format.
+
+    1. Test case: Missing fields (e.g. `edit 1`)<br>
+       Expected: Error message indicating no fields provided.
+
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
@@ -549,13 +670,61 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
+   1. Test case: Missing fields (e.g. `delete`)<br>
+      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+
+   1. Test case: Invalid fields (e.g. `delete 0`)<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
+
+### Adding a contact to favorites
+
+1. Adding a contact to favorites
+
+    1. Prerequisites: At least one contact exists.
+
+    1. Test case: `favorite-add 1`<br>
+       Expected: Contact is marked as favorite (star appears).
+
+    1. Test case: Missing fields (e.g. `favorite-add`)<br>
+       Expected: Error message for invalid command format.
+
+    1. Test case: Invalid fields (e.g. `favorite-add a`, `favorite-add 0`)<br>
+       Expected: Error message for invalid command format.
+
+    1. Test case: `favorite-add 1` (already favorite)<br>
+       Expected: Error message indicating contact is already a favorite.
+
+### Removing a contact from favorites
+
+1. Removing a contact from favorites
+
+    1. Prerequisites: At least one contact marked as favorite.
+
+    1. Test case: Missing fields (e.g. `favorite-remove`)<br>
+       Expected: Error message for invalid command format.
+
+    1. Test case: Invalid fields (e.g. `favorite-remove a`, `favorite-remove 0`)<br>
+       Expected: Error message for invalid command format.
+
+    1. Test case: Removing non-favorite contact<br>
+       Expected: Error message indicating contact is already not a favorite.
+
+### Viewing favorite contacts
+
+1. Viewing favorites
+
+    1. Prerequisites: At least one contact marked as favorite.
+
+    1. Test case: `favorite-view`<br>
+       Expected: Only favorite contacts are displayed.
+
+    1. Test case: No favorites exist<br>
+       Expected: A message indicating 0 contacts listed.
 
 ### Saving data
 
@@ -564,3 +733,4 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+

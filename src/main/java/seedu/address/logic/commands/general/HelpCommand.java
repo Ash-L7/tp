@@ -92,11 +92,22 @@ public class HelpCommand extends Command {
                     + "-----------------------------------------------------------\n"
                     + "OTHER\n"
                     + "-----------------------------------------------------------\n"
+                    + "UNDO\n"
+                    + "  Command: undo\n"
+                    + "  Info: Reverts the most recent command that modified data\n"
+                    + "  Example: undo\n"
+                    + "\n"
+                    + "REDO\n"
+                    + "  Command: redo\n"
+                    + "  Info: Restores the most recently undone command\n"
+                    + "  Example: redo\n"
+                    + "\n"
                     + "HELP\n"
                     + "  Command: help\n"
                     + "\n"
                     + "=============================================================\n"
                     + "Auto-save: Data is saved automatically after every command.\n"
+                    + "Undo/Redo: Use 'undo' and 'redo' commands to revert or restore changes.\n"
                     + "=============================================================\n";
 
     @Override
