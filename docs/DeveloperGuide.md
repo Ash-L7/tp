@@ -171,7 +171,7 @@ This section describes some noteworthy details on how certain features are imple
 
 The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
+* `VersionedAddressBook#commit()` — Saves a snapshot of the current address book state into its history.
 * `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
 * `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
 
@@ -183,11 +183,11 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th contact. The `delete` command calls `Model#commitAddressBook()`, causing a snapshot of the modified address book state to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add type/person n/David …​` to add a new contact. The `add` command also calls `Model#commitAddressBook()`, causing another snapshot to be saved into the `addressBookStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
@@ -195,12 +195,11 @@ Step 3. The user executes `add n/David …​` to add a new person. The `add` co
 
 </div>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user decides that adding the contact was a mistake and executes `undo`. The `undo` command calls `Model#undoAddressBook()`, which shifts the `currentStatePointer` once to the left and restores the address book to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial address book state, there are no previous states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check for this case and returns an error to the user rather than attempting to undo.
 
 </div>
 
@@ -234,25 +233,17 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <img src="images/CommitActivityDiagram.png" width="250" />
 
-#### Design considerations:
+#### Design considerations
 
 **Aspect: How undo & redo executes:**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+* **Alternative 1 (current choice):** Saves the entire address book as a snapshot.
+  * Pros: Simple to implement and reason about; every command automatically supports undo/redo without extra logic.
+  * Cons: Higher memory usage as each snapshot is a full copy of the address book.
 
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
+* **Alternative 2:** Each command knows how to undo/redo itself.
+  * Pros: Lower memory usage (e.g. for `delete`, only the deleted contact needs to be saved).
+  * Cons: Every command must implement its own undo/redo logic, increasing implementation complexity and risk of bugs.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -436,7 +427,7 @@ Priorities: High (must have) — `* * *`, Medium (nice to have) — `* *`, Low (
 ### Use case: UC07 - Create a Tour Package
 
 **MSS**
-1. User requests to create a new tour package with a name and type tag.
+1. User requests to create a new tour package with a name.
 2. Bivago confirms the tour has been created.
 
 *Use case ends.*
@@ -447,7 +438,7 @@ Priorities: High (must have) — `* * *`, Medium (nice to have) — `* *`, Low (
     - 1a1. Bivago shows a duplicate tour name error.
     - 1a2. Use case resumes at step 1.
 
-- 1b. The name or type tag provided is invalid.
+- 1b. The name provided is invalid.
     - 1b1. Bivago shows an error message.
     - 1b2. Use case resumes at step 1.
 
@@ -468,11 +459,11 @@ Priorities: High (must have) — `* * *`, Medium (nice to have) — `* *`, Low (
 
 - 1b. The specified contact does not exist.
     - 1b1. Bivago shows an error message.
-    - 1b2. Use case resumes at step 1.
+    - 1b2. Use case ends.
 
 - 1c. The specified contact is already assigned to the tour.
     - 1c1. Bivago shows a duplicate assignment error.
-    - 1c2. Use case resumes at step 1.
+    - 1c2. Use case ends.
 
 ---
 
@@ -551,6 +542,50 @@ Priorities: High (must have) — `* * *`, Medium (nice to have) — `* *`, Low (
 
 ---
 
+### Use Case: UC13 - Remove a Contact from a Tour Package
+
+**MSS**
+1. User requests to unassign a contact from a tour package.
+2. Bivago removes the tour from the contact's tour list and confirms the contact has been unassigned from the tour.
+
+*Use case ends.*
+
+**Extensions**
+
+- 1a. The specified tour package does not exist.
+    - 1a1. Bivago shows an error message.
+    - 1a2. Use case ends.
+
+- 1b. The specified contact does not exist.
+    - 1b1. Bivago shows an error message.
+    - 1b2. Use case ends.
+
+- 1c. The specified contact is not assigned to the tour.
+    - 1c1. Bivago shows an error message indicating the contact is not in the tour.
+    - 1c2. Use case ends.
+
+---
+
+### Use Case: UC14 - View Contacts in a Tour Package
+
+**MSS**
+1. User requests to view the contacts assigned to a specific tour package using its index.
+2. Bivago displays all contacts assigned to that tour.
+
+*Use case ends.*
+
+**Extensions**
+
+- 1a. The given index is invalid.
+    - 1a1. Bivago shows an error message.
+    - 1a2. Use case ends.
+
+- 2a. No contacts are assigned to the tour.
+    - 2a1. Bivago displays an empty list indicating no contacts are assigned to the tour.
+    - 2a2. Use case ends.
+
+---
+
 ## Non-Functional Requirements
 
 1. Should work on any mainstream OS (Windows, Linux, macOS) with Java 17 or above installed.
@@ -572,8 +607,8 @@ Priorities: High (must have) — `* * *`, Medium (nice to have) — `* *`, Low (
 | **Contact** | A service provider in the tour guide's network, such as a driver, restaurant, hotel, or tourist attraction. |
 | **Favorites** | A list of contacts chosen by the tour guide accessible by dedicated commands, each denoted by a star beside the name in the contact list. |
 | **Tour Package** | A planned tour offering that groups together a set of contacts (e.g. driver, restaurants, attractions) under a named itinerary. |
-| **Category** | A classification label for contacts. Valid categories include: Driver, Restaurant, Hotel, Attraction. |
-| **Tag** | A label applied to a tour package to describe its type, e.g. `sightseeing`, `food`. |
+| **Category** | A classification label for contacts. Valid categories include: `person`, `fnb`, `accomm`, `attraction`. |
+| **Tag** | A label applied to a contact to store additional information, e.g. `driver`, `vip`. |
 | **CLI (Command-Line Interface)** | A text-based interface where the user interacts with the application by typing commands rather than clicking buttons or menus. |
 
 --------------------------------------------------------------------------------------------------------------------
@@ -675,16 +710,16 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: At least one contact exists.
 
-    1. Test case: `favorite-add 1`<br>
+    1. Test case: `favourite-add 1`<br>
        Expected: Contact is marked as favorite (star appears).
 
-    1. Test case: Missing fields (e.g. `favorite-add`)<br>
+    1. Test case: Missing fields (e.g. `favourite-add`)<br>
        Expected: Error message for invalid command format.
 
-    1. Test case: Invalid fields (e.g. `favorite-add a`, `favorite-add 0`)<br>
+    1. Test case: Invalid fields (e.g. `favourite-add a`, `favourite-add 0`)<br>
        Expected: Error message for invalid command format.
 
-    1. Test case: `favorite-add 1` (already favorite)<br>
+    1. Test case: `favourite-add 1` (already favorite)<br>
        Expected: Error message indicating contact is already a favorite.
 
 ### Removing a contact from favorites
@@ -693,10 +728,10 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: At least one contact marked as favorite.
 
-    1. Test case: Missing fields (e.g. `favorite-remove`)<br>
+    1. Test case: Missing fields (e.g. `favourite-remove`)<br>
        Expected: Error message for invalid command format.
 
-    1. Test case: Invalid fields (e.g. `favorite-remove a`, `favorite-remove 0`)<br>
+    1. Test case: Invalid fields (e.g. `favourite-remove a`, `favourite-remove 0`)<br>
        Expected: Error message for invalid command format.
 
     1. Test case: Removing non-favorite contact<br>
@@ -708,17 +743,64 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: At least one contact marked as favorite.
 
-    1. Test case: `favorite-view`<br>
+    1. Test case: `favourite-view`<br>
        Expected: Only favorite contacts are displayed.
 
     1. Test case: No favorites exist<br>
        Expected: A message indicating 0 contacts listed.
 
+### Assigning a contact to a tour
+
+1. Assigning a contact to a tour
+
+    1. Prerequisites: At least one contact and one tour exist.
+
+    1. Test case: `tour-assign 1 tour/1`<br>
+       Expected: First contact is assigned to the first tour. Confirmation message shown.
+
+    1. Test case: Invalid contact index (e.g. `tour-assign 0 tour/1`)<br>
+       Expected: Error message for invalid command format.
+
+    1. Test case: Invalid tour index (e.g. `tour-assign 1 tour/0`)<br>
+       Expected: Error message for invalid command format.
+
+    1. Test case: Contact already assigned to the tour<br>
+       Expected: Error message indicating duplicate assignment.
+
+### Unassigning a contact from a tour
+
+1. Unassigning a contact from a tour
+
+    1. Prerequisites: At least one contact assigned to a tour.
+
+    1. Test case: `tour-unassign 1 tour/1`<br>
+       Expected: First contact is unassigned from the first tour. Confirmation message shown.
+
+    1. Test case: Contact not assigned to the tour<br>
+       Expected: Error message indicating contact is not in the tour.
+
+    1. Test case: Invalid indices (e.g. `tour-unassign 0 tour/1`)<br>
+       Expected: Error message for invalid command format.
+
+### Viewing contacts in a tour
+
+1. Viewing contacts assigned to a tour
+
+    1. Prerequisites: At least one tour exists.
+
+    1. Test case: `tour-view 1`<br>
+       Expected: All contacts assigned to the first tour are displayed.
+
+    1. Test case: `tour-view 1` when no contacts are assigned<br>
+       Expected: Empty list is shown.
+
+    1. Test case: Invalid index (e.g. `tour-view 0`)<br>
+       Expected: Error message for invalid command format.
+
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_ 
 
 1. _{ more test cases …​ }_
-
