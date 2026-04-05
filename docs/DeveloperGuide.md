@@ -296,10 +296,8 @@ Priorities: High (must have) — `* * *`, Medium (nice to have) — `* *`, Low (
 | `* * *` | tour guide who prioritizes efficiency | search through tours by criteria (e.g. category, contact, restaurant) | quickly find tours concerning certain contacts, restaurants, or categories |
 | `* * *` | tour guide who is lazy and forgetful | see descriptive error messages when I input commands incorrectly | not have to keep referring to the help page |
 | `* * *` | tour guide who conducts time-sensitive tours | store operating hours for restaurants and attractions | plan tours accordingly |
+| `* * *` | tour guide who makes mistakes | undo and redo commands | revert accidental changes |
 | `* *` | tour guide | add email addresses to contacts | communicate digitally when needed |
-| `* *` | tour guide | add pricing information to contacts | quickly estimate tour costs |
-| `* *` | tour guide | store capacity information (e.g. restaurant seating, bus capacity) | match group sizes appropriately |
-| `* *` | tour guide who conducts tours in other languages | add languages spoken by contacts (e.g. English-speaking driver, Mandarin-speaking restaurant staff) | match service providers with my international clients' needs |
 | `* *` | tour guide | categorize contacts by type (driver, restaurant, hotel, attraction) | quickly find the right person for each need |
 | `* *` | tour guide | edit contact information | keep details up-to-date when phone numbers or addresses change or when I make a mistake |
 | `* *` | tour guide | search for contacts by name | quickly find specific people |
@@ -307,17 +305,7 @@ Priorities: High (must have) — `* * *`, Medium (nice to have) — `* *`, Low (
 | `* *` | tour guide | add notes to contacts | remember important details like dietary restrictions they accommodate or special pricing |
 | `* *` | tour guide | mark favourite contacts | prioritize my most reliable service providers |
 | `* *` | tour guide | view all contacts associated with a tour | see my full service provider lineup at a glance |
-| `* *` | tour guide | tag tours by type (walking, food, sightseeing) | organize my offerings |
 | `* *` | tour guide | add multiple restaurants to one tour | plan multi-stop food tours |
-| `*` | tour guide | store multiple phone numbers for each contact | have backup contact methods |
-| `*` | tour guide who is forgetful | set reminders for follow-ups with contacts | maintain relationships and confirm bookings ahead of tours |
-| `*` | tour guide with affiliated contacts | link affiliated contacts (e.g. restaurant and nearby attraction) | remember partnership deals |
-| `*` | tour guide with affiliated contacts | rate my affiliated contacts | track service quality over time |
-| `*` | tour guide with affiliated contacts | add commission or discount information to contacts | remember special arrangements |
-| `*` | tour guide who conducts tours in various locations | search contacts by location/neighbourhood | find service providers near specific attractions |
-| `*` | tour guide who prioritizes efficiency | filter contacts by availability | quickly find who's available for a specific date |
-| `*` | tour guide who conducts many tour packages | duplicate existing tours | quickly create similar tour packages without re-entering all details |
-| `*` | tour guide who has wrist problems | alias commands I frequently use | not have to type so much |
 
 ---
 
