@@ -30,6 +30,14 @@ deactivate AddressBookParser
 LogicManager -> UndoCommand : execute()
 activate UndoCommand
 
+UndoCommand -> Model : canUndoAddressBook()
+activate Model
+
+Model --> UndoCommand : boolean
+deactivate Model
+
+note over UndoCommand : throws CommandException\nif canUndoAddressBook() == false
+
 UndoCommand -> Model : undoAddressBook()
 activate Model
 
@@ -37,10 +45,10 @@ Model --> UndoCommand
 deactivate Model
 
 UndoCommand --> LogicManager : result
-deactivate UndoCommand
-UndoCommand -[hidden]-> LogicManager : result
-destroy UndoCommand
 
-[<--LogicManager
+deactivate UndoCommand
+destroy UndoCommand
+[<-- LogicManager
 deactivate LogicManager
+
 @enduml
