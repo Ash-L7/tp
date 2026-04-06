@@ -14,7 +14,7 @@ title: Developer Guide
 subsequently verified. Namely in:
 `FavouriteStatusTest.java`, `HalalStatusTest.java`,
 `OpeningHourTest.java`, `ClosingHourTest.java`,
-`AccommodationStarsTest.java`, `EditContactDescriptorTest.java`, 
+`AccommodationStarsTest.java`, `EditContactDescriptorTest.java`,
 `FnbTest.java`, `AttractionTest.java`, `AccommodationTest.java`,
 `ContactIsFavouritePredicateTest.java`, `FavouriteAddCommandTest.java`,
 `FavouriteRemoveCommandTest.java`, `FavouriteViewCommandTest.java`,
