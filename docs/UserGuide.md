@@ -125,7 +125,7 @@ Exits the program.
 Undoes the previous command.
 
 * Commands which do not modify contacts/tours will not be considered
-* There must be at least one command in the command history to be undone
+* There must be at least one command that modifies contacts/tours in the command history to be undone
 * Multiple `undo` commands can be done in a row, as long as there are commands to undo
 
 <details>
@@ -149,9 +149,9 @@ Undoes the previous command.
 Redoes what was undone by an `undo` command.
 
 * Commands which do not modify contacts/tours will not be considered
-* There must be at least one `undo` command in the command history to redo
-* Multiple `redo` commands can be done in a row, as long as there are `undo` commands to redo
-* If another command which modifies contacts/tours is done after an `undo` command, that `undo` command is considered erased from the command history
+* There must be at least one undone command in the command history to be redone
+* Multiple `redo` commands can be done in a row, as long as there are commands to redo
+* If a command which modifies contacts/tours is done after an `undo` command, the redo history will be cleared. This means that the undone command can no longer be redone.
 
 <details>
 <summary><b>Example:</b></summary>
@@ -554,16 +554,16 @@ the data of your previous Bivago home folder.
 
 ### Contact Management
 
-| Action               | Command                                                                                                                                                                                            | Summary                                 |
-|----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------|
+| Action               | Command                                                                                                                                                                                                                     | Summary                                 |
+|----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------|
 | **Add**              | `add type/TYPE n/NAME p/PHONE e/EMAIL a/ADDRESS [h/HALAL_STATUS] [o/OPENING_HOUR] [c/CLOSING_HOUR] [s/STARS] [t/TAG]…​` <br> e.g., `add type/person n/John Doe p/98765432 e/john@example.com a/311 Clementi Ave 2 t/friend` | Adds a contact to the contact list      |
-| **Delete**           | `delete INDEX` <br> e.g., `delete 3`    | Deletes a contact from the contact list |
-| **Edit**             | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [h/HALAL_STATUS] [o/OPENING_HOUR] [c/CLOSING_HOUR] [s/STARS] [t/TAG]…​` <br> e.g., `edit 2 p/91234567 e/john_new@example.com`                 | Edits a contact in contact list         |
-| **Find**             | `find [type/TYPE] [n/KEYWORD [MORE_KEYWORDS]…​]` <br> e.g., `find type/person n/John Jane` | Filters the contact list                |
-| **List**             | `list`       | Lists all contacts                      |
-| **Favourite Add**    | `favourite-add` <br> e.g., `favourite-add 1` | Adds a contact to favourites            |
-| **Favourite View**   | `favourite-view` | Displays favourite contacts             |
-| **Favourite Remove** | `favourite-remove` <br> e.g., `favourite-remove 2` | Removes a contact from favourites       |
+| **Delete**           | `delete INDEX` <br> e.g., `delete 3`                                                                                                                                                                                        | Deletes a contact from the contact list |
+| **Edit**             | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [h/HALAL_STATUS] [o/OPENING_HOUR] [c/CLOSING_HOUR] [s/STARS] [t/TAG]…​` <br> e.g., `edit 2 p/91234567 e/john_new@example.com`                                          | Edits a contact in contact list         |
+| **Find**             | `find [type/TYPE] [n/KEYWORD [MORE_KEYWORDS]…​]` <br> e.g., `find type/person n/John Jane`                                                                                                                                  | Filters the contact list                |
+| **List**             | `list`                                                                                                                                                                                                                      | Lists all contacts                      |
+| **Favourite Add**    | `favourite-add INDEX` <br> e.g., `favourite-add 1`                                                                                                                                                                          | Adds a contact to favourites            |
+| **Favourite View**   | `favourite-view`                                                                                                                                                                                                            | Displays favourite contacts             |
+| **Favourite Remove** | `favourite-remove INDEX` <br> e.g., `favourite-remove 2`                                                                                                                                                                    | Removes a contact from favourites       |
 
 
 ### Tour Management
