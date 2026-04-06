@@ -29,7 +29,13 @@ public class TourViewCommand extends Command {
 
     private final Index targetIndex;
 
+    /**
+     * Creates a TourViewCommand to list all contacts assigned to the tour at {@code targetIndex}.
+     *
+     * @param targetIndex Index of the tour in the displayed tour list.
+     */
     public TourViewCommand(Index targetIndex) {
+        requireNonNull(targetIndex);
         this.targetIndex = targetIndex;
     }
 
@@ -44,6 +50,7 @@ public class TourViewCommand extends Command {
         }
 
         Tour tour = tourList.get(targetIndex.getZeroBased());
+        assert tour != null : "Tour list must not contain null elements";
         model.updateFilteredContactList(new ContactIsInTourPredicate(tour));
         return new CommandResult(
                 String.format(Messages.MESSAGE_CONTACTS_LISTED_OVERVIEW, model.getFilteredContactList().size()));
