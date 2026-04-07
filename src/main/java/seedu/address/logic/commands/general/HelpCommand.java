@@ -16,7 +16,7 @@ public class HelpCommand extends Command {
 
     public static final String SHOWING_HELP_MESSAGE =
             "=============================================================\n"
-                    + "                                               BIVAGO - HELP GUIDE                                               \n"
+                    + "                                               BIVAGO - HELP GUIDE\n"
                     + "=============================================================\n"
                     + "\n"
                     + "CONTACT MANAGEMENT\n"
