@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_NON_APPLICABLE_FIELDS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLOSING_HOUR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -17,8 +18,10 @@ import static seedu.address.logic.parser.CliSyntax.TYPE_FNB;
 import static seedu.address.logic.parser.CliSyntax.TYPE_PERSON;
 
 import java.util.Set;
+import java.util.logging.Logger;
 import java.util.stream.Stream;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.contact.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.contact.Accommodation;
@@ -40,6 +43,8 @@ import seedu.address.model.tag.Tag;
  * Parses input arguments and creates a new AddCommand object
  */
 public class AddCommandParser implements Parser<AddCommand> {
+    private static final Logger logger = LogsCenter.getLogger(AddCommand.class);
+
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
@@ -65,6 +70,26 @@ public class AddCommandParser implements Parser<AddCommand> {
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Contact contact = null;
+
+        // Check for non-applicable fields
+        if (!type.equals(TYPE_FNB)) {
+            if (arePrefixesPresent(argMultimap, PREFIX_HALAL_STATUS)) {
+                throwNonApplicableFieldException();
+            }
+        }
+
+        if (!type.equals(TYPE_ATTRACTION)) {
+            if (arePrefixesPresent(argMultimap, PREFIX_OPENING_HOUR)
+                    || arePrefixesPresent(argMultimap, PREFIX_CLOSING_HOUR)) {
+                throwNonApplicableFieldException();
+            }
+        }
+
+        if (!type.equals(TYPE_ACCOMMODATION)) {
+            if (arePrefixesPresent(argMultimap, PREFIX_STARS)) {
+                throwNonApplicableFieldException();
+            }
+        }
 
         // Create objects based on type of contact
         if (type.equals(TYPE_PERSON)) {
@@ -109,6 +134,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                 contact = new Accommodation(name, phone, email, address, tagList, Set.of());
             }
         }
+
         return new AddCommand(contact);
     }
 
@@ -118,6 +144,11 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    private static void throwNonApplicableFieldException() throws ParseException {
+        logger.info("Values for non-applicable fields provided");
+        throw new ParseException(String.format(MESSAGE_NON_APPLICABLE_FIELDS, AddCommand.MESSAGE_USAGE));
     }
 
 }
