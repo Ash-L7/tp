@@ -804,9 +804,9 @@ testers are expected to do more *exploratory* testing.
 
 ### Removing a contact from favourites
 
-1. Removing a contact from favorites
+1. Removing a contact from favourites
 
-    1. Prerequisites: At least one contact marked as favorite.
+    1. Prerequisites: At least one contact marked as favourite.
 
     1. Test case: Missing fields (e.g. `favourite-remove`)<br>
        Expected: Error message for invalid command format.
