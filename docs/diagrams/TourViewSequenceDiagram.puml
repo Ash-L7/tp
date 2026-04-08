@@ -1,0 +1,23 @@
+@startuml
+actor User
+participant "LogicManager" as Logic
+participant "TourViewCommandParser" as Parser
+participant "TourViewCommand" as Command
+participant "Model" as Model
+participant "ContactIsInTourPredicate" as Predicate
+
+User -> Logic : execute("tour-view 1")
+Logic -> Parser : parse("1")
+Parser --> Logic : TourViewCommand
+
+Logic -> Command : execute(model)
+Command -> Model : updateFilteredTourList(PREDICATE_SHOW_ALL_TOURS)
+Command -> Model : getFilteredTourList()
+Model --> Command : full tour list
+Command -> Command : check for valid index
+Command -> Predicate : new ContactIsInTourPredicate(tour)
+Predicate --> Command : predicate
+Command -> Model : updateFilteredContactList(predicate)
+Command --> Logic : CommandResult
+Logic --> User : display contacts assigned to tour
+@enduml

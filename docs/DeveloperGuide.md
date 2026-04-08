@@ -22,7 +22,7 @@ subsequently verified and tweaked accordingly. Namely in:
 `EditCommandTest.java`, `AddCommandParserTest.java`
 * William: Usage of AI Tools (Open AI) to assist in creating Plant UML diagrams which are subsequently verified and
 tweaked to accurately reflect current implementation. Namely in: `ContactClassDiagram.puml`,
-`EditContactDescriptorClassDiagram.puml`, `FavouriteAddSequenceDiagram.puml`, `FavouriteViewSequenceDiagram.pml`
+`EditContactDescriptorClassDiagram.puml`, `FavouriteAddSequenceDiagram.puml`, `FavouriteViewSequenceDiagram.puml`
 * William: Usage of AI Tools (Open AI) as an extra layer of checks for bugs and typos.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -203,13 +203,27 @@ to favourites, removing contacts from favourites, and viewing favourite contacts
 
 <img src="images/FavouriteViewSequenceDiagram.png" width="600" />
 
+### Tour Assignment Features
+
+Bivago supports assigning and unassigning contacts to tour packages, as well as viewing all contacts assigned to a specific tour. These are implemented via three commands: `TourAssignCommand`, `TourUnassignCommand`, and `TourViewCommand`.
+
+`TourAssignCommand` and `TourUnassignCommand` perform a similar operation to `EditCommand`, making use of `EditContactDescriptor` to update the set of `Tour` objects stored on a `Contact`. Both commands take two indices — a contact index and a tour index — resolve them against the currently displayed lists, validate the assignment state, then call `model.setContact()` followed by `model.commitAddressBook()` to persist the change.
+
+<img src="images/TourAssignSequenceDiagram.png" width="600" />
+
+<img src="images/TourUnassignSequenceDiagram.png" width="600" />
+
+`TourViewCommand` performs a similar operation to `FindCommand`, making use of `ContactIsInTourPredicate` to filter the contact list to only those assigned to the specified tour. The tour list is first reset to show all tours so that the index lookup is not affected by any prior filtering.
+
+<img src="images/TourViewSequenceDiagram.png" width="600" />
+
 ### Undo/redo feature
 
 #### Implementation
 
 The undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
+* `VersionedAddressBook#commit()` — Saves a snapshot of the current address book state into its history.
 * `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
 * `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
 
@@ -221,11 +235,11 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th contact. The `delete` command calls `Model#commitAddressBook()`, causing a snapshot of the modified address book state to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add type/person n/David …​` to add a new contact. The `add` command also calls `Model#commitAddressBook()`, causing another snapshot to be saved into the `addressBookStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
@@ -233,12 +247,11 @@ Step 3. The user executes `add n/David …​` to add a new person. The `add` co
 
 </div>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user decides that adding the contact was a mistake and executes `undo`. The `undo` command calls `Model#undoAddressBook()`, which shifts the `currentStatePointer` once to the left and restores the address book to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial address book state, there are no previous states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check for this case and returns an error to the user rather than attempting to undo.
 
 </div>
 
@@ -272,26 +285,17 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <img src="images/CommitActivityDiagram.png" width="250" />
 
-#### Design considerations:
+#### Design considerations
 
 **Aspect: How undo & redo executes:**
 
-* **Current Implementation:** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+* **Alternative 1 (current choice):** Saves the entire address book as a snapshot.
+  * Pros: Simple to implement and reason about; every command automatically supports undo/redo without extra logic.
+  * Cons: Higher memory usage as each snapshot is a full copy of the address book.
 
-* **Alternative Implementation:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-The current implementation was chosen for its simplicity and reliability,
-which is suitable given the moderate size of the address book
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
+* **Alternative 2:** Each command knows how to undo/redo itself.
+  * Pros: Lower memory usage (e.g. for `delete`, only the deleted contact needs to be saved).
+  * Cons: Every command must implement its own undo/redo logic, increasing implementation complexity and risk of bugs.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -335,14 +339,15 @@ Priorities: High (must have) — `* * *`, Medium (nice to have) — `* *`, Low (
 | `* * *` | tour guide who prioritizes efficiency | search through tours by criteria (e.g. category, contact, restaurant) | quickly find tours concerning certain contacts, restaurants, or categories |
 | `* * *` | tour guide who is lazy and forgetful | see descriptive error messages when I input commands incorrectly | not have to keep referring to the help page |
 | `* * *` | tour guide who conducts time-sensitive tours | store operating hours for restaurants and attractions | plan tours accordingly |
+| `* * *` | tour guide who makes mistakes | undo and redo commands | revert accidental changes |
 | `* *` | tour guide | add email addresses to contacts | communicate digitally when needed |
-| `* *` | tour guide | add pricing information to contacts | quickly estimate tour costs |
-| `* *` | tour guide | store capacity information (e.g. restaurant seating, bus capacity) | match group sizes appropriately |
-| `* *` | tour guide who conducts tours in other languages | add languages spoken by contacts (e.g. English-speaking driver, Mandarin-speaking restaurant staff) | match service providers with my international clients' needs |
 | `* *` | tour guide | categorize contacts by type (driver, restaurant, hotel, attraction) | quickly find the right person for each need |
 | `* *` | tour guide | edit contact information | keep details up-to-date when phone numbers or addresses change or when I make a mistake |
 | `* *` | tour guide | search for contacts by name | quickly find specific people |
 | `* *` | tour guide | filter contacts by category | see all restaurants or all drivers at once |
+| `* *` | tour guide | add pricing information to contacts | quickly estimate tour costs |
+| `* *` | tour guide | store capacity information (e.g. restaurant seating, bus capacity) | match group sizes appropriately |
+| `* *` | tour guide who conducts tours in other languages | add languages spoken by contacts (e.g. English-speaking driver, Mandarin-speaking restaurant staff) | match service providers with my international clients' needs |
 | `* *` | tour guide | add notes to contacts | remember important details like dietary restrictions they accommodate or special pricing |
 | `* *` | tour guide | mark favourite contacts | prioritize my most reliable service providers |
 | `* *` | tour guide | view all contacts associated with a tour | see my full service provider lineup at a glance |
@@ -484,10 +489,10 @@ Priorities: High (must have) — `* * *`, Medium (nice to have) — `* *`, Low (
 
 ---
 
-### Use case: UC07 - Create a Tour Package
+### Use Case: UC07 - Create a Tour Package
 
 **MSS**
-1. User requests to create a new tour package with a name and type tag.
+1. User requests to create a new tour package with a name.
 2. Bivago confirms the tour has been created.
 
 *Use case ends.*
@@ -498,7 +503,7 @@ Priorities: High (must have) — `* * *`, Medium (nice to have) — `* *`, Low (
     - 1a1. Bivago shows a duplicate tour name error.
     - 1a2. Use case resumes at step 1.
 
-- 1b. The name or type tag provided is invalid.
+- 1b. The name provided is invalid.
     - 1b1. Bivago shows an error message.
     - 1b2. Use case resumes at step 1.
 
@@ -519,11 +524,11 @@ Priorities: High (must have) — `* * *`, Medium (nice to have) — `* *`, Low (
 
 - 1b. The specified contact does not exist.
     - 1b1. Bivago shows an error message.
-    - 1b2. Use case resumes at step 1.
+    - 1b2. Use case ends.
 
 - 1c. The specified contact is already assigned to the tour.
     - 1c1. Bivago shows a duplicate assignment error.
-    - 1c2. Use case resumes at step 1.
+    - 1c2. Use case ends.
 
 ---
 
@@ -602,6 +607,50 @@ Priorities: High (must have) — `* * *`, Medium (nice to have) — `* *`, Low (
 
 ---
 
+### Use Case: UC13 - Remove a Contact from a Tour Package
+
+**MSS**
+1. User requests to unassign a contact from a tour package.
+2. Bivago removes the tour from the contact's tour list and confirms the contact has been unassigned from the tour.
+
+*Use case ends.*
+
+**Extensions**
+
+- 1a. The specified tour package does not exist.
+    - 1a1. Bivago shows an error message.
+    - 1a2. Use case ends.
+
+- 1b. The specified contact does not exist.
+    - 1b1. Bivago shows an error message.
+    - 1b2. Use case ends.
+
+- 1c. The specified contact is not assigned to the tour.
+    - 1c1. Bivago shows an error message indicating the contact is not in the tour.
+    - 1c2. Use case ends.
+
+---
+
+### Use Case: UC14 - View Contacts in a Tour Package
+
+**MSS**
+1. User requests to view the contacts assigned to a specific tour package using its index.
+2. Bivago displays all contacts assigned to that tour.
+
+*Use case ends.*
+
+**Extensions**
+
+- 1a. The given index is invalid.
+    - 1a1. Bivago shows an error message.
+    - 1a2. Use case ends.
+
+- 2a. No contacts are assigned to the tour.
+    - 2a1. Bivago displays an empty list indicating no contacts are assigned to the tour.
+    - 2a2. Use case ends.
+
+---
+
 ## Non-Functional Requirements
 
 1. Should work on any mainstream OS (Windows, Linux, macOS) with Java 17 or above installed.
@@ -623,8 +672,8 @@ Priorities: High (must have) — `* * *`, Medium (nice to have) — `* *`, Low (
 | **Contact** | A service provider in the tour guide's network, such as a driver, restaurant, hotel, or tourist attraction. |
 | **favourites** | A list of contacts chosen by the tour guide accessible by dedicated commands, each denoted by a star beside the name in the contact list. |
 | **Tour Package** | A planned tour offering that groups together a set of contacts (e.g. driver, restaurants, attractions) under a named itinerary. |
-| **Category** | A classification label for contacts. Valid categories include: Driver, Restaurant, Hotel, Attraction. |
-| **Tag** | A label applied to a tour package to describe its type, e.g. `sightseeing`, `food`. |
+| **Category** | A classification label for contacts. Valid categories include: `person`, `fnb`, `accomm`, `attraction`. |
+| **Tag** | A label applied to a contact to store additional information, e.g. `driver`, `vip`. |
 | **CLI (Command-Line Interface)** | A text-based interface where the user interacts with the application by typing commands rather than clicking buttons or menus. |
 
 --------------------------------------------------------------------------------------------------------------------
@@ -644,7 +693,8 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Double-click the jar file<br>
+       Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
@@ -661,13 +711,13 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: None.
 
-    1. Test case: `add type/person n/John Doe p/98765432 e/john@example.com a/123 Stree t/driver`<br>
+    1. Test case: `add type/person n/John Doe p/98765432 e/john@example.com a/123 Street t/driver`<br>
        Expected: Contact is added. Contact is added to the data file. Details of the added contact shown in the status message.
 
     1. Test case: Missing fields (e.g. `add n/John`)<br>
        Expected: Error message indicating missing required fields.
 
-    1. Test case: Invalid fields (e.g. `add y/something type/person n/John Doe p/98765432 e/john@example.com a/123 Stree t/driver`)<br>
+    1. Test case: Invalid fields (e.g. `add y/something type/person n/John Doe p/98765432 e/john@example.com a/123 Street t/driver`)<br>
        Expected: Error message indicating invalid command format.
 
     1. Test case: Duplicate contact<br>
@@ -753,7 +803,7 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: At least one contact marked as favourite.
 
     1. Test case: `favourite-remove 1`<br>
-       Expected: Contact is marked as not favourite (star disappears in GUI). Contact details are updated in the data file.
+       Expected: Contact is unmarked as favourite (star removed in GUI). Contact details are updated in the data file.
 
     1. Test case: Missing fields (e.g. `favourite-remove`)<br>
        Expected: Error message for invalid command format.
@@ -776,11 +826,58 @@ testers are expected to do more *exploratory* testing.
     1. Test case: No favourites exist<br>
        Expected: A message indicating 0 contacts listed.
 
+### Assigning a contact to a tour
+
+1. Assigning a contact to a tour
+
+    1. Prerequisites: At least one contact and one tour exist.
+
+    1. Test case: `tour-assign 1 tour/1`<br>
+       Expected: First contact is assigned to the first tour. Confirmation message shown.
+
+    1. Test case: Invalid contact index (e.g. `tour-assign 0 tour/1`)<br>
+       Expected: Error message for invalid command format.
+
+    1. Test case: Invalid tour index (e.g. `tour-assign 1 tour/0`)<br>
+       Expected: Error message for invalid command format.
+
+    1. Test case: Contact already assigned to the tour<br>
+       Expected: Error message indicating duplicate assignment.
+
+### Unassigning a contact from a tour
+
+1. Unassigning a contact from a tour
+
+    1. Prerequisites: At least one contact assigned to a tour.
+
+    1. Test case: `tour-unassign 1 tour/1`<br>
+       Expected: First contact is unassigned from the first tour. Confirmation message shown.
+
+    1. Test case: Contact not assigned to the tour<br>
+       Expected: Error message indicating contact is not in the tour.
+
+    1. Test case: Invalid indices (e.g. `tour-unassign 0 tour/1`)<br>
+       Expected: Error message for invalid command format.
+
+### Viewing contacts in a tour
+
+1. Viewing contacts assigned to a tour
+
+    1. Prerequisites: At least one tour exists.
+
+    1. Test case: `tour-view 1`<br>
+       Expected: All contacts assigned to the first tour are displayed.
+
+    1. Test case: `tour-view 1` when no contacts are assigned<br>
+       Expected: Empty list is shown.
+
+    1. Test case: Invalid index (e.g. `tour-view 0`)<br>
+       Expected: Error message for invalid command format.
+
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_ 
 
 1. _{ more test cases …​ }_
-

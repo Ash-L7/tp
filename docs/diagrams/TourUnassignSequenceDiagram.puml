@@ -1,0 +1,27 @@
+@startuml
+actor User
+participant "LogicManager" as Logic
+participant "TourUnassignCommandParser" as Parser
+participant "TourUnassignCommand" as Command
+participant "Model" as Model
+participant "Contact" as Contact
+
+User -> Logic : execute("tour-unassign 1 tour/2")
+Logic -> Parser : parse("1 tour/2")
+Parser --> Logic : TourUnassignCommand
+
+Logic -> Command : execute(model)
+Command -> Model : getFilteredContactList()
+Model --> Command : currently displayed contact list
+Command -> Command : getContact(contactList, contactIndex)
+Command -> Model : getFilteredTourList()
+Model --> Command : currently displayed tour list
+Command -> Command : getTour(tourList, tourIndex)
+Command -> Command : validateIsAssigned(contact, tour)
+Command -> Contact : buildContactWithTourRemoved(contact, tour)
+Contact --> Command : updatedContact
+Command -> Model : setContact(contact, updatedContact)
+Command -> Model : commitAddressBook()
+Command --> Logic : CommandResult
+Logic --> User : "Unassigned tour from contact: ..."
+@enduml
