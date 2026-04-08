@@ -3,9 +3,11 @@ package seedu.address.logic.commands.tour;
 import static java.util.Objects.requireNonNull;
 
 import java.util.HashSet;
+import java.util.logging.Logger;
 import java.util.List;
 import java.util.Set;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -32,6 +34,8 @@ public class TourAssignCommand extends Command {
     public static final String MESSAGE_ASSIGN_TOUR_SUCCESS = "Assigned tour to contact: %1$s";
     public static final String MESSAGE_DUPLICATE_TOUR = "Contact is already assigned to this tour.";
 
+    private static final Logger logger = LogsCenter.getLogger(TourAssignCommand.class);
+
     private final Index contactIndex;
     private final Index tourIndex;
 
@@ -54,11 +58,13 @@ public class TourAssignCommand extends Command {
         Contact updatedContact = buildContactWithTourAdded(contact, tour);
         model.setContact(contact, updatedContact);
         model.commitAddressBook();
+        logger.fine(String.format("Assigned tour to contact: %s", updatedContact));
         return new CommandResult(String.format(MESSAGE_ASSIGN_TOUR_SUCCESS, Messages.format(updatedContact)));
     }
 
     private static Contact getContact(List<Contact> contactList, Index index) throws CommandException {
         if (index.getZeroBased() >= contactList.size()) {
+            logger.info("Invalid contact index for TourAssignCommand");
             throw new CommandException(Messages.MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX);
         }
         Contact contact = contactList.get(index.getZeroBased());
@@ -68,6 +74,7 @@ public class TourAssignCommand extends Command {
 
     private static Tour getTour(List<Tour> tourList, Index index) throws CommandException {
         if (index.getZeroBased() >= tourList.size()) {
+            logger.info("Invalid tour index for TourAssignCommand");
             throw new CommandException(Messages.MESSAGE_INVALID_TOUR_DISPLAYED_INDEX);
         }
         Tour tour = tourList.get(index.getZeroBased());
@@ -77,6 +84,7 @@ public class TourAssignCommand extends Command {
 
     private static void validateNotAssigned(Contact contact, Tour tour) throws CommandException {
         if (contact.isInTour(tour)) {
+            logger.info("Contact is already assigned to tour");
             throw new CommandException(MESSAGE_DUPLICATE_TOUR);
         }
     }
