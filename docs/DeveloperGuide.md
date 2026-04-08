@@ -21,7 +21,7 @@ subsequently verified and tweaked accordingly. Namely in:
 `FavouriteAddCommandParserTest.java`, `FavouriteRemoveCommandParserTest.java`
 * William: Usage of AI Tools (Open AI) to assist in creating Plant UML diagrams which are subsequently verified and
 tweaked to accurately reflect current implementation. Namely in: `ContactClassDiagram.puml`,
-`EditContactDescriptorClassDiagram.puml`, `FavouriteAddSequenceDiagram.puml`, `FavouriteViewSequenceDiagram.pml`
+`EditContactDescriptorClassDiagram.puml`, `FavouriteAddSequenceDiagram.puml`, `FavouriteViewSequenceDiagram.puml`
 * William: Usage of AI Tools (Open AI) as an extra layer of checks for bugs and typos.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -488,7 +488,7 @@ Priorities: High (must have) — `* * *`, Medium (nice to have) — `* *`, Low (
 
 ---
 
-### Use case: UC07 - Create a Tour Package
+### Use Case: UC07 - Create a Tour Package
 
 **MSS**
 1. User requests to create a new tour package with a name.
@@ -710,13 +710,13 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: None.
 
-    1. Test case: `add type/person n/John Doe p/98765432 e/john@example.com a/123 Stree t/driver`<br>
+    1. Test case: `add type/person n/John Doe p/98765432 e/john@example.com a/123 Street t/driver`<br>
        Expected: Contact is added. Contact is added to the data file. Details of the added contact shown in the status message.
 
     1. Test case: Missing fields (e.g. `add n/John`)<br>
        Expected: Error message indicating missing required fields.
 
-    1. Test case: Invalid fields (e.g. `add y/something type/person n/John Doe p/98765432 e/john@example.com a/123 Stree t/driver`)<br>
+    1. Test case: Invalid fields (e.g. `add y/something type/person n/John Doe p/98765432 e/john@example.com a/123 Street t/driver`)<br>
        Expected: Error message indicating invalid command format.
 
     1. Test case: Duplicate contact<br>
@@ -800,6 +800,9 @@ testers are expected to do more *exploratory* testing.
 1. Removing a contact from favourites
 
     1. Prerequisites: At least one contact marked as favourite.
+
+    1. Test case: `favourite-remove 1`<br>
+       Expected: Contact is unmarked as favourite (star removed in GUI). Contact details are updated in the data file.
 
     1. Test case: Missing fields (e.g. `favourite-remove`)<br>
        Expected: Error message for invalid command format.
