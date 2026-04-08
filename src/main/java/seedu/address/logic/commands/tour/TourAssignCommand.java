@@ -3,9 +3,9 @@ package seedu.address.logic.commands.tour;
 import static java.util.Objects.requireNonNull;
 
 import java.util.HashSet;
-import java.util.logging.Logger;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;

@@ -1,7 +1,6 @@
 package seedu.address.logic.commands.tour;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TOURS;
 
 import java.util.List;
 import java.util.logging.Logger;
