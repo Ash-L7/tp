@@ -15,6 +15,7 @@ public class Tour {
     public static final String VALIDATION_REGEX = "^[A-Za-z0-9 ]+$";
 
     public final String tourName;
+    private final TourFavouriteStatus isTourFavourite;
 
     /**
      * Constructs a {@code Tour} with the given name.
@@ -25,6 +26,20 @@ public class Tour {
         requireNonNull(tourName);
         checkArgument(isValidTourName(tourName), MESSAGE_CONSTRAINTS);
         this.tourName = tourName;
+        this.isTourFavourite = new TourFavouriteStatus("false");
+    }
+
+    /**
+     * Constructs a {@code Tour} with the given name and specified Tour Favourite status.
+     *
+     * @param tourName the name of the tour
+     * @param isTourFavourite favourite status of the tour
+     */
+    public Tour(String tourName, TourFavouriteStatus isTourFavourite) {
+        requireNonNull(tourName);
+        checkArgument(isValidTourName(tourName), MESSAGE_CONSTRAINTS);
+        this.tourName = tourName;
+        this.isTourFavourite = isTourFavourite;
     }
 
     /**
@@ -44,6 +59,23 @@ public class Tour {
         return tourName;
     }
 
+
+    /**
+     * Returns a copy of the tour with its values edited.
+     */
+    public Tour setTourFavouriteStatus(TourFavouriteStatus isTourFavourite) {
+        String updatedName = this.getTourName();
+
+        return new Tour(updatedName, isTourFavourite);
+    }
+
+    public TourFavouriteStatus getTourFavouriteStatus() {
+        return this.isTourFavourite;
+    }
+
+    public boolean isTourFavourite() {
+        return this.isTourFavourite.isTourFavourite;
+    }
     /**
      * Returns the hash code of this tour, based on its name.
      *

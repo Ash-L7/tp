@@ -186,6 +186,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void setTour(Tour target, Tour editedContact) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deleteTour(Tour tour) {
             throw new AssertionError("This method should not be called.");
         }

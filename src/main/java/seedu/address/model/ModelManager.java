@@ -156,6 +156,13 @@ public class ModelManager implements Model {
         updateFilteredTourList(PREDICATE_SHOW_ALL_TOURS);
     }
 
+    @Override
+    public void setTour(Tour target, Tour editedTour) {
+        requireAllNonNull(target, editedTour);
+
+        addressBook.setTour(target, editedTour);
+    }
+
     //=========== Filtered Contact List Accessors =============================================================
 
     /**

@@ -45,6 +45,26 @@ public class UniqueTourList implements Iterable<Tour> {
     }
 
     /**
+     * Replaces the tour {@code target} in the list with {@code editedTour}.
+     * {@code target} must exist in the list.
+     * The tour identity of {@code editedTour} must not be the same as another existing tour in the list.
+     */
+    public void setTour(Tour target, Tour editedTour) {
+        requireAllNonNull(target, editedTour);
+
+        int index = internalList.indexOf(target);
+        if (index == -1) {
+            throw new TourNotFoundException();
+        }
+
+        if (!target.equals(editedTour) && contains(editedTour)) {
+            throw new DuplicateTourException();
+        }
+
+        internalList.set(index, editedTour);
+    }
+
+    /**
      * Removes the equivalent tour from the list.
      * The tour must exist in the list.
      */

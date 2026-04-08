@@ -121,6 +121,14 @@ public interface Model {
      */
     void addTour(Tour tour);
 
+    /**
+     * Replaces the given tour {@code target} with {@code editedTour}.
+     * {@code target} must exist in the address book.
+     * The tour identity of {@code editedTour} must not be the same as another
+     * existing tour in the address book.
+     */
+    void setTour(Tour target, Tour editedContact);
+
     /** Returns an unmodifiable view of the filtered contact list */
     ObservableList<Contact> getFilteredContactList();
 

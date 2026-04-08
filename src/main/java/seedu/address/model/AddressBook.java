@@ -130,6 +130,18 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the given tour {@code target} in the list with {@code editedTour}.
+     * {@code target} must exist in the address book.
+     * The tour identity of {@code editedTour} must not be the same as
+     * another existing tour in the address book.
+     */
+    public void setTour(Tour target, Tour editedTour) {
+        requireNonNull(editedTour);
+
+        tours.setTour(target, editedTour);
+    }
+
+    /**
      * Removes {@code tour} from this {@code AddressBook}.
      * {@code tour} must exist in the address book.
      */
