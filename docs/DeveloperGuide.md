@@ -192,13 +192,6 @@ or otherwise notable contacts. This is implemented using `FavouriteStatus`, a wr
 which is included in `Contact` as an additional field. New commands are introduced to manage favourites: adding contacts
 to favourites, removing contacts from favourites, and viewing favourite contacts.
 
-
-
-Bivago also supports marking certain contacts as favourites, which would be useful for managing important, commonly used
-or otherwise notable contacts. This is done through `FavouriteStatus`, a wrapper class with a boolean, which is
-implemented in `Contact` as an additional field. New commands are added to add contacts to favourites, remove contacts
-from favourites and view favourites.
-
 `FavouriteAddCommand` and `FavouriteRemoveCommand` perform a similar operation to `EditCommand`, making use of
 `EditContactDescriptor` to change the `FavouriteStatus` of a `Contact`.
 
