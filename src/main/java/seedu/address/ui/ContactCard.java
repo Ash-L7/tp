@@ -65,6 +65,7 @@ public class ContactCard extends UiPart<Region> {
         contact.getTypeSpecificDetails().forEach(detail -> {
             Label label = new Label(detail);
             label.getStyleClass().add("cell_small_label");
+            label.setWrapText(true);
             detailsBox.getChildren().add(label);
         });
     }
