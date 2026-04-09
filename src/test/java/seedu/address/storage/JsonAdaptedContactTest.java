@@ -2,7 +2,9 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_FAVOURITE_STATUS;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TOUR_FAVOURITE_STATUS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_FAVOURITE_STATUS_FALSE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TOUR_FAVOURITE_STATUS_FALSE;
 import static seedu.address.storage.JsonAdaptedContact.INVALID_FIELD_MESSAGE_FORMAT;
 import static seedu.address.storage.JsonAdaptedContact.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -32,6 +34,7 @@ import seedu.address.model.contact.Name;
 import seedu.address.model.contact.OpeningHour;
 import seedu.address.model.contact.Phone;
 import seedu.address.model.tour.Tour;
+import seedu.address.model.tour.TourFavouriteStatus;
 
 public class JsonAdaptedContactTest {
     private static final String INVALID_TYPE = "Bruh";
@@ -406,7 +409,7 @@ public class JsonAdaptedContactTest {
     @Test
     public void toModelType_invalidTours_throwsIllegalValueException() {
         List<JsonAdaptedTour> invalidTours = new ArrayList<>();
-        invalidTours.add(new JsonAdaptedTour(INVALID_TOUR));
+        invalidTours.add(new JsonAdaptedTour(INVALID_TOUR, VALID_TOUR_FAVOURITE_STATUS_FALSE));
         JsonAdaptedContact contact =
                 new JsonAdaptedContact(VALID_TYPE_PERSON, VALID_NAME_PERSON, VALID_PHONE_PERSON, VALID_EMAIL_PERSON,
                         VALID_ADDRESS_PERSON, VALID_TAGS_PERSON, invalidTours,
@@ -417,7 +420,7 @@ public class JsonAdaptedContactTest {
 
     @Test
     public void toModelType_validTours_returnsContact() throws Exception {
-        List<JsonAdaptedTour> validTours = List.of(new JsonAdaptedTour(VALID_TOUR));
+        List<JsonAdaptedTour> validTours = List.of(new JsonAdaptedTour(VALID_TOUR, VALID_TOUR_FAVOURITE_STATUS_FALSE));
         JsonAdaptedContact contact =
                 new JsonAdaptedContact(VALID_TYPE_PERSON, VALID_NAME_PERSON, VALID_PHONE_PERSON, VALID_EMAIL_PERSON,
                         VALID_ADDRESS_PERSON, VALID_TAGS_PERSON, validTours,
@@ -430,8 +433,8 @@ public class JsonAdaptedContactTest {
     @Test
     public void toModelType_multipleTours_returnsContact() throws Exception {
         List<JsonAdaptedTour> multipleTours = List.of(
-                new JsonAdaptedTour(VALID_TOUR),
-                new JsonAdaptedTour("Halloween Tour")
+                new JsonAdaptedTour(VALID_TOUR, VALID_TOUR_FAVOURITE_STATUS_FALSE),
+                new JsonAdaptedTour("Halloween Tour", "true")
         );
         JsonAdaptedContact contact =
                 new JsonAdaptedContact(VALID_TYPE_PERSON, VALID_NAME_PERSON, VALID_PHONE_PERSON, VALID_EMAIL_PERSON,
@@ -440,4 +443,12 @@ public class JsonAdaptedContactTest {
         Contact result = contact.toModelType();
         assertEquals(2, result.getTours().size());
     }
+
+    @Test
+    public void toModelType_invalidTourFavouriteStatus_throwsIllegalValueException() {
+        JsonAdaptedTour tour = new JsonAdaptedTour(VALID_TOUR, INVALID_TOUR_FAVOURITE_STATUS);
+        String expectedMessage = TourFavouriteStatus.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, tour::toModelType);
+    }
+
 }

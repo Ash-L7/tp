@@ -82,6 +82,9 @@ public class CommandTestUtil {
     public static final String VALID_TOUR_NAME_JAMES_JR = "Le Tour James Jr";
     public static final String VALID_TOUR_NAME_JAMES_SR = "Le Tour James Sr";
     public static final String VALID_TOUR_NAME_HALLOWEEN_WALK = "Halloween Walk";
+    public static final String VALID_TOUR_FAVOURITE_STATUS_TRUE = "true";
+    public static final String VALID_TOUR_FAVOURITE_STATUS_FALSE = "false";
+    public static final String INVALID_TOUR_FAVOURITE_STATUS = "maybe";
 
     public static final String TYPE_DESC_AMY = " " + PREFIX_TYPE + VALID_TYPE_AMY;
     public static final String TYPE_DESC_BOB = " " + PREFIX_TYPE + VALID_TYPE_BOB;
