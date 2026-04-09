@@ -186,6 +186,14 @@ extended to include these additional fields.
 
 <img src="images/EditContactDescriptorClassDiagram.png" width="600" />
 
+### Tour Packages
+
+Bivago's content management supports the creation of tour packages, represented by `Tour` class. Each `Tour` is 
+uniquely identified by its `Name`. The class `TourFavouriteStatus` serves as a wrapper class for the boolean state 
+of the tour.
+
+<img src="images/TourClassDiagram.png" width="600" />
+
 ### Contact Favourites
 
 Bivago also supports marking certain contacts as favourites, which is useful for managing important, commonly used,
@@ -658,22 +666,98 @@ Priorities: High (must have) — `* * *`, Medium (nice to have) — `* *`, Low (
 2. Bivago creates a new tour with the given name and assigns all contacts from the original tour to it.
 3. Bivago confirms the new tour has been created.
 
+### Use Case: UC15 - Find Tour Package
+
+**MSS**
+1. User requests to find tour packages using a search query.
+2. Bivago displays a list of tour packages matching the search query.
+
+*Use case ends.*
+
+**Extensions**
+- 1a. The search query is empty.
+    - 1a1. Bivago shows an error message indicating that a search term must be provided.
+    - 1a2. Use case resumes at step 1.
+
+- 2a. No tour packages match the search query.
+    - 2a1. Bivago shows an error message indicating no tour packages found.
+    - 2a2. Use case ends.
+
+---
+
+### Use Case: UC16 - List All Tour Packages
+
+**MSS**
+1. User requests to list all tour packages.
+2. Bivago displays the full list of tour packages.
+
+*Use case ends.*
+
+**Extensions**
+
+- 2a. There are no tour packages in Bivago.
+    - 2a1. Bivago displays an empty list.
+    - 2a2. Use case ends.
+
+---
+
+### Use Case: UC17 - Add a Tour Package to Favourite Tours
+
+**MSS**
+1. User requests to add a tour to favourite tours using its index in the displayed list.
+2. Bivago marks the tour as a favourite.
+3. Bivago confirms that the tour has been added to favourite tours.
+
 *Use case ends.*
 
 **Extensions**
 
 - 1a. The given index is invalid.
     - 1a1. Bivago shows an error message.
-    - 1a2. Use case ends.
+    - 1a2. Use case resumes at step 1.
 
-- 1b. A tour with the given name already exists.
-    - 1b1. Bivago shows a duplicate tour name error.
+- 1b. The tour is already marked as a favourite.
+    - 1b1. Bivago shows an error message indicating the tour is already in favourite tours.
     - 1b2. Use case resumes at step 1.
 
-- 1c. The name provided is invalid.
-    - 1c1. Bivago shows an error message.
-    - 1c2. Use case resumes at step 1.
+---
 
+### Use Case: UC18 - Remove a Tour Package from Favourite Tours
+
+**MSS**
+1. User requests to remove a tour from favourite tours using its index in the displayed list.
+2. Bivago unmarks the tour as a favourite.
+3. Bivago confirms that the tour has been removed from favourite tours.
+
+*Use case ends.*
+
+**Extensions**
+
+- 1a. The given index is invalid.
+    - 1a1. Bivago shows an error message.
+    - 1a2. Use case resumes at step 1.
+
+- 1b. The tour is not marked as a favourite.
+    - 1b1. Bivago shows an error message indicating the tour is not in favourite tours.
+    - 1b2. Use case resumes at step 1.
+
+---
+
+### Use Case: UC19 - View Favourite Tours
+
+**MSS**
+1. User requests to view favourite tours.
+2. Bivago displays the list of tours marked as favourites.
+
+*Use case ends.*
+
+**Extensions**
+
+- 2a. There are no tours marked as favourites.
+    - 2a1. Bivago displays an empty list indicating no favourite tours were found.
+    - 2a2. Use case ends.
+
+>>>>>>> master
 ---
 
 ## Non-Functional Requirements
@@ -691,15 +775,16 @@ Priorities: High (must have) — `* * *`, Medium (nice to have) — `* *`, Low (
 
 ### Glossary
 
-| Term | Definition |
-|------|------------|
-| **Mainstream OS** | Windows, Linux, Unix, or macOS. |
-| **Contact** | A service provider in the tour guide's network, such as a driver, restaurant, hotel, or tourist attraction. |
-| **favourites** | A list of contacts chosen by the tour guide accessible by dedicated commands, each denoted by a star beside the name in the contact list. |
-| **Tour Package** | A planned tour offering that groups together a set of contacts (e.g. driver, restaurants, attractions) under a named itinerary. |
-| **Category** | A classification label for contacts. Valid categories include: `person`, `fnb`, `accomm`, `attraction`. |
-| **Tag** | A label applied to a contact to store additional information, e.g. `driver`, `vip`. |
-| **CLI (Command-Line Interface)** | A text-based interface where the user interacts with the application by typing commands rather than clicking buttons or menus. |
+| Term                             | Definition                                                                                                                                |
+|----------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
+| **Mainstream OS**                | Windows, Linux, Unix, or macOS.                                                                                                           |
+| **Contact**                      | A service provider in the tour guide's network, such as a driver, restaurant, hotel, or tourist attraction.                               |
+| **favourites**                   | A list of contacts chosen by the tour guide accessible by dedicated commands, each denoted by a star beside the name in the contact list. |
+| **Tour Package**                 | A planned tour offering that groups together a set of contacts (e.g. driver, restaurants, attractions) under a named itinerary.           |
+| **Category**                     | A classification label for contacts. Valid categories include: `person`, `fnb`, `accomm`, `attraction`.                                   |
+| **Tag**                          | A label applied to a contact to store additional information, e.g. `driver`, `vip`.                                                       |
+| **CLI (Command-Line Interface)** | A text-based interface where the user interacts with the application by typing commands rather than clicking buttons or menus.            |
+| **favourite tours**              | A list of tours chosen by the tour guide accessible by dedicated commands, each denoted by a star beside the name in the tour list.       |
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -902,6 +987,18 @@ testers are expected to do more *exploratory* testing.
     1. Test case: Invalid indices (e.g. `tour-unassign 0 tour/1`)<br>
        Expected: Error message for invalid command format.
 
+### Listing all tours
+
+1. Listing all tours
+
+    1. Prerequisites: None.
+
+    1. Test case: `tour-list`<br>
+       Expected: All tours are displayed in the tour list.
+
+    1. Test case: `tour-list` when there are no contacts<br>
+       Expected: An empty list is shown.
+
 ### Viewing contacts in a tour
 
 1. Viewing contacts assigned to a tour
@@ -917,10 +1014,58 @@ testers are expected to do more *exploratory* testing.
     1. Test case: Invalid index (e.g. `tour-view 0`)<br>
        Expected: Error message for invalid command format.
 
+### Adding a tour to favourite tours
+
+1. Adding a tour to favourite tours
+
+    1. Prerequisites: At least one tour exists.
+
+    1. Test case: `tour-favourite-add 1`<br>
+       Expected: Tour is marked as favourite tours (star appears in GUI). Tour details are updated in the data file.
+
+    1. Test case: Missing fields (e.g. `tour-favourite-add`)<br>
+       Expected: Error message for invalid command format.
+
+    1. Test case: Invalid fields (e.g. `tour-favourite-add a`, `tour-favourite-add 0`)<br>
+       Expected: Error message for invalid command format.
+
+    1. Test case: `tour-favourite-add 1` (already favourite)<br>
+       Expected: Error message indicating tour is already a favourite tour.
+
+### Removing a tour from favourite tour
+
+1. Removing a tour from favourite tours
+
+    1. Prerequisites: At least one tour marked as favourite tour.
+
+    1. Test case: `tour-favourite-remove 1`<br>
+       Expected: Contact is unmarked as favourite (star removed in GUI). Contact details are updated in the data file.
+
+    1. Test case: Missing fields (e.g. `tour-favourite-remove`)<br>
+       Expected: Error message for invalid command format.
+
+    1. Test case: Invalid fields (e.g. `tour-favourite-remove a`, `tour-favourite-remove 0`)<br>
+       Expected: Error message for invalid command format.
+
+    1. Test case: Removing non-favourite tour<br>
+       Expected: Error message indicating tour is already not a favourite.
+
+### Viewing favourite tours
+
+1. Viewing favourite tours
+
+    1. Prerequisites: At least one tour marked as favourite tours.
+
+    1. Test case: `tour-favourite-view`<br>
+       Expected: Only favourite tours are displayed.
+
+    1. Test case: No favourite tours exist<br>
+       Expected: A message indicating 0 tour listed.
+
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_ 
+   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_

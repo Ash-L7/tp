@@ -1,0 +1,17 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Package Tour as TourPackage <<Rectangle>> {
+    Class Tour
+    Class TourFavouriteStatus
+    Class TourName <<Value Object>>
+}
+
+Tour *--> "1" TourName
+Tour *--> "1" TourFavouriteStatus
+
+Note bottom of TourName: VALIDATION_REGEX = "^[A-Za-z0-9 ]+$"
+@enduml

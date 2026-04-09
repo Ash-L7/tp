@@ -9,7 +9,7 @@ different types of contacts including **people, F&B establishments, accommodatio
 consolidating your contacts and tours in a simple **Command Line Interface (CLI)** application, Bivago helps you plan
 and execute better and smoother tours for your clients.
 
-* Table of Contents 
+* Table of Contents
 {:toc}
 
 ---
@@ -526,12 +526,50 @@ Creates a new tour with a specified name, and assigns all contacts from an exist
 * Index must be a positive integer
 * `NAME` must not already exist as a tour
 
+### Adding tours to favourites: `tour-favourite-add`
+
+Adds a specified tour from the tour list as a favourite tour.
+
+**Format:** `tour-favourite-add INDEX`
+
+* Adds the tour at the specified `INDEX` as a favourite tour.
+* Index must be a positive integer
+
 <details>
 <summary><b>Example:</b></summary>
 
 <ul>
   <li><code>tour-duplicate 1 n/Le Royal Tour Copy</code> :
   Creates a new tour named <code>Le Royal Tour Copy</code> with all contacts from the first tour assigned to it.</li>
+=======
+  <li><code>tour-favourite-add 2</code> :
+  Adds the second tour shown in the current tour list as a favourite tour.</li>
+</ul>
+
+</details>
+
+### Viewing favourite contacts: `tour-favourite-view`
+
+Shows a list of all favourite tours in the tour list.
+
+**Format:** `tour-favourite-view`
+
+### Removing contacts from favourites: `tour-favourite-remove`
+
+Removes a specified tour as a favourite tour.
+
+**Format:** `tour-favourite-remove INDEX`
+
+* Removes the tour at the specified `INDEX` as a favourite tour.
+* Index must be a positive integer
+
+<details>
+<summary><b>Example:</b></summary>
+
+<ul>
+  <li><code>tour-favourite-remove 1</code> :
+  Removes the first tour shown in the current tour list as a favourite tour.</li>
+>>>>>>> master
 </ul>
 
 </details>
@@ -584,13 +622,15 @@ the data of your previous Bivago home folder.
 
 ### Tour Management
 
-| Action        | Command                                                                | Summary     |
-|---------------|----------------------------------------------------------------------------------|-------------|
-| **Add**       | `tour-add n/NAME` <br> e.g., `tour-add n/Le Royal Tour`                          | Adds a tour to the tour list |
-| **Delete**    | `tour-delete INDEX` <br> e.g., `tour-delete 2`                                   | Deletes a tour from the tour list |
-| **Duplicate** | `tour-duplicate INDEX n/NAME` <br> e.g., `tour-duplicate 1 n/Le Royal Tour Copy` | Duplicates a tour with a new name, copying all contact assignments |
-| **Assign**    | `tour-assign CONTACT_INDEX tour/TOUR_INDEX` <br> e.g., `tour-assign 1 tour/2`    | Assigns a contact to a tour |
-| **Unassign**  | `tour-unassign CONTACT_INDEX tour/TOUR_INDEX` <br> e.g., `tour-unassign 3 tour/5` | Unassigns a contact from a tour|
-| **View**      | `tour-view INDEX` <br> e.g., `tour-view 1`                                       | Display contacts assigned to a tour |
-| **Find**      | `tour-find KEYWORD [MORE_KEYWORDS]` <br> e.g., `tour-find City Walking`          | Filters the tour list |
-| **List**      | `tour-list`                                                                      | Lists all tours |
+| Action                    | Command                                                                           | Summary                             |
+|---------------------------|-----------------------------------------------------------------------------------|-------------------------------------|
+| **Add**                   | `tour-add n/NAME` <br> e.g., `tour-add n/Le Royal Tour`                           | Adds a tour to the tour list        |
+| **Delete**                | `tour-delete INDEX` <br> e.g., `tour-delete 2`                                    | Deletes a tour from the tour list   |
+| **Assign**                | `tour-assign CONTACT_INDEX tour/TOUR_INDEX` <br> e.g., `tour-assign 1 tour/2`     | Assigns a contact to a tour         |
+| **Unassign**              | `tour-unassign CONTACT_INDEX tour/TOUR_INDEX` <br> e.g., `tour-unassign 3 tour/5` | Unassigns a contact from a tour     |
+| **View**                  | `tour-view INDEX` <br> e.g., `tour-view 1`                                        | Display contacts assigned to a tour |
+| **Find**                  | `tour-find KEYWORD [MORE_KEYWORDS]` <br> e.g., `tour-find City Walking`           | Filters the tour list               |
+| **List**                  | `tour-list`                                                                       | Lists all tours                     |
+| **Tour Favourite Add**    | `tour-favourite-add INDEX` <br> e.g., `tour-favourite-add 1`                      | Adds a tour to favourites           |
+| **Tour Favourite View**   | `tour-favourite-view`                                                             | Displays favourite tours            |
+| **Tour Favourite Remove** | `tourfavourite-remove INDEX` <br> e.g., `tour favourite-remove 2`                 | Removes a tour from favourites      |
