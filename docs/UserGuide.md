@@ -9,7 +9,7 @@ different types of contacts including **people, F&B establishments, accommodatio
 consolidating your contacts and tours in a simple **Command Line Interface (CLI)** application, Bivago helps you plan
 and execute better and smoother tours for your clients.
 
-* Table of Contents 
+* Table of Contents
 {:toc}
 
 ---
