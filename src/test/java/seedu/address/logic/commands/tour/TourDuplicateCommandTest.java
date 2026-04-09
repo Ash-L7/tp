@@ -1,5 +1,6 @@
 package seedu.address.logic.commands.tour;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
@@ -12,6 +13,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -67,6 +69,16 @@ public class TourDuplicateCommandTest {
         TourDuplicateCommand command = new TourDuplicateCommand(INDEX_FIRST_TOUR, "City Tour");
 
         assertCommandFailure(command, model, TourDuplicateCommand.MESSAGE_DUPLICATE_TOUR);
+    }
+
+    @Test
+    public void toStringMethod() {
+        TourDuplicateCommand command = new TourDuplicateCommand(INDEX_FIRST_TOUR, "New Tour Name");
+        String expected = new ToStringBuilder(command)
+                .add("targetIndex", INDEX_FIRST_TOUR)
+                .add("name", "New Tour Name")
+                .toString();
+        assertEquals(expected, command.toString());
     }
 
     @Test

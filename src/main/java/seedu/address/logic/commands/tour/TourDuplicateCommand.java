@@ -59,7 +59,7 @@ public class TourDuplicateCommand extends Command {
         }
 
         Tour tourToDuplicate = lastShownList.get(targetIndex.getZeroBased());
-        assert tourToDuplicate != null : "Tour in tour list should not be null";
+        assert !name.isBlank() : "Tour name should not be blank after parsing";
 
         Tour newTour = new Tour(name);
         if (model.hasTour(newTour)) {

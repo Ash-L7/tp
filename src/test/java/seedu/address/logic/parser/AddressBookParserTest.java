@@ -29,7 +29,10 @@ import seedu.address.logic.commands.general.HelpCommand;
 import seedu.address.logic.commands.general.RedoCommand;
 import seedu.address.logic.commands.general.UndoCommand;
 import seedu.address.logic.commands.tour.TourAddCommand;
+import seedu.address.logic.commands.tour.TourAssignCommand;
 import seedu.address.logic.commands.tour.TourDeleteCommand;
+import seedu.address.logic.commands.tour.TourDuplicateCommand;
+import seedu.address.logic.commands.tour.TourUnassignCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.ContactTypePredicate;
@@ -113,6 +116,29 @@ public class AddressBookParserTest {
         TourDeleteCommand command = (TourDeleteCommand) parser.parseCommand(TourDeleteCommand.COMMAND_WORD
                 + " " + INDEX_FIRST_TOUR.getOneBased());
         assertEquals(new TourDeleteCommand(INDEX_FIRST_TOUR), command);
+    }
+
+    @Test
+    public void parseCommand_tourAssign() throws Exception {
+        TourAssignCommand command = (TourAssignCommand) parser.parseCommand(
+                TourAssignCommand.COMMAND_WORD + " " + INDEX_FIRST_CONTACT.getOneBased()
+                        + " tour/" + INDEX_FIRST_TOUR.getOneBased());
+        assertEquals(new TourAssignCommand(INDEX_FIRST_CONTACT, INDEX_FIRST_TOUR), command);
+    }
+
+    @Test
+    public void parseCommand_tourUnassign() throws Exception {
+        TourUnassignCommand command = (TourUnassignCommand) parser.parseCommand(
+                TourUnassignCommand.COMMAND_WORD + " " + INDEX_FIRST_CONTACT.getOneBased()
+                        + " tour/" + INDEX_FIRST_TOUR.getOneBased());
+        assertEquals(new TourUnassignCommand(INDEX_FIRST_CONTACT, INDEX_FIRST_TOUR), command);
+    }
+
+    @Test
+    public void parseCommand_tourDuplicate() throws Exception {
+        TourDuplicateCommand command = (TourDuplicateCommand) parser.parseCommand(
+                TourDuplicateCommand.COMMAND_WORD + " " + INDEX_FIRST_TOUR.getOneBased() + " n/New Tour Name");
+        assertEquals(new TourDuplicateCommand(INDEX_FIRST_TOUR, "New Tour Name"), command);
     }
 
     @Test

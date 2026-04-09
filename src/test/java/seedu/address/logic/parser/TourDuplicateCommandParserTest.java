@@ -40,6 +40,12 @@ public class TourDuplicateCommandParserTest {
     }
 
     @Test
+    public void parse_missingNamePrefixValidIndex_failure() {
+        assertParseFailure(parser, "1",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, TourDuplicateCommand.MESSAGE_USAGE));
+    }
+
+    @Test
     public void parse_missingBothFields_failure() {
         assertParseFailure(parser, "",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, TourDuplicateCommand.MESSAGE_USAGE));
