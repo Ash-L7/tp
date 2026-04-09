@@ -1074,6 +1074,6 @@ testers are expected to do more *exploratory* testing.
 
       Expected: The app starts with an empty contact list. A warning message is shown in the result display stating the data file could not be loaded, the reason (e.g. which invalid field was detected), and that the app has started with a clean state. The corrupted `bivago-data.json` is immediately overwritten with an empty address book.
 
-   2. Test case: delete `data/bivago-data.json` and relaunch the app.
+   1. Test case: delete `data/bivago-data.json` and relaunch the app.
 
       Expected: The app starts with the sample address book data and creates a new `bivago-data.json`.
