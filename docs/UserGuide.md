@@ -201,7 +201,7 @@ A contact can have any number of tags (including 0)
 **General Fields & Constraints**
 * `type/TYPE` — must be `person`, `fnb`, `accomm`, or `attraction`
 * `n/NAME` — only alphanumeric characters and spaces allowed, and cannot be blank
-* `p/PHONE` — only numbers allowed, and must contain at least 3 digits
+* `p/PHONE` — must contain at least 3 digits; may also include letters, parentheses `()`, spaces, and `|` to add labels or multiple numbers (e.g. `81231231(House) | 1241242(Personal)`)
 * `e/EMAIL` — a valid email in the form `LOCAL-PART@DOMAIN`
 * `a/ADDRESS` — cannot be blank
 * `t/TAG` — only alphanumeric characters allowed
@@ -290,6 +290,9 @@ Edits an existing contact in the contact list.
 <ul>
   <li><code>edit 1 p/91234567 e/johndoe@example.com</code> :
   Edits the first contact by updating the phone number and email.</li>
+
+  <li><code>edit 1 p/91234567(Mobile) | 61234567(Office)</code> :
+  Edits the first contact with multiple labelled phone numbers.</li>
 
   <li><code>edit 2 n/New Name t/</code> :
   Edits the second contact by updating the name and clearing all tags.</li>
