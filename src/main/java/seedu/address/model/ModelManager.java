@@ -157,6 +157,17 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void assignTour(Contact contact, Tour tour) {
+        requireAllNonNull(contact, tour);
+        setContact(contact, contact.withTourAdded(tour));
+    }
+
+    @Override
+    public void unassignTour(Contact contact, Tour tour) {
+        requireAllNonNull(contact, tour);
+        setContact(contact, contact.withTourRemoved(tour));
+    }
+
     public void setTour(Tour target, Tour editedTour) {
         requireAllNonNull(target, editedTour);
 

@@ -201,16 +201,16 @@ Adds a contact to the contact list.
  [s/STARS] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A contact can have any number of tags (including 0)
+A contact can have any number of tags (including 0). Each tag must be at most 30 characters long.
 </div>
 
 **General Fields & Constraints**
 * `type/TYPE` — must be `person`, `fnb`, `accomm`, or `attraction`
 * `n/NAME` — only alphanumeric characters and spaces allowed, and cannot be blank
-* `p/PHONE` — only numbers allowed, and must contain at least 3 digits
+* `p/PHONE` — must contain at least 3 digits; may also include letters, parentheses `()`, spaces, `+`, and `|` to add country codes, labels, or multiple numbers (e.g. `+6581231231` or `81231231(House) | 1241242(Personal)`)
 * `e/EMAIL` — a valid email in the form `LOCAL-PART@DOMAIN`
 * `a/ADDRESS` — cannot be blank
-* `t/TAG` — only alphanumeric characters allowed
+* `t/TAG` — only alphanumeric characters allowed, and must be at most 30 characters long
 
 <details>
 <summary><b>Valid Email Rules:</b></summary>
@@ -245,7 +245,7 @@ A contact can have any number of tags (including 0)
 * **Accommodation contacts**: `[s/STARS]` — must be `1–5` (default: `3`)
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Important:**
-Fields that are not applicable to the specified contact type will be ignored.
+Fields that are not applicable to the specified contact type will be rejected.
 For example, `h/true` will not apply to `person` contacts.
 </div>
 
@@ -298,6 +298,9 @@ Edits an existing contact in the contact list.
   <li><code>edit 1 p/91234567 e/alAhh@example.com</code> :
   Edits the first contact by updating the phone number and email.<br>
   <img src="images/EditCommandExample.png" alt="EditCommandExample"></li>
+
+  <li><code>edit 1 p/91234567(Mobile) | 61234567(Office)</code> :
+  Edits the first contact with multiple labelled phone numbers.</li>
 
   <li><code>edit 2 n/New Name t/</code> :
   Edits the second contact by updating the name and clearing all tags.</li>
@@ -529,6 +532,16 @@ Deletes a tour package from the tour list.
 
 </details>
 
+### Duplicating a tour: `tour-duplicate`
+
+Creates a new tour with a specified name, and assigns all contacts from an existing tour to it.
+
+**Format:** `tour-duplicate INDEX n/NAME`
+
+* Duplicates the tour at the specified `INDEX`
+* Index must be a positive integer
+* `NAME` must not already exist as a tour
+
 ### Adding tours to favourites: `tour-favourite-add`
 
 Adds a specified tour from the tour list as a favourite tour.
@@ -542,6 +555,9 @@ Adds a specified tour from the tour list as a favourite tour.
 <summary><b>Example:</b></summary>
 
 <ul>
+  <li><code>tour-duplicate 1 n/Le Royal Tour Copy</code> :
+  Creates a new tour named <code>Le Royal Tour Copy</code> with all contacts from the first tour assigned to it.</li>
+=======
   <li><code>tour-favourite-add 2</code> :
   Adds the second tour shown in the current tour list as a favourite tour.<br>
   <img src="images/TourFavouriteAddCommandExample.png" alt="TourFavouriteAddCommandExample"></li>
@@ -570,6 +586,7 @@ Removes a specified tour as a favourite tour.
 <ul>
   <li><code>tour-favourite-remove 1</code> :
   Removes the first tour shown in the current tour list as a favourite tour.</li>
+>>>>>>> master
 </ul>
 
 </details>

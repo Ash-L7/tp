@@ -10,6 +10,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.commands.contact.EditCommand;
 import seedu.address.logic.commands.contact.EditCommand.EditContactDescriptor;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tour.Tour;
@@ -111,6 +112,28 @@ public abstract class Contact {
         return "Tours: " + getTours().stream()
                 .map(Tour::toString)
                 .collect(Collectors.joining(" | "));
+    }
+
+    /**
+     * Returns a copy of the contact with the given tour added to its set of tours.
+     */
+    public Contact withTourAdded(Tour tour) {
+        Set<Tour> updatedTours = new HashSet<>(this.tours);
+        updatedTours.add(tour);
+        EditCommand.EditContactDescriptor descriptor = new EditCommand.EditContactDescriptor();
+        descriptor.setTours(updatedTours);
+        return this.edit(descriptor);
+    }
+
+    /**
+     * Returns a copy of the contact with the given tour removed from its set of tours.
+     */
+    public Contact withTourRemoved(Tour tour) {
+        Set<Tour> updatedTours = new HashSet<>(this.tours);
+        updatedTours.remove(tour);
+        EditCommand.EditContactDescriptor descriptor = new EditCommand.EditContactDescriptor();
+        descriptor.setTours(updatedTours);
+        return this.edit(descriptor);
     }
 
     public FavouriteStatus getFavouriteStatus() {

@@ -2,9 +2,7 @@ package seedu.address.logic.commands.tour;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
@@ -13,7 +11,6 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.contact.EditCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.contact.Contact;
@@ -55,11 +52,11 @@ public class TourAssignCommand extends Command {
         Contact contact = getContact(model.getFilteredContactList(), contactIndex);
         Tour tour = getTour(model.getFilteredTourList(), tourIndex);
         validateNotAssigned(contact, tour);
-        Contact updatedContact = buildContactWithTourAdded(contact, tour);
-        model.setContact(contact, updatedContact);
+        model.assignTour(contact, tour);
         model.commitAddressBook();
-        logger.fine(String.format("Assigned tour to contact: %s", updatedContact));
-        return new CommandResult(String.format(MESSAGE_ASSIGN_TOUR_SUCCESS, Messages.format(updatedContact)));
+
+        logger.fine(String.format("Assigned tour to contact: %s", contact));
+        return new CommandResult(String.format(MESSAGE_ASSIGN_TOUR_SUCCESS, Messages.format(contact)));
     }
 
     private static Contact getContact(List<Contact> contactList, Index index) throws CommandException {
@@ -87,17 +84,6 @@ public class TourAssignCommand extends Command {
             logger.info("Contact is already assigned to tour");
             throw new CommandException(MESSAGE_DUPLICATE_TOUR);
         }
-    }
-
-    private static Contact buildContactWithTourAdded(Contact contact, Tour tour) {
-        Set<Tour> updatedTours = new HashSet<>(contact.getTours());
-        updatedTours.add(tour);
-        assert updatedTours.contains(tour) : "Tour must be present in the set after adding";
-        EditCommand.EditContactDescriptor descriptor = new EditCommand.EditContactDescriptor();
-        descriptor.setTours(updatedTours);
-        Contact updatedContact = contact.edit(descriptor);
-        assert updatedContact != null : "Edited contact must not be null";
-        return updatedContact;
     }
 
     @Override

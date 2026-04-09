@@ -28,6 +28,7 @@ import seedu.address.logic.commands.general.UndoCommand;
 import seedu.address.logic.commands.tour.TourAddCommand;
 import seedu.address.logic.commands.tour.TourAssignCommand;
 import seedu.address.logic.commands.tour.TourDeleteCommand;
+import seedu.address.logic.commands.tour.TourDuplicateCommand;
 import seedu.address.logic.commands.tour.TourFindCommand;
 import seedu.address.logic.commands.tour.TourListCommand;
 import seedu.address.logic.commands.tour.TourUnassignCommand;
@@ -86,6 +87,12 @@ public class AddressBookParser {
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
 
+        case ExitCommand.COMMAND_WORD:
+            return new ExitCommand();
+
+        case HelpCommand.COMMAND_WORD:
+            return new HelpCommand();
+
         case FavouriteViewCommand.COMMAND_WORD:
             return new FavouriteViewCommand();
 
@@ -97,12 +104,6 @@ public class AddressBookParser {
 
         case TourListCommand.COMMAND_WORD:
             return new TourListCommand();
-
-        case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
-
-        case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
 
         case TourAddCommand.COMMAND_WORD:
             return new TourAddCommandParser().parse(arguments);
@@ -121,6 +122,9 @@ public class AddressBookParser {
 
         case TourFindCommand.COMMAND_WORD:
             return new TourFindCommandParser().parse(arguments);
+
+        case TourDuplicateCommand.COMMAND_WORD:
+            return new TourDuplicateCommandParser().parse(arguments);
 
         case TourFavouriteAddCommand.COMMAND_WORD:
             return new TourFavouriteAddCommandParser().parse(arguments);

@@ -279,7 +279,7 @@ Step 5. The user then decides to execute the command `list`. Commands that do no
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `delete-tour 1`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `tour-delete 1`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 ![UndoRedoState5](images/UndoRedoState5.png)
 
@@ -653,6 +653,13 @@ Priorities: High (must have) — `* * *`, Medium (nice to have) — `* *`, Low (
 
 ---
 
+### Use Case: UC15 - Duplicate a Tour Package
+
+**MSS**
+1. User requests to duplicate an existing tour package using its index, providing a new name.
+2. Bivago creates a new tour with the given name and assigns all contacts from the original tour to it.
+3. Bivago confirms the new tour has been created.
+
 ### Use Case: UC15 - Find Tour Package
 
 **MSS**
@@ -744,6 +751,7 @@ Priorities: High (must have) — `* * *`, Medium (nice to have) — `* *`, Low (
     - 2a1. Bivago displays an empty list indicating no favourite tours were found.
     - 2a2. Use case ends.
 
+>>>>>>> master
 ---
 
 ## Non-Functional Requirements
@@ -928,6 +936,24 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: No favourites exist<br>
        Expected: A message indicating 0 contacts listed.
+
+### Duplicating a tour
+
+1. Duplicating a tour
+
+    1. Prerequisites: At least one tour exists. Use `tour-list` to confirm.
+
+    1. Test case: `tour-duplicate 1 n/New Tour`<br>
+       Expected: A new tour named `New Tour` is created with all contacts from the first tour assigned to it. Confirmation message shown.
+
+    1. Test case: Duplicate name (e.g. name already exists as another tour)<br>
+       Expected: Error message indicating duplicate tour name.
+
+    1. Test case: Invalid index (e.g. `tour-duplicate 0 n/New Tour`)<br>
+       Expected: Error message for invalid command format.
+
+    1. Test case: Missing name prefix (e.g. `tour-duplicate 1`)<br>
+       Expected: Error message for invalid command format.
 
 ### Assigning a contact to a tour
 

@@ -45,15 +45,11 @@ public class TourAssignCommandTest {
 
         TourAssignCommand command = new TourAssignCommand(INDEX_FIRST_CONTACT, INDEX_FIRST_TOUR);
 
-        String expectedMessage = String.format(TourAssignCommand.MESSAGE_ASSIGN_TOUR_SUCCESS,
-                Messages.format(contactToAssign));
-
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        Contact expectedContact = contactToAssign.edit(buildDescriptorWithTour(contactToAssign, tourToAssign));
-        expectedModel.setContact(contactToAssign, expectedContact);
+        expectedModel.assignTour(contactToAssign, tourToAssign);
 
         assertCommandSuccess(command, model,
-                String.format(TourAssignCommand.MESSAGE_ASSIGN_TOUR_SUCCESS, Messages.format(expectedContact)),
+                String.format(TourAssignCommand.MESSAGE_ASSIGN_TOUR_SUCCESS, Messages.format(contactToAssign)),
                 expectedModel);
     }
 
