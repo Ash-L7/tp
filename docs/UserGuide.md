@@ -519,6 +519,16 @@ Deletes a tour package from the tour list.
 
 </details>
 
+### Duplicating a tour: `tour-duplicate`
+
+Creates a new tour with a specified name, and assigns all contacts from an existing tour to it.
+
+**Format:** `tour-duplicate INDEX n/NAME`
+
+* Duplicates the tour at the specified `INDEX`
+* Index must be a positive integer
+* `NAME` must not already exist as a tour
+
 ### Adding tours to favourites: `tour-favourite-add`
 
 Adds a specified tour from the tour list as a favourite tour.
@@ -532,6 +542,9 @@ Adds a specified tour from the tour list as a favourite tour.
 <summary><b>Example:</b></summary>
 
 <ul>
+  <li><code>tour-duplicate 1 n/Le Royal Tour Copy</code> :
+  Creates a new tour named <code>Le Royal Tour Copy</code> with all contacts from the first tour assigned to it.</li>
+=======
   <li><code>tour-favourite-add 2</code> :
   Adds the second tour shown in the current tour list as a favourite tour.</li>
 </ul>
@@ -559,6 +572,7 @@ Removes a specified tour as a favourite tour.
 <ul>
   <li><code>tour-favourite-remove 1</code> :
   Removes the first tour shown in the current tour list as a favourite tour.</li>
+>>>>>>> master
 </ul>
 
 </details>

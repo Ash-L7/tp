@@ -41,17 +41,16 @@ public class TourUnassignCommandTest {
 
     @Test
     public void execute_validIndices_success() {
-        Contact contactToEdit = model.getFilteredContactList().get(INDEX_FIRST_CONTACT.getZeroBased());
-        Tour tourToRemove = model.getFilteredTourList().get(INDEX_FIRST_TOUR.getZeroBased());
+        Contact contactToUnassign = model.getFilteredContactList().get(INDEX_FIRST_CONTACT.getZeroBased());
+        Tour tourToUnassign = model.getFilteredTourList().get(INDEX_FIRST_TOUR.getZeroBased());
 
         TourUnassignCommand command = new TourUnassignCommand(INDEX_FIRST_CONTACT, INDEX_FIRST_TOUR);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        Contact expectedContact = contactToEdit.edit(buildDescriptorWithoutTour(contactToEdit, tourToRemove));
-        expectedModel.setContact(contactToEdit, expectedContact);
+        expectedModel.setContact(contactToUnassign, contactToUnassign.withTourRemoved(tourToUnassign));
 
         assertCommandSuccess(command, model,
-                String.format(TourUnassignCommand.MESSAGE_UNASSIGN_TOUR_SUCCESS, Messages.format(expectedContact)),
+                String.format(TourUnassignCommand.MESSAGE_UNASSIGN_TOUR_SUCCESS, Messages.format(contactToUnassign)),
                 expectedModel);
     }
 

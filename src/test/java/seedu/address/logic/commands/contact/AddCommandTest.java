@@ -214,6 +214,16 @@ public class AddCommandTest {
         public void updateFilteredTourList(Predicate<Tour> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void assignTour(Contact contact, Tour tour) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void unassignTour(Contact contact, Tour tour) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

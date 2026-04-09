@@ -15,7 +15,9 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.NameContainsKeywordsPredicate;
+import seedu.address.model.tour.Tour;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -91,6 +93,32 @@ public class ModelManagerTest {
     @Test
     public void getFilteredContactList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredContactList().remove(0));
+    }
+
+    @Test
+    public void assignTour_addsTourToContact() {
+        modelManager.addContact(ALICE);
+        Tour tour = new Tour("City Tour");
+        modelManager.addTour(tour);
+
+        modelManager.assignTour(ALICE, tour);
+
+        Contact updatedContact = modelManager.getFilteredContactList().get(0);
+        assertTrue(updatedContact.isInTour(tour));
+    }
+
+    @Test
+    public void unassignTour_removesTourFromContact() {
+        modelManager.addContact(ALICE);
+        Tour tour = new Tour("City Tour");
+        modelManager.addTour(tour);
+        modelManager.assignTour(ALICE, tour);
+
+        Contact assignedContact = modelManager.getFilteredContactList().get(0);
+        modelManager.unassignTour(assignedContact, tour);
+
+        Contact updatedContact = modelManager.getFilteredContactList().get(0);
+        assertFalse(updatedContact.isInTour(tour));
     }
 
     @Test
