@@ -34,6 +34,7 @@ class JsonAdaptedContact {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Contact's %s field is missing!";
     public static final String INVALID_FIELD_MESSAGE_FORMAT = "Contact's %s field is invalid!";
+    public static final String IRRELEVANT_FIELD_MESSAGE_FORMAT = "Contact of type %s should not have field: %s";
 
     private final String type;
     private final String name;
@@ -182,11 +183,39 @@ class JsonAdaptedContact {
         }
 
         if (type.equals(Person.class.getSimpleName())) {
+            if (halalStatus != null) {
+                throw new IllegalValueException(String.format(
+                        IRRELEVANT_FIELD_MESSAGE_FORMAT, type, HalalStatus.class.getSimpleName()));
+            }
+            if (openingHour != null) {
+                throw new IllegalValueException(String.format(
+                        IRRELEVANT_FIELD_MESSAGE_FORMAT, type, OpeningHour.class.getSimpleName()));
+            }
+            if (closingHour != null) {
+                throw new IllegalValueException(String.format(
+                        IRRELEVANT_FIELD_MESSAGE_FORMAT, type, ClosingHour.class.getSimpleName()));
+            }
+            if (stars != null) {
+                throw new IllegalValueException(String.format(
+                        IRRELEVANT_FIELD_MESSAGE_FORMAT, type, AccommodationStars.class.getSimpleName()));
+            }
             return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelTours,
                     modelFavouriteStatus);
         }
 
         if (type.equals(Fnb.class.getSimpleName())) {
+            if (openingHour != null) {
+                throw new IllegalValueException(String.format(
+                        IRRELEVANT_FIELD_MESSAGE_FORMAT, type, OpeningHour.class.getSimpleName()));
+            }
+            if (closingHour != null) {
+                throw new IllegalValueException(String.format(
+                        IRRELEVANT_FIELD_MESSAGE_FORMAT, type, ClosingHour.class.getSimpleName()));
+            }
+            if (stars != null) {
+                throw new IllegalValueException(String.format(
+                        IRRELEVANT_FIELD_MESSAGE_FORMAT, type, AccommodationStars.class.getSimpleName()));
+            }
             if (halalStatus == null) {
                 throw new IllegalValueException(String.format(
                         MISSING_FIELD_MESSAGE_FORMAT, HalalStatus.class.getSimpleName()));
@@ -200,6 +229,14 @@ class JsonAdaptedContact {
         }
 
         if (type.equals(Attraction.class.getSimpleName())) {
+            if (halalStatus != null) {
+                throw new IllegalValueException(String.format(
+                        IRRELEVANT_FIELD_MESSAGE_FORMAT, type, HalalStatus.class.getSimpleName()));
+            }
+            if (stars != null) {
+                throw new IllegalValueException(String.format(
+                        IRRELEVANT_FIELD_MESSAGE_FORMAT, type, AccommodationStars.class.getSimpleName()));
+            }
             if (openingHour == null) {
                 throw new IllegalValueException(String.format(
                         MISSING_FIELD_MESSAGE_FORMAT, OpeningHour.class.getSimpleName()));
@@ -224,6 +261,18 @@ class JsonAdaptedContact {
         }
 
         if (type.equals(Accommodation.class.getSimpleName())) {
+            if (halalStatus != null) {
+                throw new IllegalValueException(String.format(
+                        IRRELEVANT_FIELD_MESSAGE_FORMAT, type, HalalStatus.class.getSimpleName()));
+            }
+            if (openingHour != null) {
+                throw new IllegalValueException(String.format(
+                        IRRELEVANT_FIELD_MESSAGE_FORMAT, type, OpeningHour.class.getSimpleName()));
+            }
+            if (closingHour != null) {
+                throw new IllegalValueException(String.format(
+                        IRRELEVANT_FIELD_MESSAGE_FORMAT, type, ClosingHour.class.getSimpleName()));
+            }
             if (stars == null) {
                 throw new IllegalValueException(String.format(
                         MISSING_FIELD_MESSAGE_FORMAT, AccommodationStars.class.getSimpleName()));

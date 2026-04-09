@@ -81,6 +81,11 @@ public class MainWindow extends UiPart<Stage> {
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
+        String startupMessage = logic.getStartupMessage();
+        if (startupMessage != null) {
+            resultDisplay.setFeedbackToUser(startupMessage);
+        }
+
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 

@@ -33,6 +33,7 @@ public class LogicManager implements Logic {
     private final Model model;
     private final Storage storage;
     private final AddressBookParser addressBookParser;
+    private String startupMessage = null;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -93,5 +94,15 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
+    }
+
+    @Override
+    public String getStartupMessage() {
+        return startupMessage;
+    }
+
+    @Override
+    public void setStartupMessage(String message) {
+        this.startupMessage = message;
     }
 }

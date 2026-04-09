@@ -51,4 +51,14 @@ public interface Logic {
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+
+    /**
+     * Returns the startup message to display on launch, or null if none.
+     */
+    String getStartupMessage();
+
+    /**
+     * Sets the startup message to display on launch.
+     */
+    void setStartupMessage(String message);
 }

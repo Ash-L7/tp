@@ -45,6 +45,7 @@ public class MainApp extends Application {
     protected Storage storage;
     protected Model model;
     protected Config config;
+    protected String startupWarning = null;
 
     @Override
     public void init() throws Exception {
@@ -63,6 +64,10 @@ public class MainApp extends Application {
         model = initModelManager(storage, userPrefs);
 
         logic = new LogicManager(model, storage);
+
+        if (startupWarning != null) {
+            logic.setStartupMessage(startupWarning);
+        }
 
         ui = new UiManager(logic);
     }
@@ -85,9 +90,18 @@ public class MainApp extends Application {
             }
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
         } catch (DataLoadingException e) {
-            logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
-                    + " Will be starting with an empty AddressBook.");
+            String reason = e.getCause() != null ? e.getCause().getMessage() : e.getMessage();
+            startupWarning = "WARNING: Data file could not be loaded due to invalid or tampered data.\n"
+                    + "Reason: " + reason + "\n"
+                    + "The app has started with an empty contact list.";
+            logger.warning(startupWarning);
             initialData = new AddressBook();
+            try {
+                storage.saveAddressBook(initialData);
+                logger.info("Overwrote corrupted data file with empty address book.");
+            } catch (IOException ioe) {
+                logger.warning("Failed to overwrite corrupted data file: " + ioe.getMessage());
+            }
         }
 
         return new ModelManager(initialData, userPrefs);

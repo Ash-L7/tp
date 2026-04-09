@@ -32,6 +32,7 @@ import seedu.address.model.contact.Fnb;
 import seedu.address.model.contact.HalalStatus;
 import seedu.address.model.contact.Name;
 import seedu.address.model.contact.OpeningHour;
+import seedu.address.model.contact.Person;
 import seedu.address.model.contact.Phone;
 import seedu.address.model.tour.Tour;
 import seedu.address.model.tour.TourFavouriteStatus;
@@ -451,4 +452,129 @@ public class JsonAdaptedContactTest {
         assertThrows(IllegalValueException.class, expectedMessage, tour::toModelType);
     }
 
+    // ===== Irrelevant field tests =====
+
+    @Test
+    public void toModelType_personWithHalalStatus_throwsIllegalValueException() {
+        JsonAdaptedContact contact = new JsonAdaptedContact(VALID_TYPE_PERSON, VALID_NAME_PERSON, VALID_PHONE_PERSON,
+                VALID_EMAIL_PERSON, VALID_ADDRESS_PERSON, VALID_TAGS_PERSON, EMPTY_TOUR,
+                VALID_HALAL_STATUS, NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER);
+        String expectedMessage = String.format(JsonAdaptedContact.IRRELEVANT_FIELD_MESSAGE_FORMAT,
+                Person.class.getSimpleName(), HalalStatus.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, contact::toModelType);
+    }
+
+    @Test
+    public void toModelType_personWithOpeningHour_throwsIllegalValueException() {
+        JsonAdaptedContact contact = new JsonAdaptedContact(VALID_TYPE_PERSON, VALID_NAME_PERSON, VALID_PHONE_PERSON,
+                VALID_EMAIL_PERSON, VALID_ADDRESS_PERSON, VALID_TAGS_PERSON, EMPTY_TOUR,
+                NULL_PARAMETER, VALID_OPENING_HOUR, NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER);
+        String expectedMessage = String.format(JsonAdaptedContact.IRRELEVANT_FIELD_MESSAGE_FORMAT,
+                Person.class.getSimpleName(), OpeningHour.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, contact::toModelType);
+    }
+
+    @Test
+    public void toModelType_personWithClosingHour_throwsIllegalValueException() {
+        JsonAdaptedContact contact = new JsonAdaptedContact(VALID_TYPE_PERSON, VALID_NAME_PERSON, VALID_PHONE_PERSON,
+                VALID_EMAIL_PERSON, VALID_ADDRESS_PERSON, VALID_TAGS_PERSON, EMPTY_TOUR,
+                NULL_PARAMETER, NULL_PARAMETER, VALID_CLOSING_HOUR, NULL_PARAMETER, NULL_PARAMETER);
+        String expectedMessage = String.format(JsonAdaptedContact.IRRELEVANT_FIELD_MESSAGE_FORMAT,
+                Person.class.getSimpleName(), ClosingHour.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, contact::toModelType);
+    }
+
+    @Test
+    public void toModelType_personWithStars_throwsIllegalValueException() {
+        JsonAdaptedContact contact = new JsonAdaptedContact(VALID_TYPE_PERSON, VALID_NAME_PERSON, VALID_PHONE_PERSON,
+                VALID_EMAIL_PERSON, VALID_ADDRESS_PERSON, VALID_TAGS_PERSON, EMPTY_TOUR,
+                NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER, VALID_STARS, NULL_PARAMETER);
+        String expectedMessage = String.format(JsonAdaptedContact.IRRELEVANT_FIELD_MESSAGE_FORMAT,
+                Person.class.getSimpleName(), AccommodationStars.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, contact::toModelType);
+    }
+
+    @Test
+    public void toModelType_fnbWithOpeningHour_throwsIllegalValueException() {
+        JsonAdaptedContact contact = new JsonAdaptedContact(Fnb.class.getSimpleName(),
+                AL_AZHAR.getName().toString(), AL_AZHAR.getPhone().toString(),
+                AL_AZHAR.getEmail().toString(), AL_AZHAR.getAddress().toString(),
+                AL_AZHAR.getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()),
+                EMPTY_TOUR, VALID_HALAL_STATUS, VALID_OPENING_HOUR, NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER);
+        String expectedMessage = String.format(JsonAdaptedContact.IRRELEVANT_FIELD_MESSAGE_FORMAT,
+                Fnb.class.getSimpleName(), OpeningHour.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, contact::toModelType);
+    }
+
+    @Test
+    public void toModelType_fnbWithStars_throwsIllegalValueException() {
+        JsonAdaptedContact contact = new JsonAdaptedContact(Fnb.class.getSimpleName(),
+                AL_AZHAR.getName().toString(), AL_AZHAR.getPhone().toString(),
+                AL_AZHAR.getEmail().toString(), AL_AZHAR.getAddress().toString(),
+                AL_AZHAR.getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()),
+                EMPTY_TOUR, VALID_HALAL_STATUS, NULL_PARAMETER, NULL_PARAMETER, VALID_STARS, NULL_PARAMETER);
+        String expectedMessage = String.format(JsonAdaptedContact.IRRELEVANT_FIELD_MESSAGE_FORMAT,
+                Fnb.class.getSimpleName(), AccommodationStars.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, contact::toModelType);
+    }
+
+    @Test
+    public void toModelType_attractionWithHalalStatus_throwsIllegalValueException() {
+        JsonAdaptedContact contact = new JsonAdaptedContact(Attraction.class.getSimpleName(),
+                USS.getName().toString(), USS.getPhone().toString(),
+                USS.getEmail().toString(), USS.getAddress().toString(),
+                USS.getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()),
+                EMPTY_TOUR, VALID_HALAL_STATUS, VALID_OPENING_HOUR, VALID_CLOSING_HOUR, NULL_PARAMETER, NULL_PARAMETER);
+        String expectedMessage = String.format(JsonAdaptedContact.IRRELEVANT_FIELD_MESSAGE_FORMAT,
+                Attraction.class.getSimpleName(), HalalStatus.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, contact::toModelType);
+    }
+
+    @Test
+    public void toModelType_attractionWithStars_throwsIllegalValueException() {
+        JsonAdaptedContact contact = new JsonAdaptedContact(Attraction.class.getSimpleName(),
+                USS.getName().toString(), USS.getPhone().toString(),
+                USS.getEmail().toString(), USS.getAddress().toString(),
+                USS.getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()),
+                EMPTY_TOUR, NULL_PARAMETER, VALID_OPENING_HOUR, VALID_CLOSING_HOUR, VALID_STARS, NULL_PARAMETER);
+        String expectedMessage = String.format(JsonAdaptedContact.IRRELEVANT_FIELD_MESSAGE_FORMAT,
+                Attraction.class.getSimpleName(), AccommodationStars.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, contact::toModelType);
+    }
+
+    @Test
+    public void toModelType_accommodationWithHalalStatus_throwsIllegalValueException() {
+        JsonAdaptedContact contact = new JsonAdaptedContact(Accommodation.class.getSimpleName(),
+                HOTEL.getName().toString(), HOTEL.getPhone().toString(),
+                HOTEL.getEmail().toString(), HOTEL.getAddress().toString(),
+                HOTEL.getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()),
+                EMPTY_TOUR, VALID_HALAL_STATUS, NULL_PARAMETER, NULL_PARAMETER, VALID_STARS, NULL_PARAMETER);
+        String expectedMessage = String.format(JsonAdaptedContact.IRRELEVANT_FIELD_MESSAGE_FORMAT,
+                Accommodation.class.getSimpleName(), HalalStatus.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, contact::toModelType);
+    }
+
+    @Test
+    public void toModelType_accommodationWithOpeningHour_throwsIllegalValueException() {
+        JsonAdaptedContact contact = new JsonAdaptedContact(Accommodation.class.getSimpleName(),
+                HOTEL.getName().toString(), HOTEL.getPhone().toString(),
+                HOTEL.getEmail().toString(), HOTEL.getAddress().toString(),
+                HOTEL.getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()),
+                EMPTY_TOUR, NULL_PARAMETER, VALID_OPENING_HOUR, NULL_PARAMETER, VALID_STARS, NULL_PARAMETER);
+        String expectedMessage = String.format(JsonAdaptedContact.IRRELEVANT_FIELD_MESSAGE_FORMAT,
+                Accommodation.class.getSimpleName(), OpeningHour.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, contact::toModelType);
+    }
+
+    @Test
+    public void toModelType_accommodationWithClosingHour_throwsIllegalValueException() {
+        JsonAdaptedContact contact = new JsonAdaptedContact(Accommodation.class.getSimpleName(),
+                HOTEL.getName().toString(), HOTEL.getPhone().toString(),
+                HOTEL.getEmail().toString(), HOTEL.getAddress().toString(),
+                HOTEL.getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()),
+                EMPTY_TOUR, NULL_PARAMETER, NULL_PARAMETER, VALID_CLOSING_HOUR, VALID_STARS, NULL_PARAMETER);
+        String expectedMessage = String.format(JsonAdaptedContact.IRRELEVANT_FIELD_MESSAGE_FORMAT,
+                Accommodation.class.getSimpleName(), ClosingHour.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, contact::toModelType);
+    }
 }

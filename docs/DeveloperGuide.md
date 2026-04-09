@@ -153,6 +153,7 @@ The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+* validates each contact's type-specific fields on load — if a contact has fields irrelevant to its type (e.g. a `Person` with a `halalStatus` field), the entire data file is rejected and the app starts with an empty contact list.
 
 ### Common classes
 
@@ -1067,10 +1068,12 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-    1. Prerequisites: `bivago-data.json` is present in the `data` folder.
+   1. Prerequisites: `bivago-data.json` is present in the `data` folder.
 
-    1. Test case: Close the app, delete the `bivago-data.json` file, then open the app.<br>
-       Expected: App is initialised with sample data.
+   1. Test case: open `data/bivago-data.json` in a text editor and add an irrelevant field to a contact (e.g. add `"halalStatus": "true"` to a `Person` contact, or `"stars": "3"` to an `Fnb` contact). Save the file and relaunch the app.
 
-    1. Test case: Close the app, edit `halalStatus` of a `Fnb` contact to be `12345`, then open the app.<br>
-       Expected: App data is cleared.
+      Expected: The app starts with an empty contact list. A warning message is shown in the result display stating the data file could not be loaded, the reason (e.g. which invalid field was detected), and that the app has started with a clean state. The corrupted `bivago-data.json` is immediately overwritten with an empty address book.
+
+   1. Test case: delete `data/bivago-data.json` and relaunch the app.
+
+      Expected: The app starts with the sample address book data and creates a new `bivago-data.json`.
