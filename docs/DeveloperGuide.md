@@ -86,7 +86,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ContactListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -95,7 +95,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Contact` object residing in the `Model`.
 
 ### Logic component
 
@@ -116,7 +116,7 @@ How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+1. The command can communicate with the `Model` when it is executed (e.g. to delete a contact).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
@@ -141,12 +141,6 @@ The `Model` component,
 * stores the currently 'selected' `Contact`/`Tour` objects (e.g., results of a search query) as separate _filtered_ lists which is exposed to outsiders as an unmodifiable `ObservableList<Contact>`/`ObservableList<Tour>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
-</div>
 
 
 ### Storage component
@@ -779,7 +773,7 @@ Priorities: High (must have) — `* * *`, Medium (nice to have) — `* *`, Low (
 |----------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
 | **Mainstream OS**                | Windows, Linux, Unix, or macOS.                                                                                                           |
 | **Contact**                      | A service provider in the tour guide's network, such as a driver, restaurant, hotel, or tourist attraction.                               |
-| **favourites**                   | A list of contacts chosen by the tour guide accessible by dedicated commands, each denoted by a star beside the name in the contact list. |
+| **Favourites**                   | A list of contacts chosen by the tour guide accessible by dedicated commands, each denoted by a star beside the name in the contact list. |
 | **Tour Package**                 | A planned tour offering that groups together a set of contacts (e.g. driver, restaurants, attractions) under a named itinerary.           |
 | **Category**                     | A classification label for contacts. Valid categories include: `person`, `fnb`, `accomm`, `attraction`.                                   |
 | **Tag**                          | A label applied to a contact to store additional information, e.g. `driver`, `vip`.                                                       |
@@ -813,7 +807,14 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+1. Saving and loading
+
+   1. Modify the app by using commands to add or delete tours and contacts.
+   
+   1. Close the window.
+
+   1. Re-launch the app by double-clicking the jar file.<br>
+      Expected: The modifications are still in effect.
 
 ### Adding a contact
 
@@ -1066,6 +1067,10 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. Prerequisites: `bivago-data.json` is present in the `data` folder.
 
-1. _{ more test cases …​ }_
+    1. Test case: Close the app, delete the `bivago-data.json` file, then open the app.<br>
+       Expected: App is initialised with sample data.
+
+    1. Test case: Close the app, edit `halalStatus` of a `Fnb` contact to be `12345`, then open the app.<br>
+       Expected: App data is cleared.
