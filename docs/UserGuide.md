@@ -120,6 +120,12 @@ Exits the program.
 
 **Format:** `exit`
 
+### Clearing the app : `clear`
+
+Clears all data from the app.
+
+**Format:** `clear`
+
 ### Undoing the last command: `undo`
 
 Undoes the previous command.
@@ -176,10 +182,10 @@ manually.
 
 ### Editing the data file
 
-Bivago data are saved automatically as a JSON file `[JAR file location]/data/bivago-data.json`.
+Bivago data are saved automatically as a JSON file `[JAR file location]/data/bivago-data.json`. Advanced users are welcome to update data by directly editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Warning:**
-Do not manually edit the data file. Any modifications that result in an invalid format or out-of-range values will cause Bivago to not work as intended. Always use the commands provided by the app to make changes to your data.
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+If your changes to the data file makes its format invalid, or make certain values invalid, Bivago will discard all data and start with an empty data file at the next run. Hence, it is recommended to make a backup of a file before editing it.
 </div>
 
 ---
@@ -248,7 +254,8 @@ For example, `h/true` will not apply to `person` contacts.
 
 <ul>
   <li><code>add type/person n/John Doe p/98765432 e/johnd@example.com a/311 Clementi Ave 2</code> :
-  Adds a person contact named <code>John Doe</code> to the contact list.</li>
+  Adds a person contact named <code>John Doe</code> to the contact list.<br>
+  <img src="images/AddCommandExample.png" alt="AddCommandExample"></li>
 
   <li><code>add type/fnb n/Nasi Lemak Stall p/91234567 e/fnb@example.com a/Market Street h/true</code> :
   Adds an F&amp;B contact named <code>Nasi Lemak Stall</code> with halal status set to <code>true</code>.</li>
@@ -288,8 +295,9 @@ Edits an existing contact in the contact list.
 <summary><b>Example:</b></summary>
 
 <ul>
-  <li><code>edit 1 p/91234567 e/johndoe@example.com</code> :
-  Edits the first contact by updating the phone number and email.</li>
+  <li><code>edit 1 p/91234567 e/alAhh@example.com</code> :
+  Edits the first contact by updating the phone number and email.<br>
+  <img src="images/EditCommandExample.png" alt="EditCommandExample"></li>
 
   <li><code>edit 1 p/91234567(Mobile) | 61234567(Office)</code> :
   Edits the first contact with multiple labelled phone numbers.</li>
@@ -320,7 +328,8 @@ Finds contacts matching a specified type, whose names contain any of the given k
 
 <ul>
   <li><code>find n/John</code> :
-  Finds contacts of any type whose names contain <code>John</code>.</li>
+  Finds contacts of any type whose names contain <code>John</code>.<br>
+  <img src="images/FindCommandExample.png" alt="FindCommandExample"></li>
 
   <li><code>find n/alex david</code> :
   Finds contacts of any type whose names contain <code>alex</code> or <code>david</code>.</li>
@@ -370,7 +379,8 @@ Adds a specified contact from the contact list as a favourite contact.
 
 <ul>
   <li><code>favourite-add 2</code> :
-  Adds the second contact shown in the current contact list as a favourite contact.</li>
+  Adds the second contact shown in the current contact list as a favourite contact.<br>
+  <img src="images/FavouriteAddCommandExample.png" alt="FavouriteAddCommandExample"></li>
 </ul>
 
 </details>
@@ -415,7 +425,8 @@ Adds a tour package to the tour list.
 
 <ul>
   <li><code>tour-add n/Le Royal Tour</code> :
-  Adds a tour named <code>Le Royal Tour</code>.</li>
+  Adds a tour named <code>Le Royal Tour</code>.<br>
+  <img src="images/TourAddCommandExample.png" alt="TourAddCommandExample"></li>
 </ul>
 
 </details>
@@ -438,8 +449,9 @@ Assigns a contact to a tour.
 <summary><b>Example:</b></summary>
 
 <ul>
-  <li><code>tour-assign 1 tour/2</code> :
-  Assigns the first contact to the second tour.</li>
+  <li><code>tour-assign 1 tour/3</code> :
+  Assigns the first contact to the third tour.<br>
+  <img src="images/TourAssignCommandExample.png" alt="TourAssignCommandExample"></li>
 </ul>
 
 </details>
@@ -497,8 +509,9 @@ Finds tours whose names contain any of the given keywords.
   <li><code>tour-find Foodie</code> :
   Finds tours whose names contain <code>Foodie</code>.</li>
 
-  <li><code>tour-find City Walking</code> :
-  Finds tours whose names contain <code>City</code> or <code>Walking</code>.</li>
+  <li><code>tour-find LeWalking Royal</code> :
+  Finds tours whose names contain <code>LeWalking</code> or <code>Royal</code>.<br>
+  <img src="images/TourFindCommandExample.png" alt="TourFindCommandExample"></li>
 </ul>
 
 </details>
@@ -546,7 +559,8 @@ Adds a specified tour from the tour list as a favourite tour.
   Creates a new tour named <code>Le Royal Tour Copy</code> with all contacts from the first tour assigned to it.</li>
 =======
   <li><code>tour-favourite-add 2</code> :
-  Adds the second tour shown in the current tour list as a favourite tour.</li>
+  Adds the second tour shown in the current tour list as a favourite tour.<br>
+  <img src="images/TourFavouriteAddCommandExample.png" alt="TourFavouriteAddCommandExample"></li>
 </ul>
 
 </details>
@@ -579,22 +593,11 @@ Removes a specified tour as a favourite tour.
 
 ---
 
-## FAQ
-
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains
-the data of your previous Bivago home folder.
-
----
-
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only
    the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the
    application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut
-   `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to
-   manually restore the minimized Help Window.
 
 ---
 
@@ -602,12 +605,13 @@ the data of your previous Bivago home folder.
 
 ### General
 
-| Action   | Command | Summary                    |
-|----------|---------|----------------------------|
-| **Help** | `help`  | Displays a help message    |
-| **Exit** | `exit`  | Closes the program         |
-| **Undo** | `undo`  | Undo the previous command  |
-| **Redo** | `redo`  | Restores an undone command |
+| Action    | Command | Summary                    |
+|-----------|---------|----------------------------|
+| **Help**  | `help`  | Displays a help message    |
+| **Exit**  | `exit`  | Closes the program         |
+| **Clear** | `clear` | Clears all data            |
+| **Undo**  | `undo`  | Undo the previous command  |
+| **Redo**  | `redo`  | Restores an undone command |
 
 ### Contact Management
 
