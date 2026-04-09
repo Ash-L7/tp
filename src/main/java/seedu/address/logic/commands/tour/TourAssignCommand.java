@@ -3,11 +3,7 @@ package seedu.address.logic.commands.tour;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
-<<<<<<< HEAD
-=======
-import java.util.Set;
 import java.util.logging.Logger;
->>>>>>> master
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
@@ -58,12 +54,9 @@ public class TourAssignCommand extends Command {
         validateNotAssigned(contact, tour);
         model.assignTour(contact, tour);
         model.commitAddressBook();
-<<<<<<< HEAD
+
+        logger.fine(String.format("Assigned tour to contact: %s", contact));
         return new CommandResult(String.format(MESSAGE_ASSIGN_TOUR_SUCCESS, Messages.format(contact)));
-=======
-        logger.fine(String.format("Assigned tour to contact: %s", updatedContact));
-        return new CommandResult(String.format(MESSAGE_ASSIGN_TOUR_SUCCESS, Messages.format(updatedContact)));
->>>>>>> master
     }
 
     private static Contact getContact(List<Contact> contactList, Index index) throws CommandException {
