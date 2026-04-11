@@ -661,7 +661,9 @@ Priorities: High (must have) — `* * *`, Medium (nice to have) — `* *`, Low (
 2. Bivago creates a new tour with the given name and assigns all contacts from the original tour to it.
 3. Bivago confirms the new tour has been created.
 
-### Use Case: UC15 - Find Tour Package
+---
+
+### Use Case: UC16 - Find Tour Package
 
 **MSS**
 1. User requests to find tour packages using a search query.
@@ -680,7 +682,7 @@ Priorities: High (must have) — `* * *`, Medium (nice to have) — `* *`, Low (
 
 ---
 
-### Use Case: UC16 - List All Tour Packages
+### Use Case: UC17 - List All Tour Packages
 
 **MSS**
 1. User requests to list all tour packages.
@@ -696,7 +698,7 @@ Priorities: High (must have) — `* * *`, Medium (nice to have) — `* *`, Low (
 
 ---
 
-### Use Case: UC17 - Add a Tour Package to Favourite Tours
+### Use Case: UC18 - Add a Tour Package to Favourite Tours
 
 **MSS**
 1. User requests to add a tour to favourite tours using its index in the displayed list.
@@ -717,7 +719,7 @@ Priorities: High (must have) — `* * *`, Medium (nice to have) — `* *`, Low (
 
 ---
 
-### Use Case: UC18 - Remove a Tour Package from Favourite Tours
+### Use Case: UC19 - Remove a Tour Package from Favourite Tours
 
 **MSS**
 1. User requests to remove a tour from favourite tours using its index in the displayed list.
@@ -738,7 +740,7 @@ Priorities: High (must have) — `* * *`, Medium (nice to have) — `* *`, Low (
 
 ---
 
-### Use Case: UC19 - View Favourite Tours
+### Use Case: UC20 - View Favourite Tours
 
 **MSS**
 1. User requests to view favourite tours.
@@ -752,7 +754,6 @@ Priorities: High (must have) — `* * *`, Medium (nice to have) — `* *`, Low (
     - 2a1. Bivago displays an empty list indicating no favourite tours were found.
     - 2a2. Use case ends.
 
->>>>>>> master
 ---
 
 ## Non-Functional Requirements
