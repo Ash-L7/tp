@@ -206,11 +206,12 @@ A contact can have any number of tags (including 0). Each tag must be at most 30
 
 **General Fields & Constraints**
 * `type/TYPE` — must be `person`, `fnb`, `accomm`, or `attraction`
-* `n/NAME` — only alphanumeric characters and spaces allowed, and cannot be blank
+* `n/NAME` — only alphanumeric characters and spaces allowed, and cannot be blank. 
 * `p/PHONE` — must contain at least 3 digits; may also include letters, parentheses `()`, spaces, `+`, and `|` to add country codes, labels, or multiple numbers (e.g. `+6581231231` or `81231231(House) | 1241242(Personal)`)
 * `e/EMAIL` — a valid email in the form `LOCAL-PART@DOMAIN`
 * `a/ADDRESS` — cannot be blank
 * `t/TAG` — only alphanumeric characters allowed, and must be at most 30 characters long
+* Invalid data in any field will cause the command to be rejected
 
 <details>
 <summary><b>Valid Email Rules:</b></summary>
