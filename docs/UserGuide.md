@@ -641,4 +641,4 @@ Removes a specified tour as a favourite tour.
 | **List**                  | `tour-list`                                                                       | Lists all tours                     |
 | **Tour Favourite Add**    | `tour-favourite-add INDEX` <br> e.g., `tour-favourite-add 1`                      | Adds a tour to favourites           |
 | **Tour Favourite View**   | `tour-favourite-view`                                                             | Displays favourite tours            |
-| **Tour Favourite Remove** | `tourfavourite-remove INDEX` <br> e.g., `tour favourite-remove 2`                 | Removes a tour from favourites      |
+| **Tour Favourite Remove** | `tour-favourite-remove INDEX` <br> e.g., `tour-favourite-remove 2`                | Removes a tour from favourites      |
