@@ -96,9 +96,12 @@ Refer to the [Features](#features) below for details of each command.
 * Parameters can be in any order.<br>
   e.g. the parameters `n/NAME p/PHONE_NUMBER` and `p/PHONE_NUMBER n/NAME` are equivalent.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) or
- parameters not specific to the contact type will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) 
+  will be rejected.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+* Parameters not specific to the contact type will cause commands to be rejected.<br>
+  e.g. the parameter `h/HALAL_STATUS` is not applicable to a `type/person` contact, the add command will be rejected 
+  until a correction is made.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines
   as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -558,7 +561,7 @@ Adds a specified tour from the tour list as a favourite tour.
 <ul>
   <li><code>tour-duplicate 1 n/Le Royal Tour Copy</code> :
   Creates a new tour named <code>Le Royal Tour Copy</code> with all contacts from the first tour assigned to it.</li>
-=======
+
   <li><code>tour-favourite-add 2</code> :
   Adds the second tour shown in the current tour list as a favourite tour.<br>
   <img src="images/TourFavouriteAddCommandExample.png" alt="TourFavouriteAddCommandExample"></li>
@@ -587,7 +590,6 @@ Removes a specified tour as a favourite tour.
 <ul>
   <li><code>tour-favourite-remove 1</code> :
   Removes the first tour shown in the current tour list as a favourite tour.</li>
->>>>>>> master
 </ul>
 
 </details>
