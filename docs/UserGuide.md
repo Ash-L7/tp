@@ -566,13 +566,13 @@ Adds a specified tour from the tour list as a favourite tour.
 
 </details>
 
-### Viewing favourite contacts: `tour-favourite-view`
+### Viewing favourite tours: `tour-favourite-view`
 
 Shows a list of all favourite tours in the tour list.
 
 **Format:** `tour-favourite-view`
 
-### Removing contacts from favourites: `tour-favourite-remove`
+### Removing tours from favourites: `tour-favourite-remove`
 
 Removes a specified tour as a favourite tour.
 
