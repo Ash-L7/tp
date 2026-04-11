@@ -559,9 +559,6 @@ Adds a specified tour from the tour list as a favourite tour.
 <summary><b>Example:</b></summary>
 
 <ul>
-  <li><code>tour-duplicate 1 n/Le Royal Tour Copy</code> :
-  Creates a new tour named <code>Le Royal Tour Copy</code> with all contacts from the first tour assigned to it.</li>
-
   <li><code>tour-favourite-add 2</code> :
   Adds the second tour shown in the current tour list as a favourite tour.<br>
   <img src="images/TourFavouriteAddCommandExample.png" alt="TourFavouriteAddCommandExample"></li>
