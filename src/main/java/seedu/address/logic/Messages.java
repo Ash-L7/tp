@@ -19,15 +19,15 @@ public class Messages {
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX = "The contact index provided is invalid";
-    public static final String MESSAGE_CONTACTS_LISTED_OVERVIEW = "%1$d contacts listed! Contact list will be in " +
-            "filtered view until 'list' command is called to view all contacts.";
+    public static final String MESSAGE_CONTACTS_LISTED_OVERVIEW = "%1$d contacts listed! Contact list will be in "
+            + "filtered view until 'list' command is called to view all contacts.";
     public static final String MESSAGE_NON_APPLICABLE_FIELDS =
             "Values for non-applicable fields were provided! No changes were made! \n%1$s";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_INVALID_TOUR_DISPLAYED_INDEX = "The tour index provided is invalid";
-    public static final String MESSAGE_TOURS_LISTED_OVERVIEW = "%1$d tours listed! Tour list will be in filtered view" +
-            " until 'tour-list' command is called to view all contacts.";
+    public static final String MESSAGE_TOURS_LISTED_OVERVIEW = "%1$d tours listed! Tour list will be in filtered view"
+            + " until 'tour-list' command is called to view all contacts.";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
