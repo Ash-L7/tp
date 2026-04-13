@@ -24,6 +24,9 @@ subsequently verified and tweaked accordingly. Namely in:
 tweaked to accurately reflect current implementation. Namely in: `ContactClassDiagram.puml`,
 `EditContactDescriptorClassDiagram.puml`, `FavouriteAddSequenceDiagram.puml`, `FavouriteViewSequenceDiagram.puml`
 * William: Usage of AI Tools (Open AI) as an extra layer of checks for bugs and typos.
+* Chen Yoong Shee: Usage of AI Tools (Open AI) to assist in extending tests to support tour find and tour list command,
+  subsequently verified and tweaked accordingly. Namely in:
+  `TourFindCommandTest.java`, `TourFindCommandParserTest.java`
 
 --------------------------------------------------------------------------------------------------------------------
 
