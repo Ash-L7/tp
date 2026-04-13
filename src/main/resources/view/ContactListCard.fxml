@@ -24,6 +24,7 @@
           </minWidth>
         </Label>
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
+        <FlowPane fx:id="type" prefWidth="20" prefHeight="20" />
         <Label fx:id="favouriteStatus" text="★" style="-fx-text-fill: #F59E0B; -fx-font-size: 13px;" />
       </HBox>
       <FlowPane fx:id="tags" />

@@ -419,6 +419,22 @@
     -fx-font-family: "Segoe UI Semibold";
 }
 
+#type {
+    -fx-hgap: 5;
+    -fx-vgap: 3;
+}
+
+#type .label {
+    -fx-text-fill: #8540ae;
+    -fx-background-color: #f7ebfe;
+    -fx-padding: 4 8 4 8;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Segoe UI Semibold";
+}
+
 /* ---- Section Headers ---- */
 .section-header {
     -fx-font-family: "Segoe UI Semibold";

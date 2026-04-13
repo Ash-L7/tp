@@ -45,6 +45,10 @@ public class ContactCard extends UiPart<Region> {
     private VBox detailsBox;
     @FXML
     private Label favouriteStatus;
+    @FXML
+    private FlowPane type;
+    @FXML
+    private VBox typeBox;
 
     /**
      * Creates a {@code ContactCode} with the given {@code Contact} and index to display.
@@ -59,6 +63,7 @@ public class ContactCard extends UiPart<Region> {
         phone.setText(contact.getPhone().value);
         address.setText(contact.getAddress().value);
         email.setText(contact.getEmail().value);
+        type.getChildren().add(new Label(contact.getType().toUpperCase()));
         contact.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
