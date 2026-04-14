@@ -97,7 +97,7 @@ Refer to the [Features](#features) below for details of each command.
   e.g. the parameters `n/NAME p/PHONE_NUMBER` and `p/PHONE_NUMBER n/NAME` are equivalent.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) or
- parameters not specific to the contact type will be ignored.<br>
+ parameters not sspecific to the contact type will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines
